@@ -11,7 +11,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class ProcesamientoImagen {
     
-    //Imagen actual que se ha cargado//////////
+    //Imagen actual que se ha cargado/////
     private BufferedImage imageActual;
     
     //Método que devuelve una imagen abierta desde archivo
