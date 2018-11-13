@@ -5,7 +5,15 @@
  */
 package GUI;
 
+
+import imgBuild.Azure;
 import imgBuild.ProcesamientoImagen;
+import imgBuild.searchImg;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 
 /**
@@ -13,12 +21,28 @@ import javax.swing.ImageIcon;
  * @author Juanma
  */
 public class Menu extends javax.swing.JFrame {
+   
+
+
+   Azure azure = new Azure();
    ProcesamientoImagen ObjProcesamiento=new ProcesamientoImagen();
+   searchImg imgset = new searchImg();
+   ProcesamientoImagen pro = new ProcesamientoImagen();
+   
+    String URLDATA ;
+    Image URLIMG ;
+      
+   
     /**
      * Creates new form Menu
      */
     public Menu() {
         initComponents();
+        this.setLocationRelativeTo(null);
+         
+   
+   
+        
     }
 
     /**
@@ -33,6 +57,8 @@ public class Menu extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jLabel3 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
         jButton2 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
@@ -46,6 +72,7 @@ public class Menu extends javax.swing.JFrame {
         jPanel1.setPreferredSize(new java.awt.Dimension(1200, 600));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jScrollPane1.setForeground(new java.awt.Color(102, 102, 102));
         jScrollPane1.setMaximumSize(new java.awt.Dimension(790, 420));
         jScrollPane1.setMinimumSize(new java.awt.Dimension(790, 420));
         jScrollPane1.setPreferredSize(new java.awt.Dimension(790, 420));
@@ -54,6 +81,13 @@ public class Menu extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jLabel3);
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 900, 530));
+
+        jTextArea1.setBackground(new java.awt.Color(102, 102, 102));
+        jTextArea1.setColumns(20);
+        jTextArea1.setRows(5);
+        jScrollPane2.setViewportView(jTextArea1);
+
+        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 540, 900, 40));
 
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Pictures/bchrome.png"))); // NOI18N
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -72,8 +106,14 @@ public class Menu extends javax.swing.JFrame {
         jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1130, 160, 60, 60));
 
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Pictures/bimg.png"))); // NOI18N
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
         jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1130, 90, 60, 60));
 
+        jLabel2.setForeground(new java.awt.Color(102, 102, 102));
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Pictures/CoccyxMenu.png"))); // NOI18N
         jLabel2.setText("jLabel2");
         jLabel2.setPreferredSize(new java.awt.Dimension(1200, 600));
@@ -86,13 +126,36 @@ public class Menu extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
                
-        jLabel3.setIcon(new ImageIcon(ObjProcesamiento.abrirImagen()));
+       // jLabel3.setIcon(new ImageIcon(ObjProcesamiento.abrirImagen()));
+        
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-         jLabel3.setIcon(new ImageIcon(ObjProcesamiento.escalaGrises()));
+       try {
+           URLDATA =jTextArea1.getText();//url
+           URLIMG = imgset.ImagenURL(URLDATA);// Image del url
+           
+           
+           jLabel3.setIcon(new ImageIcon(URLIMG));//carga img
+           azure.setImageToAnalyze(URLDATA);//carga azure
+           
+         
+           jTextArea1.setText("");//reset del jtexarea
+          
+           
+       } catch (IOException ex) {
+           Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
+       }
+
+         
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+           pro.setImageActual((BufferedImage) URLIMG);
+          jLabel3.setIcon(new ImageIcon( pro.escalaGrises(3,3)));
+           
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -137,5 +200,7 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTextArea jTextArea1;
     // End of variables declaration//GEN-END:variables
 }
