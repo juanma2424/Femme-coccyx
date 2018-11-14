@@ -5,7 +5,6 @@
  */
 package GUI;
 
-
 import imgBuild.Azure;
 import imgBuild.ProcesamientoImagen;
 import imgBuild.errorShow;
@@ -22,29 +21,23 @@ import javax.swing.ImageIcon;
  * @author Juanma
  */
 public class Menu extends javax.swing.JFrame {
-   
 
+    Azure azure = new Azure();
+    ProcesamientoImagen ObjProcesamiento = new ProcesamientoImagen();
+    searchImg imgset = new searchImg();
+    ProcesamientoImagen pro = new ProcesamientoImagen();
+    errorShow myWindow = errorShow.getSingletonInstance();
 
-   Azure azure = new Azure();
-   ProcesamientoImagen ObjProcesamiento=new ProcesamientoImagen();
-   searchImg imgset = new searchImg();
-   ProcesamientoImagen pro = new ProcesamientoImagen();
-  // ErrorURL myWindow = new ErrorURL();
-   
-    String URLDATA ;
-    Image URLIMG ;
-      
-   
+    String URLDATA;
+    Image URLIMG;
+
     /**
      * Creates new form Menu
      */
     public Menu() {
         initComponents();
         this.setLocationRelativeTo(null);
-         
-   
-   
-        
+
     }
 
     /**
@@ -127,37 +120,46 @@ public class Menu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-               
-       // jLabel3.setIcon(new ImageIcon(ObjProcesamiento.abrirImagen()));
-        
-        
+
+        // jLabel3.setIcon(new ImageIcon(ObjProcesamiento.abrirImagen()));
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-       try {
-           URLDATA =jTextArea1.getText();//url
-           URLIMG = imgset.ImagenURL(URLDATA);// Image del url
-           
-           if(URLIMG != null){
-           jLabel3.setIcon(new ImageIcon(URLIMG));//carga img
-           azure.setImageToAnalyze(URLDATA);//carga azure
-           jTextArea1.setText("");//reset del jtexarea
-           }
-           else{
-           jTextArea1.setText("");//reset del jtexarea
-          // myWindow.setVisible(true);
-           }
-       } catch (IOException ex) {
-           Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
-       }
+        try {
+            URLDATA = jTextArea1.getText();//url
+            URLIMG = imgset.fastShare(URLDATA);// Image del url
 
-         
+            if (URLIMG != null) {
+                jLabel3.setIcon(new ImageIcon(URLIMG));//carga img
+
+                Runnable miRunnabl = new Runnable() {//Clase para ejecutar hilo independiente del main
+                    @Override
+                    public void run() {
+                        azure.setImageToAnalyze(URLDATA);//carga azure
+                    }
+                };
+                Thread hilo1 = new Thread(miRunnabl);//Instancia del hilo 
+                hilo1.start();
+
+                jTextArea1.setText("");//reset del jtexarea
+                // azure.setImageToAnalyze(URLDATA);//carga azure
+            } else {
+                jTextArea1.setText("");//reset del jtexarea
+                errorShow.setError(true);
+
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-           pro.setImageActual((BufferedImage) URLIMG);
-          jLabel3.setIcon(new ImageIcon( pro.escalaGrises(3,3)));
-           
+        pro.setImageActual((BufferedImage) URLIMG);
+        jLabel3.setIcon(new ImageIcon(pro.escalaGrises(3, 3)));
+
     }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
