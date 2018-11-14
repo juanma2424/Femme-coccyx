@@ -8,6 +8,7 @@ package GUI;
 
 import imgBuild.Azure;
 import imgBuild.ProcesamientoImagen;
+import imgBuild.errorShow;
 import imgBuild.searchImg;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
@@ -28,6 +29,7 @@ public class Menu extends javax.swing.JFrame {
    ProcesamientoImagen ObjProcesamiento=new ProcesamientoImagen();
    searchImg imgset = new searchImg();
    ProcesamientoImagen pro = new ProcesamientoImagen();
+  // ErrorURL myWindow = new ErrorURL();
    
     String URLDATA ;
     Image URLIMG ;
@@ -136,14 +138,15 @@ public class Menu extends javax.swing.JFrame {
            URLDATA =jTextArea1.getText();//url
            URLIMG = imgset.ImagenURL(URLDATA);// Image del url
            
-           
+           if(URLIMG != null){
            jLabel3.setIcon(new ImageIcon(URLIMG));//carga img
            azure.setImageToAnalyze(URLDATA);//carga azure
-           
-         
            jTextArea1.setText("");//reset del jtexarea
-          
-           
+           }
+           else{
+           jTextArea1.setText("");//reset del jtexarea
+          // myWindow.setVisible(true);
+           }
        } catch (IOException ex) {
            Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
        }
