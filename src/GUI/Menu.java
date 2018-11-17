@@ -18,12 +18,15 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
+import parsing.TXTParser;
+import sample.WordSample;
+import structures.BPTree;
 
 
 
 public class Menu extends javax.swing.JFrame {
 
-    Azure azure = new Azure();
+    Azure azure = new Azure();   
     searchImg imgset = new searchImg();
     ProcesamientoImagen pro = new ProcesamientoImagen();
     errorShow myWindow = errorShow.getSingletonInstance();
@@ -32,10 +35,19 @@ public class Menu extends javax.swing.JFrame {
 
     String URLDATA;
     Image URLIMG;
+    static File archivo;
 
-    /**
-     * Creates new form Menu
-     */
+    
+    
+    
+    ////get&set//////////////////////
+    public static File getArchivo() {
+        return archivo;
+    }
+    public static void setArchivo(File archivo) {
+        Menu.archivo = archivo;
+    }
+    //////////////////////////////////
     public Menu() {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -127,11 +139,14 @@ public class Menu extends javax.swing.JFrame {
         selectorArchivos.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
         selectorArchivos.showOpenDialog(this);
         
-        File archivo = selectorArchivos.getSelectedFile(); // obtiene el archivo seleccionado
-        System.out.println(archivo);
+        archivo = selectorArchivos.getSelectedFile(); // obtiene el archivo seleccionado
+        setArchivo(archivo);
         DataTXT.setData(true);
+        
 
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
 
@@ -156,13 +171,11 @@ public class Menu extends javax.swing.JFrame {
             Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         pro.setImageActual((BufferedImage) URLIMG);
         jLabel3.setIcon(new ImageIcon(pro.escalaGrises(3, 3)));
-
     }//GEN-LAST:event_jButton3ActionPerformed
 
    
