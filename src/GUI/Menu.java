@@ -6,27 +6,29 @@
 package GUI;
 
 import imgBuild.Azure;
+import imgBuild.DataTXT;
 import imgBuild.ProcesamientoImagen;
 import imgBuild.errorShow;
 import imgBuild.searchImg;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
 
-/**
- *
- * @author Juanma
- */
+
+
 public class Menu extends javax.swing.JFrame {
 
     Azure azure = new Azure();
-    ProcesamientoImagen ObjProcesamiento = new ProcesamientoImagen();
     searchImg imgset = new searchImg();
     ProcesamientoImagen pro = new ProcesamientoImagen();
     errorShow myWindow = errorShow.getSingletonInstance();
+    DataTXT   mydata  = DataTXT.getSingletonInstance();
+    ProcesamientoImagen ObjProcesamiento = new ProcesamientoImagen();
 
     String URLDATA;
     Image URLIMG;
@@ -121,33 +123,34 @@ public class Menu extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
-        // jLabel3.setIcon(new ImageIcon(ObjProcesamiento.abrirImagen()));
+        JFileChooser selectorArchivos = new JFileChooser();
+        selectorArchivos.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
+        selectorArchivos.showOpenDialog(this);
+        
+        File archivo = selectorArchivos.getSelectedFile(); // obtiene el archivo seleccionado
+        System.out.println(archivo);
+        DataTXT.setData(true);
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+
         try {
             URLDATA = jTextArea1.getText();//url
-            URLIMG = imgset.fastShare(URLDATA);// Image del url
 
+            URLIMG = imgset.ImagenURL(URLDATA);// Image del url
             if (URLIMG != null) {
                 jLabel3.setIcon(new ImageIcon(URLIMG));//carga img
-
-                Runnable miRunnabl = new Runnable() {//Clase para ejecutar hilo independiente del main
-                    @Override
-                    public void run() {
-                        azure.setImageToAnalyze(URLDATA);//carga azure
-                    }
-                };
+                Runnable miRunnabl = () -> {
+                    azure.setImageToAnalyze(URLDATA);//carga azure
+                } //Clase para ejecutar hilo independiente del main
+                        ;
                 Thread hilo1 = new Thread(miRunnabl);//Instancia del hilo 
                 hilo1.start();
-
                 jTextArea1.setText("");//reset del jtexarea
-                // azure.setImageToAnalyze(URLDATA);//carga azure
             } else {
                 jTextArea1.setText("");//reset del jtexarea
                 errorShow.setError(true);
-
             }
         } catch (IOException ex) {
             Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
@@ -162,9 +165,7 @@ public class Menu extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jButton3ActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
+   
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
