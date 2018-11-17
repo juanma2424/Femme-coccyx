@@ -18,9 +18,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
-import parsing.TXTParser;
-import sample.WordSample;
-import structures.BPTree;
 
 
 
@@ -153,7 +150,7 @@ public class Menu extends javax.swing.JFrame {
         try {
             URLDATA = jTextArea1.getText();//url
 
-            URLIMG = imgset.ImagenURL(URLDATA);// Image del url
+            URLIMG = imgset.fastShare(URLDATA);// Image del url
             if (URLIMG != null) {
                 jLabel3.setIcon(new ImageIcon(URLIMG));//carga img
                 Runnable miRunnabl = () -> {
