@@ -18,6 +18,9 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.TreeMap;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.logging.Level;
@@ -26,6 +29,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import percentage.SampleCant;
 import percentage.extractPixel;
+import sample.pixelSample;
 
 public class Menu extends javax.swing.JFrame {
 
@@ -189,35 +193,41 @@ public class Menu extends javax.swing.JFrame {
 //////////////////////////////////SHAREIMG//////////////////////////////////////       
         pro.setImageActual((BufferedImage) URLIMG);
         jLabel3.setIcon(new ImageIcon(pro.escalaGrises(3, 3)));
+         
        
-       
-        ArrayList<ImgProcess> lispix = new ArrayList<ImgProcess>();
-        lispix.add(new ImgProcess("Sector1", pro.getExtract1()));
-        lispix.add(new ImgProcess("Sector2", pro.getExtract2()));
-        lispix.add(new ImgProcess("Sector3", pro.getExtract3()));
-        lispix.add(new ImgProcess("Sector4", pro.getExtract4()));
-        lispix.add(new ImgProcess("Sector5", pro.getExtract5()));
-        lispix.add(new ImgProcess("Sector6", pro.getExtract6()));
-        lispix.add(new ImgProcess("Sector7", pro.getExtract7()));
-        lispix.add(new ImgProcess("Sector8", pro.getExtract8()));
-        lispix.add(new ImgProcess("Sector9", pro.getExtract9()));
-          
-  
-          long init = System.currentTimeMillis();  // Instante inicial del procesamiento
+        Queue<pixelSample[]> q = new LinkedList<pixelSample[]>(); 
         
-        ExecutorService executor = Executors.newFixedThreadPool(9);
-        for (ImgProcess frame: lispix) {
-            Runnable cajera = new ImgRunnable(frame, init);
-            executor.execute(cajera);
-        }
-        executor.shutdown();	// Cierro el Executor
-        while (!executor.isTerminated()) {
-        	// Espero a que terminen de ejecutarse todos los procesos 
-        	// para pasar a las siguientes instrucciones 
-        }
-        
-        long fin = System.currentTimeMillis();	// Instante final del procesamiento
-        System.out.println("Tiempo total de procesamiento: "+(fin-init)/1000+" Segundos");
+//        ArrayList<ImgProcess> lispix = new ArrayList<ImgProcess>();
+//        lispix.add(new ImgProcess("Sector1", pro.getExtract1()));
+//        lispix.add(new ImgProcess("Sector2", pro.getExtract2()));
+//        lispix.add(new ImgProcess("Sector3", pro.getExtract3()));
+//        lispix.add(new ImgProcess("Sector4", pro.getExtract4()));
+//        lispix.add(new ImgProcess("Sector5", pro.getExtract5()));
+//        lispix.add(new ImgProcess("Sector6", pro.getExtract6()));
+//        lispix.add(new ImgProcess("Sector7", pro.getExtract7()));
+//        lispix.add(new ImgProcess("Sector8", pro.getExtract8()));
+//        lispix.add(new ImgProcess("Sector9", pro.getExtract9()));
+//        
+//        
+//        
+//        
+//          
+//  
+//          long init = System.currentTimeMillis();  // Instante inicial del procesamiento
+//        
+//        ExecutorService executor = Executors.newFixedThreadPool(9);
+//        for (ImgProcess frame: lispix) {
+//            Runnable cajera = new ImgRunnable(frame, init);
+//            executor.execute(cajera);
+//        }
+//        executor.shutdown();	// Cierro el Executor
+//        while (!executor.isTerminated()) {
+//        	// Espero a que terminen de ejecutarse todos los procesos 
+//        	// para pasar a las siguientes instrucciones 
+//        }
+//        
+//        long fin = System.currentTimeMillis();	// Instante final del procesamiento
+//        System.out.println("Tiempo total de procesamiento: "+(fin-init)/1000+" Segundos");
         
 
                  
