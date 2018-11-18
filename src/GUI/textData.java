@@ -7,6 +7,11 @@ package GUI;
 
 import static GUI.Menu.getArchivo;
 import imgBuild.DataTXT;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import parsing.TXTParser;
 import sample.WordSample;
 import structures.BPTree;
@@ -69,6 +74,27 @@ public class textData extends javax.swing.JFrame {
         parser.setDirec(getArchivo().toString());
         BPTree<String, BPTree<String, WordSample>> tree = parser.getBTree(Integer.parseInt(jTextField1.getText()),
         Integer.parseInt(jTextField2.getText()), Integer.parseInt(jTextField3.getText()), Integer.parseInt(jTextField4.getText()));
+        
+//        System.out.println(tree.search("p").search("prince").counter);
+//        System.out.println(tree.search("a").search("asombroso").region);
+//        
+//        try {
+//            Scanner scan = new Scanner(new File(getArchivo().toString()));
+//            int n = 0;
+//            while (scan.hasNext()){
+//                String a = scan.next().toLowerCase();
+//                if ("asombroso".equals(a)){
+//                    n++;
+//                }
+//            }
+//            System.out.println("Las veces que aparece asombroso es: " + n);
+//        } catch (FileNotFoundException ex) {
+//            Logger.getLogger(textData.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+        
+        
+        
+        
         DataTXT.setData(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 

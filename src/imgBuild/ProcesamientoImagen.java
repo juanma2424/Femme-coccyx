@@ -4,6 +4,7 @@ package imgBuild;
 import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.util.Hashtable;
+import percentage.extractPixel;
 
 
 
@@ -15,6 +16,8 @@ public class ProcesamientoImagen {
     private int pivoteX ;
     private int pivoteY;
     public int id_h=0 ;
+    
+    extractPixel pixel = new extractPixel();
     
     Hashtable<String,String> secto1=new Hashtable<String,String>();
     Hashtable<String,String> secto2=new Hashtable<String,String>();
@@ -40,7 +43,7 @@ public class ProcesamientoImagen {
                 //Calculamos la media de los tres canales (rojo, verde, azul)
                 mediaPixel=(int)((colorAux.getRed()+colorAux.getGreen()+colorAux.getBlue())/3);
                 
-
+                
                 //almacenamos los pixeles en un hastable    
                 table.put(id_h, colorAux);
                 id_h++;
@@ -52,8 +55,7 @@ public class ProcesamientoImagen {
                
             }
             
-        } 
-        
+        }  
     }
      
     public void limitX(int pFinalX,int pY){
@@ -87,6 +89,7 @@ public class ProcesamientoImagen {
         ///////////////////////////////////////////////////////////////////////
         //01
         sector(0,0,pivoteX,pivoteY,secto1);
+        pixel.extract(secto1);
         //02
         sector((imageActual.getWidth()/n)*1 , 0 ,(imageActual.getWidth()/n)*2,pivoteY,secto2);
         //03
