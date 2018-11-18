@@ -152,17 +152,17 @@ public class Menu extends javax.swing.JFrame {
 
             URLIMG = imgset.fastShare(URLDATA);// Image del url
             if (URLIMG != null) {
-                jLabel3.setIcon(new ImageIcon(URLIMG));//carga img
-                Runnable miRunnabl = () -> {
-                    azure.setImageToAnalyze(URLDATA);//carga azure
-                } //Clase para ejecutar hilo independiente del main
-                        ;
-                Thread hilo1 = new Thread(miRunnabl);//Instancia del hilo 
-                hilo1.start();
-                jTextArea1.setText("");//reset del jtexarea
-            } else {
-                jTextArea1.setText("");//reset del jtexarea
-                errorShow.setError(true);
+                 jLabel3.setIcon(new ImageIcon(URLIMG));//carga img
+//                Runnable miRunnabl = () -> {
+//                    azure.setImageToAnalyze(URLDATA);//carga azure
+//                } //Clase para ejecutar hilo independiente del main
+//                        ;
+//                Thread hilo1 = new Thread(miRunnabl);//Instancia del hilo 
+//                hilo1.start();
+//                jTextArea1.setText("");//reset del jtexarea
+//            } else {
+//                jTextArea1.setText("");//reset del jtexarea
+//                errorShow.setError(true);
             }
         } catch (IOException ex) {
             Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
