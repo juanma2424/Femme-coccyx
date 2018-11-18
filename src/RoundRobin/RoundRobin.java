@@ -1,31 +1,20 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+//https://www.geeksforgeeks.org/round-robin-scheduling-with-different-arrival-times/
 package RoundRobin;
 
-import java.util.Map;
-import java.util.Queue;
-import java.util.TreeMap;
-import sample.pixelSample;
+import percentage.extractPixel;
 
-/**
- *
- * @author Juanma
- */
 public class RoundRobin {
 
-    public static void roundRobin(String p[], int a[], int b[], int n) {
-        // result of average times 
+    public static void roundRobin(extractPixel[] p, int[] a, int[] b, int n) {
+        // resultado de tiempos promedio
         int res = 0;
         int resc = 0;
 
-        // for sequence storage 
+        // para almacenamiento de secuencias
         String seq = new String();
 
-        // copy the burst array and arrival array 
-        // for not effecting the actual array 
+        // Copia la matriz de ráfaga y la matriz de llegada
+        // por no afectar la matriz real
         int res_b[] = new int[b.length];
         int res_a[] = new int[a.length];
 
@@ -34,53 +23,54 @@ public class RoundRobin {
             res_a[i] = a[i];
         }
 
-        // critical time of system 
+        // tiempo crítico del sistema
         int t = 0;
 
-        // for store the waiting time 
+        // para almacenar el tiempo de espera
         int w[] = new int[p.length];
 
-        // for store the Completion time 
+        //para almacenar el tiempo de finalización
         int comp[] = new int[p.length];
 
         while (true) {
             boolean flag = true;
             for (int i = 0; i < p.length; i++) {
 
-                // these condition for if 
-                // arrival is not on zero 
-                // check that if there come before qtime 
+                // estas condiciones para si
+                // la llegada no está en cero
+               // comprueba que si llega antes de qtime
                 if (res_a[i] <= t) {
                     if (res_a[i] <= n) {
                         if (res_b[i] > 0) {
                             flag = false;
                             if (res_b[i] > n) {
 
-                                // make decrease the b time 
+                               // hacer disminuir el tiempo b
                                 t = t + n;
                                 res_b[i] = res_b[i] - n;
                                 res_a[i] = res_a[i] + n;
                                 seq += "->" + p[i];
                             } else {
 
-                                // for last time 
+                                // por última vez
+
                                 t = t + res_b[i];
 
-                                // store comp time 
+                                //  tiempo de compensación 
                                 comp[i] = t - a[i];
 
-                                // store wait time 
+                                // tiempo de espera
                                 w[i] = t - b[i] - a[i];
                                 res_b[i] = 0;
 
-                                // add sequence 
+                                // add sequence
                                 seq += "->" + p[i];
                             }
                         }
                     } else if (res_a[i] > n) {
 
-                        // is any have less arrival time 
-                        // the coming process then execute them 
+                        // es alguno tiene menos tiempo de llegada
+                       // el proceso venidero y luego ejecutarlo
                         for (int j = 0; j < p.length; j++) {
 
                             // compare 
@@ -103,12 +93,11 @@ public class RoundRobin {
                             }
                         }
 
-                        // now the previous porcess according to 
-                        // ith is process 
+                        // ahora el proceso anterior 
                         if (res_b[i] > 0) {
                             flag = false;
 
-                            // Check for greaters 
+                            // Verificar si hay grandes
                             if (res_b[i] > n) {
                                 t = t + n;
                                 res_b[i] = res_b[i] - n;
@@ -123,13 +112,13 @@ public class RoundRobin {
                             }
                         }
                     }
-                } // if no process is come on thse critical 
+                } // // si no hay ningún proceso en estos críticos
                 else if (res_a[i] > t) {
                     t++;
                     i--;
                 }
             }
-            // for exit the while loop 
+            // para salir del bucle while
             if (flag) {
                 break;
             }
@@ -151,21 +140,23 @@ public class RoundRobin {
         System.out.println("Sequence is like that " + seq);
     }
 
-    // Driver Code 
+    
+   
     public static void main(String args[]) {
-        // name of the process 
-        String name[] = {"p1", "p2", "p3", "p4"};
+        extractPixel a = new extractPixel();
+        a.prueba();
+        
+        extractPixel name[] = { a.prueba()};
 
-        // arrival for every process 
+        // llegada para cada proceso
         int arrivaltime[] = {0, 1, 2, 3};
 
-        // burst time for every process 
+        // tiempo de ráfaga para cada proceso
         int bursttime[] = {10, 4, 5, 3};
 
-        // quantum time of each process 
+        // time quantum de cada proceso
         int q = 3;
 
-        // cal the function for output 
         roundRobin(name, arrivaltime, bursttime, q);
     }
 

@@ -30,5 +30,10 @@ public class extractPixel {
         }
         return dataSample;
      }
+     public extractPixel prueba(){
+        
+         System.out.println("hola");
+         return null;
+    }
      
 }
