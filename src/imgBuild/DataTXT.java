@@ -1,37 +1,36 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package imgBuild;
 
 import GUI.textData;
 
-
 public class DataTXT {
-     
+
+    //---------VARIABLE--------------//
     private static DataTXT myWindow;
     private static textData datatxt;
+    //---------------------------//
 
+    //-------CONSTRUCTOR---------//
     private DataTXT() {
-         datatxt = new textData();
-         datatxt.setVisible(false);
+        datatxt = new textData();
+        datatxt.setVisible(false);
     }
+    //---------------------------//
 
+    //-----------SETBOOL---------------------//
     public static void setData(boolean bool) {
-        datatxt.setVisible(bool); 
+        datatxt.setVisible(bool);
     }
+    //---------------------------------------//
 
+    //----------------GET----WINDOWS------------------//
     public static DataTXT getSingletonInstance() {
-        if (myWindow == null){
+        if (myWindow == null) {
             myWindow = new DataTXT();
-        }
-        else{
+        } else {
             datatxt.setVisible(false);
         }
         return myWindow;
     }
-    
-
-    
+    //--------------------------------------------//
 }

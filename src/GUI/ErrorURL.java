@@ -75,13 +75,13 @@ public class ErrorURL extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
     errorShow.setError(false);
-
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {     
+    public static void main(String args[]) {
+        
         new ErrorURL().setVisible(true);
     }
 

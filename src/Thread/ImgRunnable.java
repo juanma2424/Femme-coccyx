@@ -1,39 +1,46 @@
-
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package Thread;
 
+import percentage.extractPixel;
 
-
-public class CajeraRunnable implements Runnable {
+/**
+ *
+ * @author Juanma
+ */
+public class ImgRunnable implements Runnable {
 
         //-----VARIEABLE--------//    
-	private Cliente cliente;
+	private ImgProcess cliente;
 	private long initialTime;
         //----------------------//
         
-        //-----------CONSTRUCTOR----CLIENTE---TIEMPO-----------//
-	public CajeraRunnable(Cliente cliente, long initialTime) {
-		this.cliente = cliente;
-		this.initialTime = initialTime;
-	}
-        //----------------------------------------------------//
-
+        
+	
+        
+   //-----------CONSTRUCTOR----CLIENTE---TIEMPO-----------//
+   
+    public ImgRunnable(ImgProcess pdate, long init) {
+        this.cliente = pdate;
+        this.initialTime = init;
+    }
+    //----------------------------------------------------//
 	@Override
 	public void run() {
-		System.out.println("\"La cajera " + Thread.currentThread().getName() 
-				+ "\" COMIENZA A PROCESAR LA COMPRA DEL CLIENTE " + this.cliente.getNombre() 
+            System.out.println("\"La cajera " + Thread.currentThread().getName() 
+				+ "\" COMIENZA A PROCESAR LA COMPRA DEL CLIENTE " + this.cliente.getName()
 				+ " EN EL TIEMPO: " + (System.currentTimeMillis() - this.initialTime) / 1000 + "seg");
 
-		for (int i = 0; i < this.cliente.getCarroCompra().length; i++) {
+            for (int i = 0; i < this.cliente.getPixelColor().length; i++) {
 			// Se procesa el pedido en X segundos
-			this.esperarXsegundos(cliente.getCarroCompra()[i]);
-			System.out.println("Procesado el producto " + (i + 1) + " del " + this.cliente.getNombre() 
+			System.out.println("El COLOR ES  " + (i + 1) + " del " + this.cliente.getPixelColor()[i].getColor()
 				+ "->Tiempo: " + (System.currentTimeMillis() - this.initialTime) / 1000 + "seg");
 		}
 
-		System.out.println("\"La cajera " + Thread.currentThread().getName() + "\" HA TERMINADO DE PROCESAR " 
-				+ this.cliente.getNombre() + " EN EL TIEMPO: "
-				+ (System.currentTimeMillis() - this.initialTime) / 1000 + "seg");
-
+		
 	}
         
         
@@ -61,13 +68,13 @@ public class CajeraRunnable implements Runnable {
         //------------------------------------------//
 
         //------------SETCLIENTE-------------------//
-	public Cliente getCliente() {
+	public ImgProcess getCliente() {
 		return cliente;
 	}
         //------------------------------------------//
         
         //------------GETCLIENTE-------------------//
-	public void setCliente(Cliente cliente) {
+	public void setCliente(ImgProcess cliente) {
 		this.cliente = cliente;
 	}
         //------------------------------------------//

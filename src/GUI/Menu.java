@@ -5,46 +5,54 @@
  */
 package GUI;
 
+import Thread.Cliente;
+import Thread.ImgProcess;
+import Thread.ImgRunnable;
 import imgBuild.Azure;
 import imgBuild.DataTXT;
-import imgBuild.ProcesamientoImagen;
+import imgBuild.ProcessImage;
 import imgBuild.errorShow;
 import imgBuild.searchImg;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
-
-
+import percentage.SampleCant;
+import percentage.extractPixel;
 
 public class Menu extends javax.swing.JFrame {
 
+//////////////////////////////INSTANCE//////////////////////////////////////////
     Azure azure = new Azure();   
     searchImg imgset = new searchImg();
-    ProcesamientoImagen pro = new ProcesamientoImagen();
+    ProcessImage pro = new ProcessImage();
     errorShow myWindow = errorShow.getSingletonInstance();
     DataTXT   mydata  = DataTXT.getSingletonInstance();
-    ProcesamientoImagen ObjProcesamiento = new ProcesamientoImagen();
+    ProcessImage ObjProcesamiento = new ProcessImage();
+    SampleCant    cant = new SampleCant();
+////////////////////////////////////////////////////////////////////////////////
 
+///////////////////////////////VARIABLES/////////////////////////////////////////
     String URLDATA;
     Image URLIMG;
     static File archivo;
-
+////////////////////////////////////////////////////////////////////////////////
     
-    
-    
-    ////get&set//////////////////////
+////////////////////////////GET&SET/////////////////////////////////////////////
     public static File getArchivo() {
         return archivo;
     }
     public static void setArchivo(File archivo) {
         Menu.archivo = archivo;
     }
-    //////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
     public Menu() {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -131,16 +139,15 @@ public class Menu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-
+///////////////////////////////SEARCHTXT////////////////////////////////////////
         JFileChooser selectorArchivos = new JFileChooser();
         selectorArchivos.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
         selectorArchivos.showOpenDialog(this);
-        
+/////////////////////////////PARSER/////////////////////////////////////////////        
         archivo = selectorArchivos.getSelectedFile(); // obtiene el archivo seleccionado
         setArchivo(archivo);
         DataTXT.setData(true);
-        
-
+////////////////////////////////////////////////////////////////////////////////        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     
@@ -148,31 +155,73 @@ public class Menu extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
 
         try {
+            
+            //------------GETURL--------------//
             URLDATA = jTextArea1.getText();//url
-
-            URLIMG = imgset.fastShare(URLDATA);// Image del url
+            URLIMG = imgset.ImagenURL(URLDATA);// Image del url
+            //---------------------------------//
+            
             if (URLIMG != null) {
-                 jLabel3.setIcon(new ImageIcon(URLIMG));//carga img
-//                Runnable miRunnabl = () -> {
-//                    azure.setImageToAnalyze(URLDATA);//carga azure
-//                } //Clase para ejecutar hilo independiente del main
-//                        ;
-//                Thread hilo1 = new Thread(miRunnabl);//Instancia del hilo 
-//                hilo1.start();
-//                jTextArea1.setText("");//reset del jtexarea
-//            } else {
-//                jTextArea1.setText("");//reset del jtexarea
-//                errorShow.setError(true);
+                
+                //-SET-IMG-// 
+                jLabel3.setIcon(new ImageIcon(URLIMG));//SHARE IMG
+                //--------//
+                
+                //----------------THREAD-------------------------------------//
+                 Runnable miRunnabl = () -> {
+                   // azure.setImageToAnalyze(URLDATA);//SHARE AZURE
+                } 
+                        ;
+                Thread hilo1 = new Thread(miRunnabl);//MAKE THREAD 
+                hilo1.start();
+                //-----------------------------------------------------------//
+                jTextArea1.setText("");//RESET JTEXTAREA
+            } else {
+                jTextArea1.setText("");//RESET JTEXTAREA
+                errorShow.setError(true);//SHOW ERROR
             }
         } catch (IOException ex) {
             Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
         }
-
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+//////////////////////////////////SHAREIMG//////////////////////////////////////       
         pro.setImageActual((BufferedImage) URLIMG);
         jLabel3.setIcon(new ImageIcon(pro.escalaGrises(3, 3)));
+       
+          
+          ArrayList<ImgProcess> lispix = new ArrayList<ImgProcess>();
+          lispix.add(new ImgProcess("Sector1", pro.getExtract1()));
+          //         cant.cant( pro.getPixel2());
+//         cant.cant( pro.getPixel3());
+//         cant.cant( pro.getPixel4());
+//         cant.cant( pro.getPixel5());
+//         cant.cant( pro.getPixel6());
+//         cant.cant( pro.getPixel7());
+//         cant.cant( pro.getPixel8());
+//         cant.cant( pro.getPixel9());
+//         cant.generateRepite();
+
+          long init = System.currentTimeMillis();  // Instante inicial del procesamiento
+        
+        ExecutorService executor = Executors.newFixedThreadPool(1);
+        for (ImgProcess frame: lispix) {
+            Runnable cajera = new ImgRunnable(frame, init);
+            executor.execute(cajera);
+        }
+        executor.shutdown();	// Cierro el Executor
+        while (!executor.isTerminated()) {
+        	// Espero a que terminen de ejecutarse todos los procesos 
+        	// para pasar a las siguientes instrucciones 
+        }
+        
+        long fin = System.currentTimeMillis();	// Instante final del procesamiento
+        System.out.println("Tiempo total de procesamiento: "+(fin-init)/1000+" Segundos");
+    
+
+                 
+////////////////////////////////////////////////////////////////////////////////        
     }//GEN-LAST:event_jButton3ActionPerformed
 
    

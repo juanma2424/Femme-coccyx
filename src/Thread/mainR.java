@@ -1,13 +1,14 @@
-
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package Thread;
-
-
-
 import java.util.ArrayList;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-public class mainT {
+public class mainR {
     
     private static final int numCajeras = 2;
 
@@ -25,7 +26,7 @@ public class mainT {
         // Tiempo total en procesar todos los pedidos = 108 segundos
         
         long init = System.currentTimeMillis();  // Instante inicial del procesamiento
-        //<>,name,nomlist
+        
         ExecutorService executor = Executors.newFixedThreadPool(numCajeras);
         for (Cliente cliente: clientes) {
             Runnable cajera = new CajeraRunnable(cliente, init);
@@ -41,4 +42,3 @@ public class mainT {
         System.out.println("Tiempo total de procesamiento: "+(fin-init)/1000+" Segundos");
     }
 }
-
