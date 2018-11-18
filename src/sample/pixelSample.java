@@ -6,30 +6,20 @@
 package sample;
 
 import java.awt.Color;
-import java.awt.image.BufferedImage;
-import java.util.Hashtable;
-
-
-
 
 public class pixelSample {
+    int posX;
+    int posY;
+    int id;
+    Color color;
     
-    private BufferedImage imageActual;
-    private int mediaPixel, colorSRGB = 0;
-    private Color colorAux;
-    private int pivoteX;
-    private int pivoteY;
-    private int pivotefX;
-    private int pivotefY;
-    public int id_h = 0;
-    private Hashtable table;
-    
-    public pixelSample (int pInicialX, int pInicialY, int pFinalX, int pFinalY) {
-        this.pivoteX = pInicialX;
-        this.pivoteY = pInicialY;
-        this.pivotefX = pFinalX;
-        this.pivotefY = pFinalY;
-        
-    }
    
+    public pixelSample (int id,int pX, int pY, Color pcolor) {
+        this.id = id;
+        this.posX = pX;
+        this.posY = pY;
+        this.color = pcolor;     
+    }
+    
+    
 }

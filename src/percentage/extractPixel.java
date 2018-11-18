@@ -5,7 +5,6 @@
  */
 package percentage;
 
-import java.awt.Color;
 import java.util.Hashtable;
 
 public class extractPixel {
@@ -14,27 +13,23 @@ public class extractPixel {
      double rpta ;
      int length;
      Hashtable Mytable;
-     Color [] dataSample;
+     int [] dataSample;
     
-    
-    
-    public void extract(Hashtable table ){
+    public int[] extract(Hashtable table ){
         this.Mytable = table;
         length = table.size();
         valorEntero = (int) Math.floor(Math.random()*(15-10+1)+10);
         size = table.size();
         rpta = size*valorEntero /100.0;
         System.out.println( "  vamos  "  + rpta);
-        dataSample = new Color[((int)rpta)];
-        setSamples();
+        dataSample = new int[length];
+        return setSamples();
     }
     
-    public Color[] setSamples(){
-       
-        for (int i = 0; i < ((int)rpta); i++) {
+    public int[] setSamples(){
+         for (int i = 0; i < dataSample.length; i++) {
             int numero = (int) (Math.random() * length);
-            dataSample[i] =  (Color) Mytable.get(numero);
-           
+            dataSample[i] =  numero;
         }
         return dataSample;
     }

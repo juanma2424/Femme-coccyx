@@ -8,6 +8,7 @@ package Thread;
 import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.util.Hashtable;
+import sample.pixelSample;
 
 public class PixelRunnable implements Runnable {
 
@@ -20,36 +21,45 @@ public class PixelRunnable implements Runnable {
     private int pivotefY;
     public int id_h = 0;
     private Hashtable table;
+    
+    private pixelSample pixels;
+    private int inicialX;
+    private int inicialY;
+    private int finalX;
+    private int finalY;
+    private int idSector;
 
-    public PixelRunnable(int pInicialX, int pInicialY, int pFinalX, int pFinalY, Hashtable ptable) {
-        this.pivoteX = pInicialX;
-        this.pivoteY = pInicialY;
-        this.pivotefX = pFinalX;
-        this.pivotefY = pFinalY;
+    
+    
+    
+    
+    public PixelRunnable(int pInicialX, int pInicialY, int pFinalX, int pFinalY, Hashtable ptable) {  
+        this.inicialX = pInicialX;
+        this.inicialY = pInicialY;
+        this.finalX = pFinalX;
+        this.finalY = pFinalY;
         this.table = ptable;
+        this.idSector = 0;
+     
+    }
+
+    public PixelRunnable(pixelSample pixelSample) {
+        
     }
 
     @Override
     public void run() {
-        for (int i = pivoteX; i < pivoteX; i++) {
-            for (int j = pivoteY; j < pivoteY; j++) {
-
+       //Recorremos la imagen píxel a píxel
+        for(int i = this.inicialX ; i< this.finalX ; i++ ){
+            for( int j = this.inicialY; j < this.finalY; j++ ){
+                
                 //Almacenamos el color del píxel
-                colorAux = new Color(this.imageActual.getRGB(i, j));
-
-                //Calculamos la media de los tres canales (rojo, verde, azul)
-                mediaPixel = (int) ((colorAux.getRed() + colorAux.getGreen() + colorAux.getBlue()) / 3);
-
-                // almacenamos por samples
-                //  pixelSample samplePix =new pixelSample(colorAux,id_h,i, j);
-                //almacenamos los pixeles en un hastable por color    
+                colorAux=new Color(this.imageActual.getRGB(i, j));
+                
+                //almacenamos los pixeles en un hastable    
                 table.put(id_h, colorAux);
                 id_h++;
-
-                colorSRGB = (mediaPixel << 8) | (mediaPixel << 8) | mediaPixel;
-                //Asignamos el nuevo valor al BufferedImage
-                imageActual.setRGB(i, j, colorSRGB);
-
+                
             }
 
         }

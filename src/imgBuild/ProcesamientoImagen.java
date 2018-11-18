@@ -1,12 +1,12 @@
  
 package imgBuild;
 
+
 import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.util.Hashtable;
 import percentage.extractPixel;
-
-
+import sample.pixelSample;
 
 public class ProcesamientoImagen {
     
@@ -17,7 +17,15 @@ public class ProcesamientoImagen {
     private int pivoteY;
     public int id_h=0 ;
     
-    extractPixel pixel = new extractPixel();
+    extractPixel pixel1 = new extractPixel();
+    extractPixel pixel2 = new extractPixel();
+    extractPixel pixel3 = new extractPixel();
+    extractPixel pixel4 = new extractPixel();
+    extractPixel pixel5 = new extractPixel();
+    extractPixel pixel6 = new extractPixel();
+    extractPixel pixel7 = new extractPixel();
+    extractPixel pixel8 = new extractPixel();
+    extractPixel pixel9 = new extractPixel();
     
     Hashtable<String,String> secto1=new Hashtable<String,String>();
     Hashtable<String,String> secto2=new Hashtable<String,String>();
@@ -38,14 +46,15 @@ public class ProcesamientoImagen {
             for( int j = pInicialY; j <  pFinalY; j++ ){
                 
                 //Almacenamos el color del píxel
-                colorAux=new Color(this.imageActual.getRGB(i, j));
+                colorAux = new Color(this.imageActual.getRGB(i, j));
                 
                 //Calculamos la media de los tres canales (rojo, verde, azul)
                 mediaPixel=(int)((colorAux.getRed()+colorAux.getGreen()+colorAux.getBlue())/3);
                 
                 
+                 pixelSample dato = new  pixelSample(id_h,i,j,colorAux);
                 //almacenamos los pixeles en un hastable    
-                table.put(id_h, colorAux);
+                table.put(id_h, dato);
                 id_h++;
                 
                 
@@ -85,11 +94,13 @@ public class ProcesamientoImagen {
         limitY( imageActual.getHeight() , pivoteX );
         limitY( imageActual.getHeight() , pivoteX*2 );
         
+       // ArrayList<pixelSample> pixeles = new ArrayList<pixelSample>();
+    
+        
          //inico (x,y) , final(x,y)
         ///////////////////////////////////////////////////////////////////////
         //01
         sector(0,0,pivoteX,pivoteY,secto1);
-        pixel.extract(secto1);
         //02
         sector((imageActual.getWidth()/n)*1 , 0 ,(imageActual.getWidth()/n)*2,pivoteY,secto2);
         //03
@@ -114,7 +125,17 @@ public class ProcesamientoImagen {
         //09
         sector((imageActual.getWidth()/n)*2 , (imageActual.getHeight()/m)*2 , 
                 imageActual.getWidth(), imageActual.getHeight() , secto9);
-         
+        
+        pixel1.extract(secto1);
+        pixel2.extract(secto2);
+        pixel3.extract(secto3);
+        pixel4.extract(secto4);
+        pixel5.extract(secto5);
+        pixel6.extract(secto6);
+        pixel7.extract(secto7);
+        pixel8.extract(secto8);
+        pixel9.extract(secto9);
+        
         //Retornamos la imagen
         return imageActual;
     }
@@ -130,4 +151,6 @@ public class ProcesamientoImagen {
         pivoteX = imageActual.getWidth();
         pivoteY = imageActual.getHeight();
     }
+
+   
 }
