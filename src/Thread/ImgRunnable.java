@@ -30,13 +30,13 @@ public class ImgRunnable implements Runnable {
     //----------------------------------------------------//
 	@Override
 	public void run() {
-            System.out.println("\"La cajera " + Thread.currentThread().getName() 
-				+ "\" COMIENZA A PROCESAR LA COMPRA DEL CLIENTE " + this.cliente.getName()
-				+ " EN EL TIEMPO: " + (System.currentTimeMillis() - this.initialTime) / 1000 + "seg");
+//            System.out.println("\"La cajera " + Thread.currentThread().getName() 
+//				+ "\" COMIENZA A PROCESAR LA COMPRA DEL CLIENTE " + this.cliente.getName()
+//				+ " EN EL TIEMPO: " + (System.currentTimeMillis() - this.initialTime) / 1000 + "seg");
 
             for (int i = 0; i <(this.cliente.getPixelColor().length); i++) {
 			
-	          System.out.println(this.cliente.getPixelColor()[i]);
+	         // System.out.println(this.cliente.getPixelColor()[i]);
 		}
 
 		

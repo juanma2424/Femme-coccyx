@@ -15,6 +15,7 @@ public class ProcessImage {
     private int pivoteX;
     private int pivoteY;
     private int id_h = 0;
+    private int id_t = 0;
     
     private pixelSample[] extract1;
     private pixelSample[] extract2;
@@ -128,54 +129,55 @@ public class ProcessImage {
         //-----------------------inico (x,y) ,  final(x,y)-------------------//
         //01
         sector(0, 0, pivoteX, pivoteY, sector1);
+        extract1 = pixel1.datos(sector1, id_h,id_t);
+        id_t = id_h;
+         
         //02
         sector((imageActual.getWidth() / n) * 1, 0, (imageActual.getWidth() / n) * 2, pivoteY, sector2);
-         extract2 = pixel2.datos(sector2, id_h);
-         System.out.println( id_h);
-         System.out.println( sector2.size());
-         System.out.println("   funciona  " +extract2[3] );
+         extract2 = pixel2.datos(sector2, id_h,id_t);
+          id_t = id_h;
+        
         //03
         sector((imageActual.getWidth() / n) * 2, 0, imageActual.getWidth(), pivoteY, sector3);
         ////////////////////////////////////////////////////////////////////////
-
+        extract3 = pixel3.datos(sector3, id_h,id_t);
+         id_t = id_h;
         //-------------------------inico (x,y) , final(x,y)-------------------//
         //11
         sector(0, (imageActual.getHeight() / m) * 1, pivoteX, (imageActual.getHeight() / m) * 2, sector4);
+        extract4 = pixel4.datos(sector4, id_h,id_t);
+         id_t = id_h;
         //12
         sector((imageActual.getWidth() / n) * 1, (imageActual.getHeight() / m) * 1,
                 (imageActual.getWidth() / n) * 2, (imageActual.getHeight() / m) * 2, sector5);
+        extract5 = pixel5.datos(sector5, id_h,id_t);
+         id_t = id_h;
         //13
         sector((imageActual.getWidth() / n) * 2, (imageActual.getHeight() / m) * 1,
                 imageActual.getWidth(), (imageActual.getHeight() / m) * 2, sector6);
+        extract6 = pixel6.datos(sector6, id_h,id_t);
+         id_t = id_h;
         ////////////////////////////////////////////////////////////////////////
 
         //-------------------------inico (x,y) , final(x,y)-------------------//
         //07
         sector(0, (imageActual.getHeight() / m) * 2, pivoteX, imageActual.getHeight(), sector7);
+        extract7 = pixel7.datos(sector7, id_h,id_t);
+         id_t = id_h;
         //08
         sector((imageActual.getWidth() / n) * 1, (imageActual.getHeight() / m) * 2,
                 (imageActual.getWidth() / n) * 2, imageActual.getHeight(), sector8);
+        extract8 = pixel8.datos(sector8, id_h,id_t);
+         id_t = id_h;
         //09
         sector((imageActual.getWidth() / n) * 2, (imageActual.getHeight() / m) * 2,
                 imageActual.getWidth(), imageActual.getHeight(), sector9);
+        extract9 = pixel9.datos(sector9, id_h,id_t);
+        
+
         ////////////////////////////////////////////////////////////////////////
         /////////////////////------------------------------/////////////////////
-        //---ARRAY-SECTORS----//
-       
-        
-         
-//          extract1 = pixel1.extract(sector1);
-//          System.out.println("array sample " + extract1[0]);
-           
-          
-//        extract3 = pixel3.extract(sector3);
-//        extract4 = pixel4.extract(sector4);
-//        extract5 = pixel5.extract(sector5);
-//        extract6 = pixel6.extract(sector6);
-//        extract7 = pixel7.extract(sector7);
-//        extract8 = pixel8.extract(sector8);
-//        extract9 = pixel9.extract(sector9);
-        //-------------------// 
+     
         
         
 

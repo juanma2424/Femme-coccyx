@@ -6,7 +6,7 @@ import sample.pixelSample;
 
 public class extractPixel {
     
-     public pixelSample[] datos(Hashtable table ,int limt){
+     public pixelSample[] datos(Hashtable table ,int limt,int lims){
          
          //----------------------RANMDON 10-15-----------------------//
          int valorEntero = (int) Math.floor(Math.random()*(15-10+1)+10);
@@ -23,9 +23,9 @@ public class extractPixel {
          //----------------------------------------------------------//
          
           for (int i = 0; i < dataSample.length; i++) {
-              
-              int num  =  (int) Math.floor(Math.random()*(((limt)-(limt - table.size())+1) )+(table.size()));
-              System.out.println(" pizza " + num  );
+              int M = lims;
+              int N = limt;    
+              int num = (int) Math.floor(Math.random()*(N-M+1)+M);
               dataSample[i] =  (pixelSample) table.get(num);
         }
         return dataSample;
