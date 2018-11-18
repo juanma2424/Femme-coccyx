@@ -19,6 +19,4 @@ public class SampleCant {
         cantData.add(pixel1);
     }
     
-    
-    
 }

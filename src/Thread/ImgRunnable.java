@@ -34,10 +34,9 @@ public class ImgRunnable implements Runnable {
 				+ "\" COMIENZA A PROCESAR LA COMPRA DEL CLIENTE " + this.cliente.getName()
 				+ " EN EL TIEMPO: " + (System.currentTimeMillis() - this.initialTime) / 1000 + "seg");
 
-            for (int i = 0; i < this.cliente.getPixelColor().length; i++) {
-			// Se procesa el pedido en X segundos
-			System.out.println("El COLOR ES  " + (i + 1) + " del " + this.cliente.getPixelColor()[i].getColor()
-				+ "->Tiempo: " + (System.currentTimeMillis() - this.initialTime) / 1000 + "seg");
+            for (int i = 0; i <(this.cliente.getPixelColor().length); i++) {
+			
+	          System.out.println(this.cliente.getPixelColor()[i]);
 		}
 
 		

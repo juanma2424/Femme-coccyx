@@ -15,9 +15,8 @@ public class ProcessImage {
     private int pivoteX;
     private int pivoteY;
     private int id_h = 0;
-    private pixelSample[] extract1;
-
     
+    private pixelSample[] extract1;
     private pixelSample[] extract2;
     private pixelSample[] extract3;
     private pixelSample[] extract4;
@@ -38,6 +37,7 @@ public class ProcessImage {
     extractPixel pixel7 = new extractPixel();
     extractPixel pixel8 = new extractPixel();
     extractPixel pixel9 = new extractPixel();
+    
     //-------------------------------------------//
 
     //-----------------------HASH--SAMPLES---SECTOR--------------//
@@ -71,7 +71,7 @@ public class ProcessImage {
                 //---------------------------------ID--X--Y--COLOR------//
                 pixelSample dato = new pixelSample(id_h, i, j, colorAux);
                 //-----------------------------------------------------// 
-
+               
                 //--------------------SAVE SAMPLE PIXEL HASH------------------//
                 table.put(id_h, dato);
                 id_h++;//INC ID
@@ -130,6 +130,10 @@ public class ProcessImage {
         sector(0, 0, pivoteX, pivoteY, sector1);
         //02
         sector((imageActual.getWidth() / n) * 1, 0, (imageActual.getWidth() / n) * 2, pivoteY, sector2);
+         extract2 = pixel2.datos(sector2, id_h);
+         System.out.println( id_h);
+         System.out.println( sector2.size());
+         System.out.println("   funciona  " +extract2[3] );
         //03
         sector((imageActual.getWidth() / n) * 2, 0, imageActual.getWidth(), pivoteY, sector3);
         ////////////////////////////////////////////////////////////////////////
@@ -157,16 +161,23 @@ public class ProcessImage {
         ////////////////////////////////////////////////////////////////////////
         /////////////////////------------------------------/////////////////////
         //---ARRAY-SECTORS----//
-        extract1 = pixel1.extract(sector1);
-        extract2 = pixel2.extract(sector2);
-        extract3 = pixel3.extract(sector3);
-        extract4 = pixel4.extract(sector4);
-        extract5 = pixel5.extract(sector5);
-        extract6 = pixel6.extract(sector6);
-        extract7 = pixel7.extract(sector7);
-        extract8 = pixel8.extract(sector8);
-        extract9 = pixel9.extract(sector9);
+       
+        
+         
+//          extract1 = pixel1.extract(sector1);
+//          System.out.println("array sample " + extract1[0]);
+           
+          
+//        extract3 = pixel3.extract(sector3);
+//        extract4 = pixel4.extract(sector4);
+//        extract5 = pixel5.extract(sector5);
+//        extract6 = pixel6.extract(sector6);
+//        extract7 = pixel7.extract(sector7);
+//        extract8 = pixel8.extract(sector8);
+//        extract9 = pixel9.extract(sector9);
         //-------------------// 
+        
+        
 
         //---RETURN IMG---//
         return imageActual;
@@ -327,6 +338,8 @@ public class ProcessImage {
     public void setExtract9(pixelSample[] extract9) {
         this.extract9 = extract9;
     }
+    
+   
 
 ////////////////////////////////////////////////////////////////////////////////    
 }
