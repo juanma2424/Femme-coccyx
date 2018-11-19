@@ -1,4 +1,4 @@
-
+//https://docs.microsoft.com/es-es/azure/cognitive-services/Computer-vision/quickstarts/java-analyze
 package imgBuild;
 
 import java.net.URI;

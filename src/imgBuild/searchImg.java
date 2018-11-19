@@ -1,4 +1,4 @@
-
+//http://www.myjavazone.com/2011/02/cargar-una-imagen-desde-una-url.html
 package imgBuild;
 
 import java.awt.Image;
