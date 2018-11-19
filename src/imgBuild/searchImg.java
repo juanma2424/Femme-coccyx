@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package imgBuild;
 
 import java.awt.Image;
@@ -10,67 +6,53 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
 import static sun.security.jgss.GSSToken.debug;
 
 public class searchImg {
 
+    //---------VARIEABLE------------//
     private URLConnection urlCon;//Para obtener datos de la conexión 
+    //-----------------------------//
 
-    
-    
-    
-    
-    
-    
-    public Image fastShare(String urldate) throws IOException{
-        Runnable miRunnable = new Runnable() {//Clase para ejecutar hilo independiente del main
-
-                    @Override 
-                    public void run() { 
-                        try {
-                            ImagenURL(urldate);//carga img
-                        } catch (IOException ex) {
-                            Logger.getLogger(searchImg.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-                    } 
-                }; 
-           
-           Thread hilo = new Thread(miRunnable);//Instancia del hilo 
-           hilo.start(); 
-           return ImagenURL(urldate);
-    }
-    
-    
-    
-    
+    //-------------------GET IMG BY URL------------------------// 
     public Image ImagenURL(String URLDATA) throws IOException {
 
-           try{
+        try {
+            //------ SET URL AND OPEN CONECTION ----// 
             URL url = new URL(URLDATA);
             urlCon = url.openConnection();
-            
-            try { 
-            if (urlCon.getContentType() != null) {
-                Image image = ImageIO.read(url);
-                return image;
+            //---------------------------------------//
+
+            try {
+                // SETIMG IN LABEL    
+                if (urlCon.getContentType() != null) {
+                    Image image = ImageIO.read(url);
+                    return image;
+                } //GET ERROR URL
+                else {
+                    return null;
+                }
+            } catch (IOException e) {
+                debug(e.getMessage());
             }
-             else {//Si urlCon.getContentType()==null 
-                return null;
-            }
-            }
-            catch (IOException e) { 
-                debug(e.getMessage()); 
-            } 
-           }
-           catch (MalformedURLException e) {//Si la URL ingresada no corresponde con el formato URL
-               
-        } 
-            
-            return null; 
+        } catch (MalformedURLException e) {//IF DONT URL  
+        }
+        return null;
     }
 
 }
+
+//    public Image fastShare(String urldate) throws IOException{
+//        Runnable  miRunnable = () -> {
+//            try {
+//                 ImagenURL(urldate);//carga img
+//            } catch (IOException ex) {
+//                Logger.getLogger(searchImg.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+//        } //Clase para ejecutar hilo independiente del main
+//        ; 
+//        Thread hilo = new Thread(miRunnable);//Instancia del hilo 
+//        hilo.start(); 
+//        return ImagenURL(urldate);
+//    }
