@@ -21,6 +21,7 @@ public class oneID {
         for (int i = 0; i <  ONEIDS.size(); i++){
             for (int j =0; j < ONEIDS.size(); j++){
                 if (i != j && ( Objects.equals( ONEIDS.get(i),ONEIDS.get(j)))){
+                    ONEIDS.get(i).setCantidad(ONEIDS.get(i).getCantidad()+1);
                     ONEIDS.remove(j);
                 }
             }
