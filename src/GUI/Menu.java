@@ -208,7 +208,7 @@ public class Menu extends javax.swing.JFrame {
         lispix.add(new ImgProcess("Sector8", pro.getExtract8()));
         lispix.add(new ImgProcess("Sector9", pro.getExtract9()));
         
-  
+  //
           long init = System.currentTimeMillis();  // Instante inicial del procesamiento
         
         ExecutorService executor = Executors.newFixedThreadPool(9);
