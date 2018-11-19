@@ -130,7 +130,7 @@ public class ProcessImage {
         //01
         sector(0, 0, pivoteX, pivoteY, sector1);
         extract1 = pixel1.datos(sector1, id_h,id_t);
-        id_t = id_h;
+        id_t = id_h+1;
          
         //02
         sector((imageActual.getWidth() / n) * 1, 0, (imageActual.getWidth() / n) * 2, pivoteY, sector2);
@@ -141,7 +141,7 @@ public class ProcessImage {
         sector((imageActual.getWidth() / n) * 2, 0, imageActual.getWidth(), pivoteY, sector3);
         ////////////////////////////////////////////////////////////////////////
         extract3 = pixel3.datos(sector3, id_h,id_t);
-         id_t = id_h;
+         id_t = id_h+1;
         //-------------------------inico (x,y) , final(x,y)-------------------//
         //11
         sector(0, (imageActual.getHeight() / m) * 1, pivoteX, (imageActual.getHeight() / m) * 2, sector4);
@@ -163,7 +163,7 @@ public class ProcessImage {
         //07
         sector(0, (imageActual.getHeight() / m) * 2, pivoteX, imageActual.getHeight(), sector7);
         extract7 = pixel7.datos(sector7, id_h,id_t);
-         id_t = id_h;
+        id_t = id_h;
         //08
         sector((imageActual.getWidth() / n) * 1, (imageActual.getHeight() / m) * 2,
                 (imageActual.getWidth() / n) * 2, imageActual.getHeight(), sector8);

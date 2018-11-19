@@ -1,6 +1,7 @@
 //https://jarroba.com/multitarea-e-hilos-en-java-con-ejemplos-ii-runnable-executors/
 package Thread;
 
+import java.util.ArrayList;
 import percentage.extractPixel;
 
 /**
@@ -12,6 +13,7 @@ public class ImgRunnable implements Runnable {
         //-----VARIEABLE--------//    
 	private ImgProcess cliente;
 	private long initialTime;
+        ArrayList<Integer> ids= new ArrayList<>();
         //----------------------//
         
         
@@ -31,8 +33,8 @@ public class ImgRunnable implements Runnable {
 //				+ " EN EL TIEMPO: " + (System.currentTimeMillis() - this.initialTime) / 1000 + "seg");
 
             for (int i = 0; i <(this.cliente.getPixelColor().length); i++) {
-			
-	         // System.out.println(this.cliente.getPixelColor()[i]);
+	         // ids.add(this.cliente.getPixelColor()[i].getId());
+	          System.out.println(this.cliente.getPixelColor()[i].getId());
 		}
 
 		
