@@ -144,9 +144,8 @@ public class RoundRobin {
    
     public static void main(String args[]) {
         extractPixel a = new extractPixel();
-        a.prueba();
-        
-        extractPixel name[] = { a.prueba()};
+       
+        int name[] = { 0, 1, 2, 3};
 
         // llegada para cada proceso
         int arrivaltime[] = {0, 1, 2, 3};

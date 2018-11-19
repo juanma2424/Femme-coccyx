@@ -8,6 +8,8 @@ public class extractPixel {
     public pixelSample[] datos(Hashtable table, int limt, int lims) {
         int M = lims;
         int N = limt;
+//        System.out.println("--------------------------------------");
+//        System.out.println(" total  " + table.size());
 //        System.out.println("---------------------------------");
 //        System.out.println("  id h / N 1  / " + N);
 //        System.out.println("  id t /M  / " + M);
@@ -18,7 +20,8 @@ public class extractPixel {
 
         //----------------------PORCENT OF SECTOR-----------------------//
         double rpta = table.size() * valorEntero / 100.0;
-
+//         System.out.println(" porcentaje  " +  rpta);
+//          System.out.println("--------------------------------------");
         //----------------------------------------------------------//
         //---------------------CREATE ARRAY SAMPLE--------------------//
         pixelSample[] dataSample = new pixelSample[(int) rpta];
@@ -31,10 +34,5 @@ public class extractPixel {
         return dataSample;
     }
 
-    public extractPixel prueba() {
-
-        System.out.println("hola");
-        return null;
-    }
 
 }

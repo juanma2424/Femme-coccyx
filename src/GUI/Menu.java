@@ -230,7 +230,20 @@ public class Menu extends javax.swing.JFrame {
         long fin = System.currentTimeMillis();	// Instante final del procesamiento
         System.out.println("Tiempo total de procesamiento: "+(fin-init)/1000+" Segundos");
        
+        
+        
+        int total = pro.getExtract1().length+
+                pro.getExtract2().length+pro.getExtract3().length
+                +pro.getExtract4().length+pro.getExtract5().length
+                +pro.getExtract6().length+pro.getExtract7().length
+                +pro.getExtract8().length;
+        
+        System.out.println(total);
+        System.out.println(IDS.size());
         ONE.one(IDS);
+        //17442
+        //23546
+        //13770
        // ONE.ID_One();
         //ONE.checkRe();
         System.out.println(ONE.ONEIDS.size());
