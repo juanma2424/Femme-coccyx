@@ -5,6 +5,7 @@
  */
 package GUI;
 
+import RGBSample.oneID;
 import Thread.Cliente;
 import Thread.ImgProcess;
 import Thread.ImgRunnable;
@@ -41,6 +42,9 @@ public class Menu extends javax.swing.JFrame {
     DataTXT   mydata  = DataTXT.getSingletonInstance();
     ProcessImage ObjProcesamiento = new ProcessImage();
     SampleCant    cant = new SampleCant();
+    ImgRunnable  p = new ImgRunnable ();
+    public ArrayList<pixelSample> IDS = new ArrayList<>();
+    oneID ONE = new oneID ();
 ////////////////////////////////////////////////////////////////////////////////
 
 ///////////////////////////////VARIABLES/////////////////////////////////////////
@@ -208,13 +212,14 @@ public class Menu extends javax.swing.JFrame {
         lispix.add(new ImgProcess("Sector8", pro.getExtract8()));
         lispix.add(new ImgProcess("Sector9", pro.getExtract9()));
         
-  //
-          long init = System.currentTimeMillis();  // Instante inicial del procesamiento
+        long init = System.currentTimeMillis();  // Instante inicial del procesamiento
         
         ExecutorService executor = Executors.newFixedThreadPool(5);
         for (ImgProcess frame: lispix) {
-            Runnable cajera = new ImgRunnable(frame, init);
+            ImgRunnable cajera = new ImgRunnable(frame, init);
             executor.execute(cajera);
+            IDS = cajera.getIds();
+            
         }
         executor.shutdown();	// Cierro el Executor
         while (!executor.isTerminated()) {
@@ -224,8 +229,11 @@ public class Menu extends javax.swing.JFrame {
         
         long fin = System.currentTimeMillis();	// Instante final del procesamiento
         System.out.println("Tiempo total de procesamiento: "+(fin-init)/1000+" Segundos");
-        
-
+       
+        ONE.one(IDS);
+       // ONE.ID_One();
+        //ONE.checkRe();
+        System.out.println(ONE.ONEIDS.size());
                  
 ////////////////////////////////////////////////////////////////////////////////        
     }//GEN-LAST:event_jButton3ActionPerformed

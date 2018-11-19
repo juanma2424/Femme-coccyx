@@ -2,19 +2,27 @@
 package Thread;
 
 import java.util.ArrayList;
-import percentage.extractPixel;
+import sample.pixelSample;
 
-/**
- *
- * @author Juanma
- */
 public class ImgRunnable implements Runnable {
 
         //-----VARIEABLE--------//    
 	private ImgProcess cliente;
 	private long initialTime;
-        ArrayList<Integer> ids = new ArrayList<>();
+        public ArrayList<pixelSample> ids = new ArrayList<>();
         //----------------------//
+
+    public ImgRunnable() {
+        
+    }
+
+    public ArrayList<pixelSample> getIds() {
+        return ids;
+    }
+
+    public void setIds(ArrayList<pixelSample> ids) {
+        this.ids = ids;
+    }
         
         
 	
@@ -32,17 +40,13 @@ public class ImgRunnable implements Runnable {
 //				+ " EN EL TIEMPO: " + (System.currentTimeMillis() - this.initialTime) / 1000 + "seg");
            try {
                 for (int i = 0; i <(this.cliente.getPixelColor().length); i++) {
-	          ids.add(this.cliente.getPixelColor()[i].getId());
+	          ids.add(this.cliente.getPixelColor()[i]);
 		}
                 }  
              catch(Exception e){
       
-             }
-
-            
-            
-
-		
+             }	
+           setIds(ids);
 	}
         //-------------------------------GET&SET-------------------------------//
         //-----------------GETSEC------------------//
