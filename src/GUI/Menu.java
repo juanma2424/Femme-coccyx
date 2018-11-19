@@ -6,7 +6,6 @@
 package GUI;
 
 import RGBSample.oneID;
-import Thread.Cliente;
 import Thread.ImgProcess;
 import Thread.ImgRunnable;
 import imgBuild.Azure;
@@ -19,9 +18,6 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.TreeMap;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.logging.Level;
@@ -29,7 +25,6 @@ import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import percentage.SampleCant;
-import percentage.extractPixel;
 import sample.pixelSample;
 
 public class Menu extends javax.swing.JFrame {
