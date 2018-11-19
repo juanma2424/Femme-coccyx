@@ -13,7 +13,7 @@ public class ImgRunnable implements Runnable {
         //-----VARIEABLE--------//    
 	private ImgProcess cliente;
 	private long initialTime;
-        ArrayList<Integer> ids= new ArrayList<>();
+        ArrayList<Integer> ids = new ArrayList<>();
         //----------------------//
         
         
@@ -23,7 +23,6 @@ public class ImgRunnable implements Runnable {
    
     public ImgRunnable(ImgProcess pdate, long init) {
         this.cliente = pdate;
-        this.initialTime = init;
     }
     //----------------------------------------------------//
 	@Override
@@ -31,21 +30,25 @@ public class ImgRunnable implements Runnable {
 //            System.out.println("\"La cajera " + Thread.currentThread().getName() 
 //				+ "\" COMIENZA A PROCESAR LA COMPRA DEL CLIENTE " + this.cliente.getName()
 //				+ " EN EL TIEMPO: " + (System.currentTimeMillis() - this.initialTime) / 1000 + "seg");
-
-            for (int i = 0; i <(this.cliente.getPixelColor().length); i++) {
-	         // ids.add(this.cliente.getPixelColor()[i].getId());
-	          System.out.println(this.cliente.getPixelColor()[i].getId());
+           try {
+                for (int i = 0; i <(this.cliente.getPixelColor().length); i++) {
+	          ids.add(this.cliente.getPixelColor()[i].getId());
 		}
+                }  
+             catch(Exception e){
+      
+             }
+
+            
+            
 
 		
 	}
-        
-        
         //-------------------------------GET&SET-------------------------------//
         //-----------------GETSEC------------------//
-	private void esperarXsegundos(int segundos) {
+	private void esperarXsegundos() {
 		try {
-			Thread.sleep(segundos * 1000);
+			Thread.sleep(1000);
 		} catch (InterruptedException ex) {
 			Thread.currentThread().interrupt();
 		}

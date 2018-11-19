@@ -5,7 +5,7 @@ import percentage.extractPixel;
 
 public class RoundRobin {
 
-    public static void roundRobin(extractPixel[] p, int[] a, int[] b, int n) {
+    public static void roundRobin(String p[], int a[], int b[], int n) {
         // resultado de tiempos promedio
         int res = 0;
         int resc = 0;
@@ -157,7 +157,7 @@ public class RoundRobin {
         // time quantum de cada proceso
         int q = 3;
 
-        roundRobin(name, arrivaltime, bursttime, q);
+        //roundRobin(name, arrivaltime, bursttime, q);
     }
 
 }

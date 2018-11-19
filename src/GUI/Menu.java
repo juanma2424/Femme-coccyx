@@ -197,7 +197,7 @@ public class Menu extends javax.swing.JFrame {
        
        
         
-        ArrayList<ImgProcess> lispix = new ArrayList<ImgProcess>();
+        ArrayList<ImgProcess> lispix = new ArrayList<>();
         lispix.add(new ImgProcess("Sector1", pro.getExtract1()));
         lispix.add(new ImgProcess("Sector2", pro.getExtract2()));
         lispix.add(new ImgProcess("Sector3", pro.getExtract3()));
@@ -211,7 +211,7 @@ public class Menu extends javax.swing.JFrame {
   //
           long init = System.currentTimeMillis();  // Instante inicial del procesamiento
         
-        ExecutorService executor = Executors.newFixedThreadPool(9);
+        ExecutorService executor = Executors.newFixedThreadPool(5);
         for (ImgProcess frame: lispix) {
             Runnable cajera = new ImgRunnable(frame, init);
             executor.execute(cajera);
