@@ -144,7 +144,7 @@ public class ProcessImage {
     public ArrayList<pixelSample> getExtract1() {
         return extract1;
     }
-
+//
     public void setExtract1(ArrayList<pixelSample> extract1) {
         this.extract1 = extract1;
     }
