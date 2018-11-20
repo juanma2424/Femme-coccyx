@@ -10,9 +10,11 @@ import Thread.ImgProcess;
 import Thread.ImgRunnable;
 import imgBuild.Azure;
 import imgBuild.DataTXT;
+import imgBuild.MoreApere;
 import imgBuild.ProcessImage;
 import imgBuild.errorShow;
 import imgBuild.searchImg;
+import java.awt.Color;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -30,6 +32,7 @@ import sample.pixelSample;
 public class Menu extends javax.swing.JFrame {
 
 //////////////////////////////INSTANCE//////////////////////////////////////////
+    MoreApere bigColor = new MoreApere();
     Azure azure = new Azure();   
     searchImg imgset = new searchImg();
     ProcessImage pro = new ProcessImage();
@@ -46,6 +49,7 @@ public class Menu extends javax.swing.JFrame {
     String URLDATA;
     Image URLIMG;
     static File archivo;
+    Color blue;
 ////////////////////////////////////////////////////////////////////////////////
     
 ////////////////////////////GET&SET/////////////////////////////////////////////
@@ -192,61 +196,11 @@ public class Menu extends javax.swing.JFrame {
 //////////////////////////////////SHAREIMG//////////////////////////////////////       
         pro.setImageActual((BufferedImage) URLIMG);
         jLabel3.setIcon(new ImageIcon(pro.escalaGrises(3, 3)));
-         
-       
-       
-        
-        ArrayList<ImgProcess> lispix = new ArrayList<>();
-        lispix.add(new ImgProcess("Sector1", pro.getExtract1()));
-        lispix.add(new ImgProcess("Sector2", pro.getExtract2()));
-        lispix.add(new ImgProcess("Sector3", pro.getExtract3()));
-        lispix.add(new ImgProcess("Sector4", pro.getExtract4()));
-        lispix.add(new ImgProcess("Sector5", pro.getExtract5()));
-        lispix.add(new ImgProcess("Sector6", pro.getExtract6()));
-        lispix.add(new ImgProcess("Sector7", pro.getExtract7()));
-        lispix.add(new ImgProcess("Sector8", pro.getExtract8()));
-        lispix.add(new ImgProcess("Sector9", pro.getExtract9()));
-        
-        long init = System.currentTimeMillis();  // Instante inicial del procesamiento
-        
-        ExecutorService executor = Executors.newFixedThreadPool(5);
-        for (ImgProcess frame: lispix) {
-            ImgRunnable cajera = new ImgRunnable(frame, init);
-            executor.execute(cajera);
-            IDS = cajera.getIds();
-            
-        }
-        executor.shutdown();	// Cierro el Executor
-        while (!executor.isTerminated()) {
-        	// Espero a que terminen de ejecutarse todos los procesos 
-        	// para pasar a las siguientes instrucciones 
-        }
-        
-        long fin = System.currentTimeMillis();	// Instante final del procesamiento
-        System.out.println("Tiempo total de procesamiento: "+(fin-init)/1000+" Segundos");
-       
-        
-        
-        int total = pro.getExtract1().length+
-                pro.getExtract2().length+pro.getExtract3().length
-                +pro.getExtract4().length+pro.getExtract5().length
-                +pro.getExtract6().length+pro.getExtract7().length
-                +pro.getExtract8().length;
-        
-        System.out.println(total);
-        System.out.println(IDS.size());
-        ONE.one(IDS);
-        //17442
-        //23546
-        //13770
-       // ONE.ID_One();
-        //ONE.checkRe();
-        System.out.println(ONE.ONEIDS.size());
-                 
-////////////////////////////////////////////////////////////////////////////////        
+        ArrayList<pixelSample> dato = pro.getExtract1();
+        ONE.one(dato);
+///////////////////////////////////////////////////////////////////////////////        
     }//GEN-LAST:event_jButton3ActionPerformed
 
-   
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
