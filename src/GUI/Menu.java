@@ -49,7 +49,7 @@ public class Menu extends javax.swing.JFrame {
     Image URLIMG;
     static File archivo;
     Color blue;
-
+    ArrayList<pixelSample> bigdatax = new ArrayList<>();
     ArrayList<pixelSample> sector1 = new ArrayList<>();
     ArrayList<pixelSample> sector2 = new ArrayList<>();
     ArrayList<pixelSample> sector3 = new ArrayList<>();
@@ -186,7 +186,7 @@ public class Menu extends javax.swing.JFrame {
 
                 //----------------THREAD-------------------------------------//
                 Runnable miRunnabl = () -> {
-                     azure.setImageToAnalyze(URLDATA);//SHARE AZURE
+                     //azure.setImageToAnalyze(URLDATA);//SHARE AZURE
                 };
                 Thread hilo1 = new Thread(miRunnabl);//MAKE THREAD 
                 hilo1.start();
@@ -206,6 +206,8 @@ public class Menu extends javax.swing.JFrame {
         pro.setImageActual((BufferedImage) URLIMG);
         jLabel3.setIcon(new ImageIcon(pro.escalaGrises(3, 3)));
         ArrayList<pixelSample> dato = pro.getExtract1();
+//        System.out.println("todo " + pro.getListPixSample().size());
+        System.out.println(" 15%  " + dato.size());
         int cantdatos = dato.size();
         int cantdiv = dato.size() / 9;
 
@@ -223,34 +225,39 @@ public class Menu extends javax.swing.JFrame {
             // para pasar a las siguientes instrucciones 
         }
         //------------------------------------------------------//
+        System.out.println(" con rep 15%  " + dato.size());
+        
+        
+        
         
         //-------------------EX2---------------------------------//
         //-----------delet same id sample-----------------------//  
         ArrayList<ImagePixel> Pixels = new ArrayList<ImagePixel>();
        
-        Pixels.add(new ImagePixel(sector.getSector1()));
-        Pixels.add(new ImagePixel(sector.getSector2()));
-        Pixels.add(new ImagePixel(sector.getSector3()));
-        Pixels.add(new ImagePixel(sector.getSector4()));
-        Pixels.add(new ImagePixel(sector.getSector5()));
-        Pixels.add(new ImagePixel(sector.getSector6()));
-        Pixels.add(new ImagePixel(sector.getSector7()));
-        Pixels.add(new ImagePixel(sector.getSector8()));
-        Pixels.add(new ImagePixel(sector.getSector9()));
+        Pixels.add(new ImagePixel(sector.getSector1() ,bigdatax ));
+        Pixels.add(new ImagePixel(sector.getSector2(), bigdatax));
+        Pixels.add(new ImagePixel(sector.getSector3(),bigdatax));
+        Pixels.add(new ImagePixel(sector.getSector4(),bigdatax));
+        Pixels.add(new ImagePixel(sector.getSector5(),bigdatax));
+        Pixels.add(new ImagePixel(sector.getSector6(),bigdatax));
+        Pixels.add(new ImagePixel(sector.getSector7(),bigdatax));
+        Pixels.add(new ImagePixel(sector.getSector8(),bigdatax));
+        Pixels.add(new ImagePixel(sector.getSector9(),bigdatax));
 
+       
         ExecutorService executor1 = Executors.newFixedThreadPool(7);
         for (ImagePixel sample: Pixels) { 
-            sacanRegion regio =  new sacanRegion(sample);
-            Runnable re = regio;
+            sacanRegion regio =  new sacanRegion(sample,bigdatax);
+            Runnable re = regio;            
             executor1.execute(re);
-                   
         }
         executor1.shutdown();
         while (!executor1.isTerminated()) {
         	
         }
         //-------------------------------------------------------------------//
-        
+       
+        pro.getid(bigdatax);
         
         
         

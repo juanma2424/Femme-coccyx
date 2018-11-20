@@ -8,14 +8,19 @@ public class sacanRegion implements Runnable {
 
     //-----VARIEABLE--------//    
     private ImagePixel sample;
-    ArrayList<pixelSample> bigdata = new ArrayList<>();
+    
+    private ArrayList<pixelSample> bigdata;
     //----------------------//
 
     //-----------CONSTRUCTOR----CLIENTE---TIEMPO-----------//
-    public sacanRegion(ImagePixel sample) {
+    public sacanRegion(ImagePixel sample , ArrayList<pixelSample> data ) {
         this.sample = sample;
+        this.bigdata = data;
+        
     }
     //----------------------------------------------------//
+
+    
 
     @Override
     public void run() {
@@ -31,11 +36,10 @@ public class sacanRegion implements Runnable {
                     }
 
                 }
-                bigdata.add(this.sample.getRegion().get(i));
-                System.out.println("dataaa  " + bigdata.get(i).getId());
+                this.bigdata.add(this.sample.getRegion().get(i));
+                //System.out.println(" big data  "+ bigdata.size());
+            setBigdata(bigdata);
             }
-
-//        ID_One(this.sample.getRegion());
         } catch (Exception e) {
         }
     }
@@ -44,7 +48,7 @@ public class sacanRegion implements Runnable {
 
     //-------------------------------GET&SET-------------------------------//
     public ArrayList<pixelSample> getBigdata() {
-        return bigdata;
+        return this.bigdata;
     }
 
     public void setBigdata(ArrayList<pixelSample> bigdata) {

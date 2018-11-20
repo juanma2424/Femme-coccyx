@@ -38,7 +38,7 @@ public class Azure {
 
         try {
             URIBuilder builder = new URIBuilder(uriBase);
-
+            
             // Request parameters. All of them are optional.
             builder.setParameter("visualFeatures", "Categories,Description,Color");
             builder.setParameter("language", "en");

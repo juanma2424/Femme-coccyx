@@ -7,6 +7,15 @@ public class ImagePixel {
 
     //-------VARIABLE-------//
     private ArrayList<pixelSample> region = new ArrayList<>();
+
+    public ArrayList<pixelSample> getBigData() {
+        return bigData;
+    }
+
+    public void setBigData(ArrayList<pixelSample> bigData) {
+        this.bigData = bigData;
+    }
+    private ArrayList<pixelSample> bigData = new ArrayList<>();
     //----------------------//
 
     //EMPY CONSTRUCTOR//
@@ -15,8 +24,9 @@ public class ImagePixel {
     //----------------//
 
     //-------NAME  ARRAY  CONSTRUCTO----------------//
-    public ImagePixel(ArrayList<pixelSample> pregion) {
+    public ImagePixel(ArrayList<pixelSample> pregion,ArrayList<pixelSample> data ) {
         this.region = pregion;
+        this.bigData = data;
     }
     //----------------------------------------------//
 

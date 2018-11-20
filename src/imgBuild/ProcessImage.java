@@ -18,7 +18,7 @@ public class ProcessImage {
     private int id_h = 0;
     ArrayList<pixelSample> listPixSample = new ArrayList<>();
     ArrayList<pixelSample> extract1 = new ArrayList<>();
-   
+    ArrayList<Integer> bigID = new ArrayList<>();
 
     //--------------------------------//
     //---------------INSTANCE ARRAY---------------//
@@ -114,6 +114,7 @@ public class ProcessImage {
 
         // int pFinalX, int pFinalY, Hashtable table) {
         sector(0, 0, imageActual.getWidth(), imageActual.getHeight(), sector1);//carga el hast y un list de pixselsample
+       // System.out.println("sector " + sector1.size());
         extract1 = pixel1.datos(sector1,0, media);//entrae el 15%
 
         //---RETURN IMG---//
@@ -146,6 +147,16 @@ public class ProcessImage {
 
     public void setExtract1(ArrayList<pixelSample> extract1) {
         this.extract1 = extract1;
+    }
+    public void getid(ArrayList<pixelSample> dato){
+        try{
+        for (int i = 0; i < dato.size(); i++) {
+            bigID.add(dato.get(i).getId());
+        }
+        }catch (Exception e) {
+        }
+        
+        
     }
 
 ////////////////////////////////////////////////////////////////////////////////    
