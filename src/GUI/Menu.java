@@ -5,58 +5,72 @@
  */
 package GUI;
 
-import Thread.Cliente;
-import Thread.ImgProcess;
-import Thread.ImgRunnable;
+import RGBSample.oneID;
+import Thread.ImagePixel;
+import Thread.pixMap;
+import Thread.sacanRegion;
+import Thread.scanMap;
 import imgBuild.Azure;
 import imgBuild.DataTXT;
+import imgBuild.MoreApere;
 import imgBuild.ProcessImage;
 import imgBuild.errorShow;
 import imgBuild.searchImg;
+import java.awt.Color;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.TreeMap;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
-import percentage.SampleCant;
-import percentage.extractPixel;
+
 import sample.pixelSample;
 
 public class Menu extends javax.swing.JFrame {
 
 //////////////////////////////INSTANCE//////////////////////////////////////////
-    Azure azure = new Azure();   
+    MoreApere bigColor = new MoreApere();
+    Azure azure = new Azure();
     searchImg imgset = new searchImg();
     ProcessImage pro = new ProcessImage();
     errorShow myWindow = errorShow.getSingletonInstance();
-    DataTXT   mydata  = DataTXT.getSingletonInstance();
+    DataTXT mydata = DataTXT.getSingletonInstance();
     ProcessImage ObjProcesamiento = new ProcessImage();
-    SampleCant    cant = new SampleCant();
+    oneID ONE = new oneID();
 ////////////////////////////////////////////////////////////////////////////////
 
 ///////////////////////////////VARIABLES/////////////////////////////////////////
     String URLDATA;
     Image URLIMG;
     static File archivo;
+    Color blue;
+    ArrayList<pixelSample> bigdatax = new ArrayList<>();
+    ArrayList<pixelSample> sector1 = new ArrayList<>();
+    ArrayList<pixelSample> sector2 = new ArrayList<>();
+    ArrayList<pixelSample> sector3 = new ArrayList<>();
+    ArrayList<pixelSample> sector4 = new ArrayList<>();
+    ArrayList<pixelSample> sector5 = new ArrayList<>();
+    ArrayList<pixelSample> sector6 = new ArrayList<>();
+    ArrayList<pixelSample> sector7 = new ArrayList<>();
+    ArrayList<pixelSample> sector8 = new ArrayList<>();
+    ArrayList<pixelSample> sector9 = new ArrayList<>();
 ////////////////////////////////////////////////////////////////////////////////
-    
+
 ////////////////////////////GET&SET/////////////////////////////////////////////
     public static File getArchivo() {
         return archivo;
     }
+
     public static void setArchivo(File archivo) {
         Menu.archivo = archivo;
     }
 ////////////////////////////////////////////////////////////////////////////////
+
     public Menu() {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -149,33 +163,31 @@ public class Menu extends javax.swing.JFrame {
         selectorArchivos.showOpenDialog(this);
 /////////////////////////////PARSER/////////////////////////////////////////////        
         archivo = selectorArchivos.getSelectedFile(); // obtiene el archivo seleccionado
+        System.out.println(archivo);
         setArchivo(archivo);
         DataTXT.setData(true);
 ////////////////////////////////////////////////////////////////////////////////        
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
 
         try {
-            
+
             //------------GETURL--------------//
             URLDATA = jTextArea1.getText();//url
             URLIMG = imgset.ImagenURL(URLDATA);// Image del url
             //---------------------------------//
-            
+
             if (URLIMG != null) {
-                
                 //-SET-IMG-// 
                 jLabel3.setIcon(new ImageIcon(URLIMG));//SHARE IMG
                 //--------//
-                
+
                 //----------------THREAD-------------------------------------//
-                 Runnable miRunnabl = () -> {
-                   // azure.setImageToAnalyze(URLDATA);//SHARE AZURE
-                } 
-                        ;
+                Runnable miRunnabl = () -> {
+                     //azure.setImageToAnalyze(URLDATA);//SHARE AZURE
+                };
                 Thread hilo1 = new Thread(miRunnabl);//MAKE THREAD 
                 hilo1.start();
                 //-----------------------------------------------------------//
@@ -193,44 +205,65 @@ public class Menu extends javax.swing.JFrame {
 //////////////////////////////////SHAREIMG//////////////////////////////////////       
         pro.setImageActual((BufferedImage) URLIMG);
         jLabel3.setIcon(new ImageIcon(pro.escalaGrises(3, 3)));
-         
-       
-       
-        
-        ArrayList<ImgProcess> lispix = new ArrayList<ImgProcess>();
-        lispix.add(new ImgProcess("Sector1", pro.getExtract1()));
-        lispix.add(new ImgProcess("Sector2", pro.getExtract2()));
-        lispix.add(new ImgProcess("Sector3", pro.getExtract3()));
-        lispix.add(new ImgProcess("Sector4", pro.getExtract4()));
-        lispix.add(new ImgProcess("Sector5", pro.getExtract5()));
-        lispix.add(new ImgProcess("Sector6", pro.getExtract6()));
-        lispix.add(new ImgProcess("Sector7", pro.getExtract7()));
-        lispix.add(new ImgProcess("Sector8", pro.getExtract8()));
-        lispix.add(new ImgProcess("Sector9", pro.getExtract9()));
-        
-  
-          long init = System.currentTimeMillis();  // Instante inicial del procesamiento
-        
-        ExecutorService executor = Executors.newFixedThreadPool(9);
-        for (ImgProcess frame: lispix) {
-            Runnable cajera = new ImgRunnable(frame, init);
-            executor.execute(cajera);
-        }
+        ArrayList<pixelSample> dato = pro.getExtract1();
+//        System.out.println("todo " + pro.getListPixSample().size());
+        System.out.println(" 15%  " + dato.size());
+        int cantdatos = dato.size();
+        int cantdiv = dato.size() / 9;
+
+        //-------------------------EX1---------------------------//
+        //------------cut img in 9 regions-----------------------//   
+        ExecutorService executor = Executors.newFixedThreadPool(7);
+        scanMap sector = new scanMap(new pixMap(dato));
+
+        Runnable secto = sector;
+        executor.execute(secto);
+
         executor.shutdown();	// Cierro el Executor
         while (!executor.isTerminated()) {
-        	// Espero a que terminen de ejecutarse todos los procesos 
-        	// para pasar a las siguientes instrucciones 
+            // Espero a que terminen de ejecutarse todos los procesos 
+            // para pasar a las siguientes instrucciones 
         }
+        //------------------------------------------------------//
+        System.out.println(" con rep 15%  " + dato.size());
         
-        long fin = System.currentTimeMillis();	// Instante final del procesamiento
-        System.out.println("Tiempo total de procesamiento: "+(fin-init)/1000+" Segundos");
         
+        
+        
+        //-------------------EX2---------------------------------//
+        //-----------delet same id sample-----------------------//  
+        ArrayList<ImagePixel> Pixels = new ArrayList<ImagePixel>();
+       
+        Pixels.add(new ImagePixel(sector.getSector1() ,bigdatax ));
+        Pixels.add(new ImagePixel(sector.getSector2(), bigdatax));
+        Pixels.add(new ImagePixel(sector.getSector3(),bigdatax));
+        Pixels.add(new ImagePixel(sector.getSector4(),bigdatax));
+        Pixels.add(new ImagePixel(sector.getSector5(),bigdatax));
+        Pixels.add(new ImagePixel(sector.getSector6(),bigdatax));
+        Pixels.add(new ImagePixel(sector.getSector7(),bigdatax));
+        Pixels.add(new ImagePixel(sector.getSector8(),bigdatax));
+        Pixels.add(new ImagePixel(sector.getSector9(),bigdatax));
 
-                 
-////////////////////////////////////////////////////////////////////////////////        
+       
+        ExecutorService executor1 = Executors.newFixedThreadPool(7);
+        for (ImagePixel sample: Pixels) { 
+            sacanRegion regio =  new sacanRegion(sample,bigdatax);
+            Runnable re = regio;            
+            executor1.execute(re);
+        }
+        executor1.shutdown();
+        while (!executor1.isTerminated()) {
+        	
+        }
+        //-------------------------------------------------------------------//
+       
+        pro.getid(bigdatax);
+        
+        
+        
+///////////////////////////////////////////////////////////////////////////////        
     }//GEN-LAST:event_jButton3ActionPerformed
 
-   
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
