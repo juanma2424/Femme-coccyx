@@ -185,11 +185,12 @@ public class Menu extends javax.swing.JFrame {
                 //--------//
 
                 //----------------THREAD-------------------------------------//
-                Runnable miRunnabl = () -> {
-                     //azure.setImageToAnalyze(URLDATA);//SHARE AZURE
-                };
-                Thread hilo1 = new Thread(miRunnabl);//MAKE THREAD 
-                hilo1.start();
+                 azure.setImageToAnalyze(URLDATA);//SHARE AZURE
+//                Runnable miRunnabl = () -> {
+//                azure.setImageToAnalyze(URLDATA);//SHARE AZURE
+//                };
+//                Thread hilo1 = new Thread(miRunnabl);//MAKE THREAD 
+//                hilo1.start();
                 //-----------------------------------------------------------//
                 jTextArea1.setText("");//RESET JTEXTAREA
             } else {
@@ -206,7 +207,7 @@ public class Menu extends javax.swing.JFrame {
         pro.setImageActual((BufferedImage) URLIMG);
         jLabel3.setIcon(new ImageIcon(pro.escalaGrises(3, 3)));
         ArrayList<pixelSample> dato = pro.getExtract1();
-//        System.out.println("todo " + pro.getListPixSample().size());
+        //System.out.println("todo " + pro.getListPixSample().size());
         System.out.println(" 15%  " + dato.size());
         int cantdatos = dato.size();
         int cantdiv = dato.size() / 9;
