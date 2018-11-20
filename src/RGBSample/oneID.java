@@ -20,8 +20,10 @@ public class oneID {
             for (int j = 0; j < ONEIDS.size(); j++) {
                 if (i != j && (Objects.equals(ONEIDS.get(i), ONEIDS.get(j)))) {
                     try {
-                        ONEIDS.remove(j);
-                        ONEIDS.get(i).setCantidad(((ONEIDS.get(i).getCantidad()) + (1)));
+                        ONEIDS.get(i).setCantidad(((ONEIDS.get(i).getCantidad()) + (1)));//incremente el contador
+                        ONEIDS.get(i).setPosition(  ONEIDS.get(j).getPosX(), ONEIDS.get(j).getPosY());//guarda pos
+                        ONEIDS.remove(j);//remueve los datos
+                       
                     } catch (Exception e) {
 
                     }

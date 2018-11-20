@@ -14,8 +14,13 @@ import org.json.JSONObject;
 
 public class Azure {
     
+//    https://westcentralus.api.cognitive.microsoft.com/vision/v1.0
+//https://westcentralus.api.cognitive.microsoft.com/vision/v2.0
+//Clave 1: 66ebfe0f0b8844b185b394968aa2a26f
+//Clave 2: c1db0fbfa4ea4f979ba101bf7afde240
+    
     private static  String imageToAnalyze ;
-    private static final  String subscriptionKey = "16125b732a6946b6b963f3345b428fec";
+    private static final  String subscriptionKey = "c1db0fbfa4ea4f979ba101bf7afde240";
     private static final String uriBase =
             "https://westcentralus.api.cognitive.microsoft.com/vision/v2.0/analyze";
 

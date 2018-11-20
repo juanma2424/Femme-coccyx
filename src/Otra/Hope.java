@@ -5,7 +5,7 @@
  */
 package Otra;
 
-import Thread.ImgProcess;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import sample.pixelSample;
