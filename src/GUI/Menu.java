@@ -265,9 +265,12 @@ public class Menu extends javax.swing.JFrame {
         
         HelloWorldJNI lol = new HelloWorldJNI();
         Graph graph = new Graph();
-//        ArrayList<Integer> juanma = new ArrayList<>();
-//        for (int i = 0; i < 10; i++){juanma.add(i);}
-        lol.nativePrint( pro.getid(bigdatax), graph);
+        ArrayList<Integer> juanma = new ArrayList<>();
+        //juanma = pro.getid(bigdatax);
+        juanma.add(3);
+        juanma.add(4);
+        juanma.add(5);
+        lol.nativePrint(juanma, graph);
         
 ///////////////////////////////////////////////////////////////////////////////        
     }//GEN-LAST:event_jButton3ActionPerformed
