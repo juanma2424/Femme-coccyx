@@ -168,10 +168,13 @@ public class Menu extends javax.swing.JFrame {
         selectorArchivos.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
         selectorArchivos.showOpenDialog(this);
 /////////////////////////////PARSER/////////////////////////////////////////////        
-        archivo = selectorArchivos.getSelectedFile(); // obtiene el archivo seleccionado
-        System.out.println(archivo);
+        archivo = selectorArchivos.getSelectedFile(); // obtiene el archivo seleccionad
         setArchivo(archivo);
         DataTXT.setData(true);
+         
+        
+        
+        
 ////////////////////////////////////////////////////////////////////////////////        
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -192,11 +195,6 @@ public class Menu extends javax.swing.JFrame {
 
                 //----------------THREAD-------------------------------------//
                 azure.setImageToAnalyze(URLDATA);//SHARE AZURE
-//                Runnable miRunnabl = () -> {
-//                azure.setImageToAnalyze(URLDATA);//SHARE AZURE
-//                };
-//                Thread hilo1 = new Thread(miRunnabl);//MAKE THREAD 
-//                hilo1.start();
                 //-----------------------------------------------------------//
                 jTextArea1.setText("");//RESET JTEXTAREA
             } else {
@@ -282,25 +280,27 @@ public class Menu extends javax.swing.JFrame {
             // Espero a que terminen de ejecutarse todos los procesos 
             // para pasar a las siguientes instrucciones 
         }
-       System.out.println(sectors.getSector1().get(0).getTag());
+      // System.out.println(sectors.getSector1().get(0).getTag());
+        for (int i = 0; i < sectors.getSector1().size(); i++) {
+            System.out.println(sectors.getSector1().get(i).getTag());
+        }
 //
 //        
         azure.getConf();
         azure.getName();
         azure.tagTen();
-//        
-//        //------------------------------------------------------//
-//       
+        
+        //------------------------------------------------------//
+       
         int david = pro.getid(bigdatax).size();
         HelloWorldJNI lol = new HelloWorldJNI();
         Graph graph = new Graph();//aem
         ArrayList<Integer> fake = new ArrayList<>();
-        //fake = pro.getid(bigdatax);
         for (int i = 0; i < david; i++) {
             fake.add(i);
         }
         lol.nativePrint(fake, graph);
-
+        
 ///////////////////////////////////////////////////////////////////////////////        
     }//GEN-LAST:event_jButton3ActionPerformed
 

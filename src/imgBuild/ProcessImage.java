@@ -66,7 +66,7 @@ public class ProcessImage {
                 colorSRGB = (mediaPixel << 8) | (mediaPixel << 8) | mediaPixel;
 
                 //---------SET NEW COLOR---------//
-                imageActual.setRGB(i, j, colorSRGB);
+//                imageActual.setRGB(i, j, colorSRGB);
                 //-------------------------------//
 
             }
