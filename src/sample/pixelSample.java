@@ -11,7 +11,9 @@ public class pixelSample {
     int id;
     int cantidad = 1;
     Color color;
+    String tag;
 
+    
     ArrayList<Integer> position = new ArrayList<>();
     //----------------//
    
@@ -74,6 +76,14 @@ public class pixelSample {
     public void setPosition(int x, int y) {
         this.position.add(x);
         this.position.add(y);
+    }
+    
+    public String getTag() {
+        return tag;
+    }
+
+    public void setTag(String tag) {
+        this.tag = tag;
     }
     //-------------------------------------------------//
     

@@ -169,21 +169,25 @@ public class ProcessImage {
         }catch (Exception e) {
 
                     }
-        
        /// System.out.println("///" + bigID.size());
         return bigID;
     }
 
-//    public void principalColor(ArrayList<pixelSample> dato) {
-//        try {
-//            for (int i = 0; i < dato.size(); i++) {
-//                bigID.add(dato.get(i).getId());
-//                if (max < dato.get(i).getCantidad()) {
-//                    max = dato.get(i).getCantidad();
-//                }
-//            }
-//        } catch (Exception e) {
-//        }
+    public Color principalColor(ArrayList<pixelSample> dato) {
+        ArrayList<Integer> bigID = new ArrayList<>();
+        int aux = 0;
+        try {
+            for (int i = 0; i < dato.size(); i++) {
+                bigID.add(dato.get(i).getId());
+                if (max < dato.get(i).getCantidad()) {
+                    max = dato.get(i).getCantidad();
+                    aux = i;
+                }
+            }
+        } catch (Exception e) {
+        }
+        return dato.get(aux).getColor();
+    }
     
 
 ////////////////////////////////////////////////////////////////////////////////    

@@ -69,9 +69,9 @@ public class Azure {
                 JSONObject json3 = json.getJSONObject("description");
                 JSONObject json4 = (JSONObject) (json3.getJSONArray("captions")).get(0);
 
-//                System.out.println(json2.getJSONArray("tags"));
-//                System.out.println(json1.get("dominantColors"));
-//                System.out.println(json4.get("confidence"));
+                System.out.println(json2.getJSONArray("tags"));
+                System.out.println(json1.get("dominantColors"));
+                System.out.println(json4.get("confidence"));
 
                 // System.out.println(" tags " + json.get("tags"));
                 // System.out.println("REST Response:\n");

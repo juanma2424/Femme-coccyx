@@ -44,9 +44,8 @@ public class Menu extends javax.swing.JFrame {
     DataTXT mydata = DataTXT.getSingletonInstance();
     ProcessImage ObjProcesamiento = new ProcessImage();
     oneID ONE = new oneID();
-   
-////////////////////////////////////////////////////////////////////////////////
 
+////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////VARIABLES/////////////////////////////////////////
     String URLDATA;
     Image URLIMG;
@@ -189,7 +188,7 @@ public class Menu extends javax.swing.JFrame {
                 //--------//
 
                 //----------------THREAD-------------------------------------//
-                 azure.setImageToAnalyze(URLDATA);//SHARE AZURE
+                azure.setImageToAnalyze(URLDATA);//SHARE AZURE
 //                Runnable miRunnabl = () -> {
 //                azure.setImageToAnalyze(URLDATA);//SHARE AZURE
 //                };
@@ -213,7 +212,6 @@ public class Menu extends javax.swing.JFrame {
         ArrayList<pixelSample> dato = pro.getExtract1();
 //        System.out.println("todo " + pro.getListPixSample().size());
 //        System.out.println("15% de todo " + pro.getExtract1().size());
-        
 
         //-------------------------EX1---------------------------//
         //------------cut img in 9 regions-----------------------//   
@@ -228,50 +226,45 @@ public class Menu extends javax.swing.JFrame {
             // Espero a que terminen de ejecutarse todos los procesos 
             // para pasar a las siguientes instrucciones 
         }
-        
-        
+
         //------------------------------------------------------//
-       
         //-------------------EX2---------------------------------//
         //-----------delet same id sample-----------------------//  
         ArrayList<ImagePixel> Pixels = new ArrayList<ImagePixel>();
-       
-        Pixels.add(new ImagePixel(sector.getSector1(),bigdatax));
-        Pixels.add(new ImagePixel(sector.getSector2(),bigdatax));
-        Pixels.add(new ImagePixel(sector.getSector3(),bigdatax));
-        Pixels.add(new ImagePixel(sector.getSector4(),bigdatax));
-        Pixels.add(new ImagePixel(sector.getSector5(),bigdatax));
-        Pixels.add(new ImagePixel(sector.getSector6(),bigdatax));
-        Pixels.add(new ImagePixel(sector.getSector7(),bigdatax));
-        Pixels.add(new ImagePixel(sector.getSector8(),bigdatax));
-        Pixels.add(new ImagePixel(sector.getSector9(),bigdatax));
-       
-        
+
+        Pixels.add(new ImagePixel(sector.getSector1(), bigdatax));
+        Pixels.add(new ImagePixel(sector.getSector2(), bigdatax));
+        Pixels.add(new ImagePixel(sector.getSector3(), bigdatax));
+        Pixels.add(new ImagePixel(sector.getSector4(), bigdatax));
+        Pixels.add(new ImagePixel(sector.getSector5(), bigdatax));
+        Pixels.add(new ImagePixel(sector.getSector6(), bigdatax));
+        Pixels.add(new ImagePixel(sector.getSector7(), bigdatax));
+        Pixels.add(new ImagePixel(sector.getSector8(), bigdatax));
+        Pixels.add(new ImagePixel(sector.getSector9(), bigdatax));
+
         ///////////////////////////////////////////////////////////////////////
         ExecutorService executor1 = Executors.newFixedThreadPool(10);
-        for (ImagePixel sample: Pixels) { 
-            sacanRegion regio =  new sacanRegion(sample,bigdatax);
-            Runnable re = regio;            
+        for (ImagePixel sample : Pixels) {
+            sacanRegion regio = new sacanRegion(sample, bigdatax);
+            Runnable re = regio;
             executor1.execute(re);
         }
         executor1.shutdown();
         while (!executor1.isTerminated()) {
-        	
+
         }
         //-------------------------------------------------------------------//
         System.out.println("sin rapetir 15% " + bigdatax.size());// array con todos los samples sin rapetir y con un 15%
-       
-        System.out.println(" " +  pro.getid(bigdatax).size());// array de ids sin repetir y con un 15%
-        
-        HelloWorldJNI lol = new HelloWorldJNI();
-        Graph graph = new Graph();
-        ArrayList<Integer> juanma = new ArrayList<>();
-        //juanma = pro.getid(bigdatax);
-        juanma.add(3);
-        juanma.add(4);
-        juanma.add(5);
-        lol.nativePrint(juanma, graph);
-        
+
+//        HelloWorldJNI lol = new HelloWorldJNI();
+//        Graph graph = new Graph();
+//        ArrayList<Integer> fake = new ArrayList<>();
+//        fake = pro.getid(bigdatax);
+//        for (int i = 0; i < 10; i++) {
+//            fake.add(i);
+//        }
+//        lol.nativePrint(fake, graph);
+
 ///////////////////////////////////////////////////////////////////////////////        
     }//GEN-LAST:event_jButton3ActionPerformed
 
