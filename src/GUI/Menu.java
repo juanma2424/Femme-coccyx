@@ -14,7 +14,6 @@ import Thread.pixMap;
 import Thread.sacanRegion;
 import Thread.scanMap;
 import imgBuild.Azure;
-import imgBuild.DataTXT;
 import imgBuild.MoreApere;
 import imgBuild.ProcessImage;
 import imgBuild.errorShow;
@@ -31,19 +30,24 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
+import proTEXT.proText;
+import sample.WordSample;
 
 import sample.pixelSample;
+import structures.BPTree;
 import structures.Graph;
 
 public class Menu extends javax.swing.JFrame {
 
 //////////////////////////////INSTANCE//////////////////////////////////////////
+    proText   textag = new proText();
     MoreApere bigColor = new MoreApere();
     Azure azure = new Azure();
     searchImg imgset = new searchImg();
     ProcessImage pro = new ProcessImage();
     errorShow myWindow = errorShow.getSingletonInstance();
-    DataTXT mydata = DataTXT.getSingletonInstance();
+   // DataTXT mydata = DataTXT.getSingletonInstance();
+    textData  getdatatex = new textData();
     ProcessImage ObjProcesamiento = new ProcessImage();
     oneID ONE = new oneID();
    // RoundRobin RRobin =new RoundRobin();
@@ -65,6 +69,7 @@ public class Menu extends javax.swing.JFrame {
     ArrayList<pixelSample> sector7 = new ArrayList<>();
     ArrayList<pixelSample> sector8 = new ArrayList<>();
     ArrayList<pixelSample> sector9 = new ArrayList<>();
+     BPTree<String, BPTree<String, WordSample>> tree ;
 ////////////////////////////////////////////////////////////////////////////////
 
 ////////////////////////////GET&SET/////////////////////////////////////////////
@@ -169,10 +174,10 @@ public class Menu extends javax.swing.JFrame {
         selectorArchivos.showOpenDialog(this);
 /////////////////////////////PARSER/////////////////////////////////////////////        
         archivo = selectorArchivos.getSelectedFile(); // obtiene el archivo seleccionad
+        getdatatex.show(true);
         setArchivo(archivo);
-        DataTXT.setData(true);
-         
-        
+        getdatatex.show(true);
+       
         
         
 ////////////////////////////////////////////////////////////////////////////////        
@@ -300,6 +305,17 @@ public class Menu extends javax.swing.JFrame {
             fake.add(i);
         }
         lol.nativePrint(fake, graph);
+       
+        tree = getdatatex.getTree();
+        System.out.println(tree.search("p").search("prince").counter);
+        
+        textag.samblestext(tree,azure.tagTen());
+        
+        
+        
+        
+        
+        
         
 ///////////////////////////////////////////////////////////////////////////////        
     }//GEN-LAST:event_jButton3ActionPerformed

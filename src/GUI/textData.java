@@ -6,7 +6,6 @@
 package GUI;
 
 import static GUI.Menu.getArchivo;
-import imgBuild.DataTXT;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
@@ -26,7 +25,7 @@ public class textData extends javax.swing.JFrame {
         this.tree = tree;
     }
     TXTParser parser = new TXTParser();
-     BPTree<String, BPTree<String, WordSample>> tree ;
+   BPTree<String, BPTree<String, WordSample>> tree ;
  
     public textData() {
         initComponents();
@@ -80,9 +79,9 @@ public class textData extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
         parser.setDirec(getArchivo().toString());
-        tree = parser.getBTree(Integer.parseInt(jTextField2.getText()),Integer.parseInt(jTextField3.getText()), Integer.parseInt(jTextField1.getText()), Integer.parseInt(jTextField4.getText()));
-        System.out.println(tree.search("p").search("prince").counter);        
-        DataTXT.setData(false);
+        tree = parser.getBTree(Integer.parseInt(jTextField2.getText()),Integer.parseInt(jTextField3.getText()), Integer.parseInt(jTextField1.getText()), Integer.parseInt(jTextField4.getText()));      
+        setTree(tree);
+        this.show(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
