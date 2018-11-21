@@ -74,7 +74,7 @@ public class Azure {
                  
 //                System.out.println("REST Response:\n");
 //                System.out.println(json.toString(2));
-                System.out.println(json.getJSONArray("tags"));
+  //              System.out.println(json.getJSONArray("tags"));
                 
                 JSONArray json1 = json.getJSONArray("tags");
                 //json1.get(0);
@@ -83,8 +83,8 @@ public class Azure {
                       JSONObject json2 = (JSONObject) json1.get(i);
                       conf.add((Double) json2.get("confidence"));
                       name.add((String) json2.get("name"));
-                      System.out.println(json2.get("confidence"));
-                       System.out.println(json2.get("name"));
+//                      System.out.println(json2.get("confidence"));
+//                       System.out.println(json2.get("name"));
                 }
                //System.out.println(json2);
 //                JSONObject json3 = json.getJSONObject("description");
