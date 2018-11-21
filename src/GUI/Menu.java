@@ -209,9 +209,9 @@ public class Menu extends javax.swing.JFrame {
         pro.setImageActual((BufferedImage) URLIMG);
         jLabel3.setIcon(new ImageIcon(pro.escalaGrises(3, 3)));
         ArrayList<pixelSample> dato = pro.getExtract1();
-        System.out.println("todo " + pro.getListPixSample().size());
-        System.out.println("15% de todo " + pro.getExtract1().size());
-        System.out.println(" xxxx " + pro.getExtract1().get(0));
+//        System.out.println("todo " + pro.getListPixSample().size());
+//        System.out.println("15% de todo " + pro.getExtract1().size());
+        
 
         //-------------------------EX1---------------------------//
         //------------cut img in 9 regions-----------------------//   
@@ -227,15 +227,6 @@ public class Menu extends javax.swing.JFrame {
             // para pasar a las siguientes instrucciones 
         }
         
-        System.out.println("  1 " + sector.getSector1().get(0));
-        System.out.println("  2 " + sector.getSector2().get(0));
-        System.out.println("  3 " + sector.getSector3().get(0));
-        System.out.println("  4 " + sector.getSector4().get(0));
-        System.out.println("  5 " + sector.getSector5().get(0));
-        System.out.println("  6 " + sector.getSector6().get(0));
-        System.out.println("  7 " + sector.getSector7().get(0));
-        System.out.println("  8 " + sector.getSector8().get(0));
-        System.out.println("  9 " + sector.getSector9().get(0));
         
         //------------------------------------------------------//
        
