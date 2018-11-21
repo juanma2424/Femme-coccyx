@@ -5,6 +5,7 @@
  */
 package GUI;
 
+import JNI.HelloWorldJNI;
 import RGBSample.oneID;
 import Thread.ImagePixel;
 import Thread.pixMap;
@@ -30,6 +31,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 
 import sample.pixelSample;
+import structures.Graph;
 
 public class Menu extends javax.swing.JFrame {
 
@@ -258,9 +260,14 @@ public class Menu extends javax.swing.JFrame {
         }
         //-------------------------------------------------------------------//
         System.out.println("sin rapetir 15% " + bigdatax.size());// array con todos los samples sin rapetir y con un 15%
-//       
+       
        // System.out.println(" " +  pro.getid(bigdatax).size());// array de ids sin repetir y con un 15%
         
+//        HelloWorldJNI lol = new HelloWorldJNI();
+//        Graph graph = new Graph();
+//        ArrayList<Integer> juanma = new ArrayList<>();
+//        for (int i = 0; i < 10; i++){juanma.add(i);}
+//        lol.nativePrint(juanma, graph);
         
 ///////////////////////////////////////////////////////////////////////////////        
     }//GEN-LAST:event_jButton3ActionPerformed
