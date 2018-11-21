@@ -106,6 +106,26 @@ public class Azure {
 
     
     }
+    
+    public ArrayList<String> tagTen(){
+        ArrayList<String> tagt = new ArrayList<>();
+        int tagLen;
+        if(getName().size()>=10){
+            tagLen= 10;
+        }else{
+            tagLen= getName().size();
+        }
+        
+        for (int i = 0; i < tagLen; i++) {
+          
+                 tagt.add(name.get(i));
+            
+           
+        
+        }
+        return tagt;
+        
+    }
     public ArrayList<Double> getConf() {
         return conf;
     }

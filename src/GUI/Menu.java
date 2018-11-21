@@ -259,7 +259,14 @@ public class Menu extends javax.swing.JFrame {
         System.out.println("sin rapetir 15% " + bigdatax.size());// array con todos los samples sin rapetir y con un 15%
         System.out.println("sin rapetir 15% " +  pro.getid(bigdatax).size());//
         System.out.println("  bla " + pro.getBigsample().size());
-        RRobin.distribute(azure.getConf(),azure.getName(),pro.getBigsample());
+        
+        azure.getConf();
+        azure.getName();
+        azure.tagTen();
+        
+        
+   
+       // RRobin.distribute(azure.getConf(),azure.getName(),pro.getBigsample());
       //  int david = pro.getid(bigdatax).size();
 //        HelloWorldJNI lol = new HelloWorldJNI();
 //        Graph graph = new Graph();//aem

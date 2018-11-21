@@ -18,10 +18,9 @@ public class ProcessImage {
     private int id_h = 0;
     private int max;
 
-   
     ArrayList<pixelSample> listPixSample = new ArrayList<>();
     ArrayList<pixelSample> extract1 = new ArrayList<>();
-    ArrayList<pixelSample>  bigsample = new ArrayList<>();
+    ArrayList<pixelSample> bigsample = new ArrayList<>();
 
     public ArrayList<pixelSample> getBigsample() {
         return bigsample;
@@ -43,35 +42,34 @@ public class ProcessImage {
     //-----------------------------PROCES SECTOR IMG----------------------------------------------//
     public void sector(int pInicialX, int pInicialY, int pFinalX, int pFinalY, Hashtable table) {
 
-        
-            //------------------------------ARRAY IMG  LOOP-----------------------------------------//
-            for (int i = pInicialX; i < pFinalX; i++) {
-                for (int j = pInicialY; j < pFinalY; j++) {
+        //------------------------------ARRAY IMG  LOOP-----------------------------------------//
+        for (int i = pInicialX; i < pFinalX; i++) {
+            for (int j = pInicialY; j < pFinalY; j++) {
 
-                    //SAVE COLOR PIXEL
-                    colorAux = new Color(this.imageActual.getRGB(i, j));
+                //SAVE COLOR PIXEL
+                colorAux = new Color(this.imageActual.getRGB(i, j));
 
-                    //PROM(RGB)
-                    mediaPixel = (int) ((colorAux.getRed() + colorAux.getGreen() + colorAux.getBlue()) / 3);
+                //PROM(RGB)
+                mediaPixel = (int) ((colorAux.getRed() + colorAux.getGreen() + colorAux.getBlue()) / 3);
 
-                    //----------------GREATE SAMPLE PIXEL-------------------//
-                    //---------------------------------ID--X--Y--COLOR------//
-                    pixelSample dato = new pixelSample(id_h, i, j, colorAux);
-                    //-----------------------------------------------------// 
-                    listPixSample.add(dato);
-                    //--------------------SAVE SAMPLE PIXEL HASH------------------//
-                    table.put(id_h, dato);
-                    id_h++;//INC ID
-                    //------------------------------------------------------------// 
+                //----------------GREATE SAMPLE PIXEL-------------------//
+                //---------------------------------ID--X--Y--COLOR------//
+                pixelSample dato = new pixelSample(id_h, i, j, colorAux);
+                //-----------------------------------------------------// 
+                listPixSample.add(dato);
+                //--------------------SAVE SAMPLE PIXEL HASH------------------//
+                table.put(id_h, dato);
+                id_h++;//INC ID
+                //------------------------------------------------------------// 
 
-                    //CANGHE COLOR
-                    colorSRGB = (mediaPixel << 8) | (mediaPixel << 8) | mediaPixel;
+                //CANGHE COLOR
+                colorSRGB = (mediaPixel << 8) | (mediaPixel << 8) | mediaPixel;
 
-                    //---------SET NEW COLOR---------//
-                    imageActual.setRGB(i, j, colorSRGB);
-                    //-------------------------------//
+                //---------SET NEW COLOR---------//
+                imageActual.setRGB(i, j, colorSRGB);
+                //-------------------------------//
 
-                }
+            }
 
         }
         //--------------------------------------------------------------------------------//
@@ -102,6 +100,37 @@ public class ProcessImage {
         }
     }
     //-----------------------------------------------------------------------//
+
+    public BufferedImage efect(int pInicialX, int pInicialY,
+            int pFinalX, int pFinalY, int RDistancia, int BDistancia) {
+
+        //------------------------------ARRAY IMG  LOOP-----------------------------------------//
+        for (int i = pInicialX; i < pFinalX; i++) {
+            for (int j = pInicialY; j < pFinalY; j++) {
+
+                //SAVE COLOR PIXEL
+                colorAux = new Color(this.imageActual.getRGB(i, j));
+
+                //PROM(RGB)
+                mediaPixel = (int) ((colorAux.getRed() + colorAux.getGreen() + colorAux.getBlue()));
+
+                //----------------GREATE SAMPLE PIXEL-------------------//
+                //---------------------------------ID--X--Y--COLOR------//
+                pixelSample dato = new pixelSample(id_h, i, j, colorAux);
+                //-----------------------------------------------------// 
+
+                //CANGHE COLOR
+                //| R-distancia % 256|, G, | B+distancia % 256 |  
+                colorSRGB = (RDistancia % 256) | (colorAux.getGreen()) | (BDistancia % 256);
+
+                //---------SET NEW COLOR---------//
+                imageActual.setRGB(i, j, colorSRGB);
+                //-------------------------------//
+
+            }
+        }
+        return imageActual;
+    }
 
     public BufferedImage escalaGrises(int n, int m) {
 
@@ -156,8 +185,8 @@ public class ProcessImage {
     public void setExtract1(ArrayList<pixelSample> extract1) {
         this.extract1 = extract1;
     }
-    
-     public int getMax() {
+
+    public int getMax() {
         return max;
     }
 
@@ -167,18 +196,18 @@ public class ProcessImage {
 
     public ArrayList<Integer> getid(ArrayList<pixelSample> dato) {
         ArrayList<Integer> bigID = new ArrayList<>();
-        try{ 
+        try {
             for (int i = 0; i < (dato.size()); i++) {
-               // System.out.println("pp " +dato.get(i) );
-                if(dato.get(i)!=null){
-                bigID.add( (dato.get(i).getId()) );
-                this.bigsample.add(dato.get(i));
+                // System.out.println("pp " +dato.get(i) );
+                if (dato.get(i) != null) {
+                    bigID.add((dato.get(i).getId()));
+                    this.bigsample.add(dato.get(i));
                 }
             }
-        }catch (Exception e) {
+        } catch (Exception e) {
 
-                    }
-       /// System.out.println("///" + bigID.size());
+        }
+        /// System.out.println("///" + bigID.size());
         return bigID;
     }
 
@@ -197,7 +226,6 @@ public class ProcessImage {
         }
         return dato.get(aux).getColor();
     }
-    
 
 ////////////////////////////////////////////////////////////////////////////////    
 }
