@@ -69,6 +69,7 @@ public class Menu extends javax.swing.JFrame {
     ArrayList<pixelSample> sector7 = new ArrayList<>();
     ArrayList<pixelSample> sector8 = new ArrayList<>();
     ArrayList<pixelSample> sector9 = new ArrayList<>();
+     ArrayList< WordSample > bigWordSample = new ArrayList<>();
      BPTree<String, BPTree<String, WordSample>> tree ;
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -310,7 +311,7 @@ public class Menu extends javax.swing.JFrame {
         System.out.println(tree.search("p").search("prince").counter);
         
         textag.samblestext(tree,azure.tagTen());
-        
+        bigWordSample = textag.getBigWordSample();
         
         
         

@@ -16,13 +16,20 @@ import structures.BPTree;
  */
 public class proText {
     
-    
-    
+     ArrayList< WordSample > bigWordSample = new ArrayList<>();
+
+
     public void samblestext(BPTree<String, BPTree<String, WordSample>> tree,  ArrayList<String> bigdatax ){
-       
-    
-    
-    
+        for (int i = 0; i < bigdatax.size(); i++) {
+            String ini =  bigdatax.get(i).substring(0, 1);
+           bigWordSample.add(tree.search((   ini   )).search(bigdatax.get(i)));
+        }  
     }
-    
+     public ArrayList<WordSample> getBigWordSample() {
+        return bigWordSample;
+    }
+
+    public void setBigWordSample(ArrayList<WordSample> bigWordSample) {
+        this.bigWordSample = bigWordSample;
+    }
 }
