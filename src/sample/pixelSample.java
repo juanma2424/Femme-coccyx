@@ -9,7 +9,7 @@ public class pixelSample {
     int posX;
     int posY;
     int id;
-    int cantidad;
+    int cantidad = 1;
     Color color;
 
     ArrayList<Integer> position = new ArrayList<>();
@@ -21,6 +21,7 @@ public class pixelSample {
         this.posX = pX;
         this.posY = pY;
         this.color = pcolor;
+        this.cantidad = 1;
     }
      //-----------------------------------------------------//
    

@@ -16,9 +16,12 @@ public class ProcessImage {
     private int pivoteX;
     private int pivoteY;
     private int id_h = 0;
+    private int max;
+
+   
     ArrayList<pixelSample> listPixSample = new ArrayList<>();
     ArrayList<pixelSample> extract1 = new ArrayList<>();
-    ArrayList<Integer> bigID = new ArrayList<>();
+    
 
     //--------------------------------//
     //---------------INSTANCE ARRAY---------------//
@@ -32,7 +35,7 @@ public class ProcessImage {
     //-----------------------------PROCES SECTOR IMG----------------------------------------------//
     public void sector(int pInicialX, int pInicialY, int pFinalX, int pFinalY, Hashtable table) {
 
-        try {
+        
             //------------------------------ARRAY IMG  LOOP-----------------------------------------//
             for (int i = pInicialX; i < pFinalX; i++) {
                 for (int j = pInicialY; j < pFinalY; j++) {
@@ -61,9 +64,6 @@ public class ProcessImage {
                     //-------------------------------//
 
                 }
-
-            }
-        } catch (Exception e) {
 
         }
         //--------------------------------------------------------------------------------//
@@ -99,8 +99,8 @@ public class ProcessImage {
 
         pivoteX = imageActual.getWidth() / n;
         pivoteY = imageActual.getHeight() / m;
-        
-        int media = imageActual.getWidth()*imageActual.getWidth();
+
+        int media = imageActual.getWidth() * imageActual.getWidth();
 
         //---------------DRAWLINEX-----------------//
         limitX(imageActual.getWidth(), pivoteY);
@@ -114,8 +114,7 @@ public class ProcessImage {
 
         // int pFinalX, int pFinalY, Hashtable table) {
         sector(0, 0, imageActual.getWidth(), imageActual.getHeight(), sector1);//carga el hast y un list de pixselsample
-       // System.out.println("sector " + sector1.size());
-        extract1 = pixel1.datos(sector1,0, media);//entrae el 15%
+        extract1 = pixel1.datos(sector1, 0, media);//entrae el 15%
 
         //---RETURN IMG---//
         return imageActual;
@@ -145,19 +144,41 @@ public class ProcessImage {
         return extract1;
     }
 //
+
     public void setExtract1(ArrayList<pixelSample> extract1) {
         this.extract1 = extract1;
     }
-    public void getid(ArrayList<pixelSample> dato){
-        try{
-        for (int i = 0; i < dato.size(); i++) {
-            bigID.add(dato.get(i).getId());
-        }
-        }catch (Exception e) {
-        }
-        
-        
+    
+     public int getMax() {
+        return max;
     }
+
+    public void setMax(int max) {
+        this.max = max;
+    }
+
+    public ArrayList<Integer> getid(ArrayList<pixelSample> dato) {
+        ArrayList<Integer> bigID = new ArrayList<>();
+        try {
+            for (int i = 0; i < dato.size(); i++) {
+                bigID.add(dato.get(i).getId());
+            }
+        } catch (Exception e) {
+        }
+        return bigID;
+    }
+
+//    public void principalColor(ArrayList<pixelSample> dato) {
+//        try {
+//            for (int i = 0; i < dato.size(); i++) {
+//                bigID.add(dato.get(i).getId());
+//                if (max < dato.get(i).getCantidad()) {
+//                    max = dato.get(i).getCantidad();
+//                }
+//            }
+//        } catch (Exception e) {
+//        }
+    
 
 ////////////////////////////////////////////////////////////////////////////////    
 }

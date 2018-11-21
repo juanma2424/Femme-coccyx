@@ -42,6 +42,7 @@ public class Menu extends javax.swing.JFrame {
     DataTXT mydata = DataTXT.getSingletonInstance();
     ProcessImage ObjProcesamiento = new ProcessImage();
     oneID ONE = new oneID();
+   
 ////////////////////////////////////////////////////////////////////////////////
 
 ///////////////////////////////VARIABLES/////////////////////////////////////////
@@ -50,6 +51,7 @@ public class Menu extends javax.swing.JFrame {
     static File archivo;
     Color blue;
     ArrayList<pixelSample> bigdatax = new ArrayList<>();
+    ArrayList<Integer> bigID = new ArrayList<>();
     ArrayList<pixelSample> sector1 = new ArrayList<>();
     ArrayList<pixelSample> sector2 = new ArrayList<>();
     ArrayList<pixelSample> sector3 = new ArrayList<>();
@@ -207,14 +209,13 @@ public class Menu extends javax.swing.JFrame {
         pro.setImageActual((BufferedImage) URLIMG);
         jLabel3.setIcon(new ImageIcon(pro.escalaGrises(3, 3)));
         ArrayList<pixelSample> dato = pro.getExtract1();
-        //System.out.println("todo " + pro.getListPixSample().size());
-        System.out.println(" 15%  " + dato.size());
-        int cantdatos = dato.size();
-        int cantdiv = dato.size() / 9;
+        System.out.println("todo " + pro.getListPixSample().size());
+        System.out.println("15% de todo " + pro.getExtract1().size());
+        System.out.println(" xxxx " + pro.getExtract1().get(0));
 
         //-------------------------EX1---------------------------//
         //------------cut img in 9 regions-----------------------//   
-        ExecutorService executor = Executors.newFixedThreadPool(7);
+        ExecutorService executor = Executors.newFixedThreadPool(10);
         scanMap sector = new scanMap(new pixMap(dato));
 
         Runnable secto = sector;
@@ -225,18 +226,25 @@ public class Menu extends javax.swing.JFrame {
             // Espero a que terminen de ejecutarse todos los procesos 
             // para pasar a las siguientes instrucciones 
         }
+        
+        System.out.println("  1 " + sector.getSector1().get(0));
+        System.out.println("  2 " + sector.getSector2().get(0));
+        System.out.println("  3 " + sector.getSector3().get(0));
+        System.out.println("  4 " + sector.getSector4().get(0));
+        System.out.println("  5 " + sector.getSector5().get(0));
+        System.out.println("  6 " + sector.getSector6().get(0));
+        System.out.println("  7 " + sector.getSector7().get(0));
+        System.out.println("  8 " + sector.getSector8().get(0));
+        System.out.println("  9 " + sector.getSector9().get(0));
+        
         //------------------------------------------------------//
-        System.out.println(" con rep 15%  " + dato.size());
-        
-        
-        
-        
+       
         //-------------------EX2---------------------------------//
         //-----------delet same id sample-----------------------//  
         ArrayList<ImagePixel> Pixels = new ArrayList<ImagePixel>();
        
-        Pixels.add(new ImagePixel(sector.getSector1() ,bigdatax ));
-        Pixels.add(new ImagePixel(sector.getSector2(), bigdatax));
+        Pixels.add(new ImagePixel(sector.getSector1(),bigdatax));
+        Pixels.add(new ImagePixel(sector.getSector2(),bigdatax));
         Pixels.add(new ImagePixel(sector.getSector3(),bigdatax));
         Pixels.add(new ImagePixel(sector.getSector4(),bigdatax));
         Pixels.add(new ImagePixel(sector.getSector5(),bigdatax));
@@ -244,9 +252,10 @@ public class Menu extends javax.swing.JFrame {
         Pixels.add(new ImagePixel(sector.getSector7(),bigdatax));
         Pixels.add(new ImagePixel(sector.getSector8(),bigdatax));
         Pixels.add(new ImagePixel(sector.getSector9(),bigdatax));
-
        
-        ExecutorService executor1 = Executors.newFixedThreadPool(7);
+        
+        ///////////////////////////////////////////////////////////////////////
+        ExecutorService executor1 = Executors.newFixedThreadPool(10);
         for (ImagePixel sample: Pixels) { 
             sacanRegion regio =  new sacanRegion(sample,bigdatax);
             Runnable re = regio;            
@@ -257,9 +266,9 @@ public class Menu extends javax.swing.JFrame {
         	
         }
         //-------------------------------------------------------------------//
-       
-        pro.getid(bigdatax);
-        
+        System.out.println("sin rapetir 15% " + bigdatax.size());// array con todos los samples sin rapetir y con un 15%
+//       
+       // System.out.println(" " +  pro.getid(bigdatax).size());// array de ids sin repetir y con un 15%
         
         
 ///////////////////////////////////////////////////////////////////////////////        

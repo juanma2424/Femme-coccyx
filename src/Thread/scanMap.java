@@ -16,6 +16,7 @@ import sample.pixelSample;
 public class scanMap implements Runnable {
     //-----VARIEABLE--------//    
     public pixMap map;
+    
     ArrayList<pixelSample> sector1 = new ArrayList<>();
     ArrayList<pixelSample> sector2 = new ArrayList<>();
     ArrayList<pixelSample> sector3 = new ArrayList<>();
@@ -40,7 +41,7 @@ public class scanMap implements Runnable {
 
     @Override
     public void run() {
-        try{
+       
         int sizemap = this.map.getMap().size()/9;
         this.map.getMap().size();
         
@@ -55,15 +56,15 @@ public class scanMap implements Runnable {
         s1(this.map, sizemap*6, sizemap*7,sector7);
         s1(this.map, sizemap*7, sizemap*8,sector8);
         s1(this.map, sizemap*8, sizemap*9,sector9);
-        }
-        catch (Exception e) {
-        }
+        
+       
+        //System.out.println("scan map------------------------------------------------------------------------------------");
     }
     
     public void s1(pixMap pmap , int x , int y , ArrayList<pixelSample> s){
          for (int i = x; i < y; i++) {
             s.add(map.getMap().get(i));
-            // System.out.println(s.get(i));
+            //System.out.println("scan map   xxxxxxxxxxx");
         }
     }
 
