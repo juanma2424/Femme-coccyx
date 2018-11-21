@@ -21,7 +21,15 @@ public class ProcessImage {
    
     ArrayList<pixelSample> listPixSample = new ArrayList<>();
     ArrayList<pixelSample> extract1 = new ArrayList<>();
-    
+    ArrayList<pixelSample>  bigsample = new ArrayList<>();
+
+    public ArrayList<pixelSample> getBigsample() {
+        return bigsample;
+    }
+
+    public void setBigsample(ArrayList<pixelSample> bigsample) {
+        this.bigsample = bigsample;
+    }
 
     //--------------------------------//
     //---------------INSTANCE ARRAY---------------//
@@ -164,6 +172,7 @@ public class ProcessImage {
                // System.out.println("pp " +dato.get(i) );
                 if(dato.get(i)!=null){
                 bigID.add( (dato.get(i).getId()) );
+                this.bigsample.add(dato.get(i));
                 }
             }
         }catch (Exception e) {

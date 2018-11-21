@@ -21,6 +21,8 @@ public class Azure {
 //Clave 1: 66ebfe0f0b8844b185b394968aa2a26f
 //Clave 2: c1db0fbfa4ea4f979ba101bf7afde240
     ArrayList<Double> conf = new ArrayList<>();
+
+    
      ArrayList<String> name = new ArrayList<>();
     private static String imageToAnalyze;
     private static final String subscriptionKey = "66ebfe0f0b8844b185b394968aa2a26f";
@@ -81,6 +83,8 @@ public class Azure {
                       JSONObject json2 = (JSONObject) json1.get(i);
                       conf.add((Double) json2.get("confidence"));
                       name.add((String) json2.get("name"));
+                      System.out.println(json2.get("confidence"));
+                       System.out.println(json2.get("name"));
                 }
                //System.out.println(json2);
 //                JSONObject json3 = json.getJSONObject("description");
@@ -101,5 +105,20 @@ public class Azure {
         }
 
     
+    }
+    public ArrayList<Double> getConf() {
+        return conf;
+    }
+
+    public void setConf(ArrayList<Double> conf) {
+        this.conf = conf;
+    }
+
+    public ArrayList<String> getName() {
+        return name;
+    }
+
+    public void setName(ArrayList<String> name) {
+        this.name = name;
     }
 }

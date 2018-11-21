@@ -1,14 +1,21 @@
 //https://www.geeksforgeeks.org/round-robin-scheduling-with-different-arrival-times/
 package RoundRobin;
 
+import java.util.ArrayList;
 import percentage.extractPixel;
+import sample.pixelSample;
 
 public class RoundRobin {
 
+    int first;
+    int second;
+    ArrayList<pixelSample> bigTag = new ArrayList<>();
+    
     public static void roundRobin(String p[], int a[], int b[], int n) {
         // resultado de tiempos promedio
         int res = 0;
         int resc = 0;
+        
 
         // para almacenamiento de secuencias
         String seq = new String();
@@ -140,7 +147,25 @@ public class RoundRobin {
         System.out.println("Sequence is like that " + seq);
     }
 
+    public void distribute(ArrayList<Double> conf, ArrayList<String> tag ,  ArrayList<pixelSample> sample){
+        int sumatory = 0;
+        for (int i = 0; i < conf.size(); i++) {
+             sumatory = (int) (conf.get(i)*100) +  sumatory;
+        }
+        second = sample.size()/sumatory;    
+        first = sample.size() - second*sumatory;
+        setTagsSamples( first,second,tag,sample);
+    }
     
+    public void setTagsSamples(int first, int second,ArrayList<String> tag ,ArrayList<pixelSample> sample){
+        for (int i = 0; i < first; i++) {
+            bigTag.add(  ( sample.get(i).setTag(tag.get(0)))  );
+        }
+        for (int i = 0; i < second; i++) {
+            
+        }
+ 
+    }
    
     public static void main(String args[]) {
         extractPixel a = new extractPixel();

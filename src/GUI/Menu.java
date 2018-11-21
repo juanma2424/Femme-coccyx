@@ -7,6 +7,7 @@ package GUI;
 
 import JNI.HelloWorldJNI;
 import RGBSample.oneID;
+import RoundRobin.RoundRobin;
 import Thread.ImagePixel;
 import Thread.pixMap;
 import Thread.sacanRegion;
@@ -44,6 +45,7 @@ public class Menu extends javax.swing.JFrame {
     DataTXT mydata = DataTXT.getSingletonInstance();
     ProcessImage ObjProcesamiento = new ProcessImage();
     oneID ONE = new oneID();
+    RoundRobin RRobin =new RoundRobin();
 
 ////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////VARIABLES/////////////////////////////////////////
@@ -256,16 +258,17 @@ public class Menu extends javax.swing.JFrame {
         //-------------------------------------------------------------------//
         System.out.println("sin rapetir 15% " + bigdatax.size());// array con todos los samples sin rapetir y con un 15%
         System.out.println("sin rapetir 15% " +  pro.getid(bigdatax).size());//
-        
-        int david = pro.getid(bigdatax).size();
-        HelloWorldJNI lol = new HelloWorldJNI();
-        Graph graph = new Graph();//aem
-        ArrayList<Integer> fake = new ArrayList<>();
-        //fake = pro.getid(bigdatax);
-        for (int i = 0; i < david; i++) {
-            fake.add(i);
-        }
-        lol.nativePrint(fake, graph);
+        System.out.println("  bla " + pro.getBigsample().size());
+        RRobin.distribute(azure.getConf(),azure.getName(),pro.getBigsample());
+      //  int david = pro.getid(bigdatax).size();
+//        HelloWorldJNI lol = new HelloWorldJNI();
+//        Graph graph = new Graph();//aem
+//        ArrayList<Integer> fake = new ArrayList<>();
+//        //fake = pro.getid(bigdatax);
+//        for (int i = 0; i < david; i++) {
+//            fake.add(i);
+//        }
+//        lol.nativePrint(fake, graph);
 
 ///////////////////////////////////////////////////////////////////////////////        
     }//GEN-LAST:event_jButton3ActionPerformed
