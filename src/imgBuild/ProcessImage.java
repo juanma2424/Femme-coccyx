@@ -159,12 +159,18 @@ public class ProcessImage {
 
     public ArrayList<Integer> getid(ArrayList<pixelSample> dato) {
         ArrayList<Integer> bigID = new ArrayList<>();
-        try {
-            for (int i = 0; i < dato.size(); i++) {
-                bigID.add(dato.get(i).getId());
+        try{ 
+            for (int i = 0; i < (dato.size()); i++) {
+               // System.out.println("pp " +dato.get(i) );
+                if(dato.get(i)!=null){
+                bigID.add( (dato.get(i).getId()) );
+                }
             }
-        } catch (Exception e) {
-        }
+        }catch (Exception e) {
+
+                    }
+        
+       /// System.out.println("///" + bigID.size());
         return bigID;
     }
 
