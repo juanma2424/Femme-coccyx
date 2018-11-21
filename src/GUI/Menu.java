@@ -7,6 +7,7 @@ package GUI;
 
 import JNI.HelloWorldJNI;
 import RGBSample.oneID;
+import RoundRobin.MakeRobin;
 import RoundRobin.RoundRobin;
 import Thread.ImagePixel;
 import Thread.pixMap;
@@ -45,8 +46,8 @@ public class Menu extends javax.swing.JFrame {
     DataTXT mydata = DataTXT.getSingletonInstance();
     ProcessImage ObjProcesamiento = new ProcessImage();
     oneID ONE = new oneID();
-    RoundRobin RRobin =new RoundRobin();
-
+   // RoundRobin RRobin =new RoundRobin();
+    MakeRobin r = new MakeRobin();
 ////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////VARIABLES/////////////////////////////////////////
     String URLDATA;
@@ -256,17 +257,22 @@ public class Menu extends javax.swing.JFrame {
 
         }
         //-------------------------------------------------------------------//
-        System.out.println("sin rapetir 15% " + bigdatax.size());// array con todos los samples sin rapetir y con un 15%
-        System.out.println("sin rapetir 15% " +  pro.getid(bigdatax).size());//
+        bigdatax.size();// array con todos los samples sin rapetir y con un 15%
+        pro.getid(bigdatax).size();//
         System.out.println("  bla " + pro.getBigsample().size());
         
-        azure.getConf();
-        azure.getName();
-        azure.tagTen();
+//        azure.getConf();
+//        azure.getName();
+//        azure.tagTen();
+       
+        r.setConf(azure.getConf());
+        r.setSample(pro.getBigsample());
+        r.setTag(azure.getName());
+        r.getData(1,1,2);
         
-        
-   
-       // RRobin.distribute(azure.getConf(),azure.getName(),pro.getBigsample());
+        System.out.println(  r.getSample().get(0).getTag());
+      
+       
       //  int david = pro.getid(bigdatax).size();
 //        HelloWorldJNI lol = new HelloWorldJNI();
 //        Graph graph = new Graph();//aem
