@@ -11,7 +11,9 @@ import RoundRobin.MakeRobin;
 import RoundRobin.RoundRobin;
 import Thread.ImagePixel;
 import Thread.pixMap;
+import Thread.pixTx;
 import Thread.sacanRegion;
+import Thread.sacanTxt;
 import Thread.scanMap;
 import imgBuild.Azure;
 import imgBuild.MoreApere;
@@ -40,17 +42,17 @@ import structures.Graph;
 public class Menu extends javax.swing.JFrame {
 
 //////////////////////////////INSTANCE//////////////////////////////////////////
-    proText   textag = new proText();
+    proText textag = new proText();
     MoreApere bigColor = new MoreApere();
     Azure azure = new Azure();
     searchImg imgset = new searchImg();
     ProcessImage pro = new ProcessImage();
     errorShow myWindow = errorShow.getSingletonInstance();
-   // DataTXT mydata = DataTXT.getSingletonInstance();
-    textData  getdatatex = new textData();
+    // DataTXT mydata = DataTXT.getSingletonInstance();
+    textData getdatatex = new textData();
     ProcessImage ObjProcesamiento = new ProcessImage();
     oneID ONE = new oneID();
-   // RoundRobin RRobin =new RoundRobin();
+    // RoundRobin RRobin =new RoundRobin();
     MakeRobin r = new MakeRobin();
 ////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////VARIABLES/////////////////////////////////////////
@@ -60,6 +62,8 @@ public class Menu extends javax.swing.JFrame {
     Color blue;
     ArrayList<pixelSample> bigdatax = new ArrayList<>();
     ArrayList<Integer> bigID = new ArrayList<>();
+
+    ////////////////////////pxsamples/////////////////////////////
     ArrayList<pixelSample> sector1 = new ArrayList<>();
     ArrayList<pixelSample> sector2 = new ArrayList<>();
     ArrayList<pixelSample> sector3 = new ArrayList<>();
@@ -69,8 +73,19 @@ public class Menu extends javax.swing.JFrame {
     ArrayList<pixelSample> sector7 = new ArrayList<>();
     ArrayList<pixelSample> sector8 = new ArrayList<>();
     ArrayList<pixelSample> sector9 = new ArrayList<>();
-     ArrayList< WordSample > bigWordSample = new ArrayList<>();
-     BPTree<String, BPTree<String, WordSample>> tree ;
+    ///////////////////////////////////////////////////////////////
+    ArrayList< WordSample> txt1 = new ArrayList<>();
+    ArrayList< WordSample> txt2 = new ArrayList<>();
+    ArrayList< WordSample> txt3 = new ArrayList<>();
+    ArrayList< WordSample> txt4 = new ArrayList<>();
+    ArrayList< WordSample> txt5 = new ArrayList<>();
+    ArrayList< WordSample> txt6 = new ArrayList<>();
+    ArrayList< WordSample> txt7 = new ArrayList<>();
+    ArrayList< WordSample> txt8 = new ArrayList<>();
+    ArrayList< WordSample> txt9 = new ArrayList<>();
+
+    ArrayList< WordSample> bigWordSample = new ArrayList<>();
+    BPTree<String, BPTree<String, WordSample>> tree;
 ////////////////////////////////////////////////////////////////////////////////
 
 ////////////////////////////GET&SET/////////////////////////////////////////////
@@ -178,9 +193,7 @@ public class Menu extends javax.swing.JFrame {
         getdatatex.show(true);
         setArchivo(archivo);
         getdatatex.show(true);
-       
-        
-        
+
 ////////////////////////////////////////////////////////////////////////////////        
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -264,15 +277,12 @@ public class Menu extends javax.swing.JFrame {
         bigdatax.size();// array con todos los samples sin rapetir y con un 15%
         pro.getid(bigdatax).size();//
         System.out.println("  bla " + pro.getBigsample().size());
-        
 
-       
         r.setConf(azure.getConf());
         r.setSample(pro.getBigsample());
         r.setTag(azure.getName());
-        r.getData(1,1,2);
-        
-        
+        r.getData(1, 1, 2);
+
         //-------------------------EX1---------------------------//
         //------------cut img in 9 regions-----------------------//   
         ExecutorService executors = Executors.newFixedThreadPool(10);
@@ -286,7 +296,7 @@ public class Menu extends javax.swing.JFrame {
             // Espero a que terminen de ejecutarse todos los procesos 
             // para pasar a las siguientes instrucciones 
         }
-      // System.out.println(sectors.getSector1().get(0).getTag());
+        // System.out.println(sectors.getSector1().get(0).getTag());
         for (int i = 0; i < sectors.getSector1().size(); i++) {
             System.out.println(sectors.getSector1().get(i).getTag());
         }
@@ -295,9 +305,8 @@ public class Menu extends javax.swing.JFrame {
         azure.getConf();
         azure.getName();
         azure.tagTen();
-        
+
         //------------------------------------------------------//
-       
         int david = pro.getid(bigdatax).size();
         HelloWorldJNI lol = new HelloWorldJNI();
         Graph graph = new Graph();//aem
@@ -306,18 +315,28 @@ public class Menu extends javax.swing.JFrame {
             fake.add(i);
         }
         lol.nativePrint(fake, graph);
-       
+
         tree = getdatatex.getTree();
         System.out.println(tree.search("p").search("prince").counter);
-        
-        textag.samblestext(tree,azure.tagTen());
+
+        textag.samblestext(tree, azure.tagTen());
         bigWordSample = textag.getBigWordSample();
-        
-        
-        
-        
-        
-        
+
+        //-------------------------EX1---------------------------//
+        //------------cut img in 9 regions-----------------------//   
+        ExecutorService executotxt = Executors.newFixedThreadPool(10);
+        sacanTxt sectortx = new sacanTxt(new pixTx(bigWordSample));
+
+        Runnable sectox = sectortx;
+        executotxt.execute(sectox);
+
+        executor.shutdown();	// Cierro el Executor
+        while (!executotxt.isTerminated()) {
+            // Espero a que terminen de ejecutarse todos los procesos 
+            // para pasar a las siguientes instrucciones 
+        }
+
+        //------------------------------------------------------//
 ///////////////////////////////////////////////////////////////////////////////        
     }//GEN-LAST:event_jButton3ActionPerformed
 

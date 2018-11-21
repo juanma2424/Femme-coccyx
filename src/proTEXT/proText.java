@@ -16,8 +16,7 @@ import structures.BPTree;
  */
 public class proText {
     
-     ArrayList< WordSample > bigWordSample = new ArrayList<>();
-
+    ArrayList< WordSample > bigWordSample = new ArrayList<>();
 
     public void samblestext(BPTree<String, BPTree<String, WordSample>> tree,  ArrayList<String> bigdatax ){
         for (int i = 0; i < bigdatax.size(); i++) {
