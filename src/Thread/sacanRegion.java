@@ -41,7 +41,7 @@ public class sacanRegion implements Runnable {
                 }
 
             }
-            if (i < a.size() && a.get(i)!=null) {
+            if (i < a.size() && (a.get(i)!=null)) {
                 this.bigdata.add(a.get(i));
                 setBigdata(bigdata);
             }

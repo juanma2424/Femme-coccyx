@@ -261,27 +261,45 @@ public class Menu extends javax.swing.JFrame {
         pro.getid(bigdatax).size();//
         System.out.println("  bla " + pro.getBigsample().size());
         
-//        azure.getConf();
-//        azure.getName();
-//        azure.tagTen();
+
        
         r.setConf(azure.getConf());
         r.setSample(pro.getBigsample());
         r.setTag(azure.getName());
         r.getData(1,1,2);
         
-        System.out.println(  r.getSample().get(0).getTag());
-      
-       
-      //  int david = pro.getid(bigdatax).size();
-//        HelloWorldJNI lol = new HelloWorldJNI();
-//        Graph graph = new Graph();//aem
-//        ArrayList<Integer> fake = new ArrayList<>();
-//        //fake = pro.getid(bigdatax);
-//        for (int i = 0; i < david; i++) {
-//            fake.add(i);
-//        }
-//        lol.nativePrint(fake, graph);
+        
+        //-------------------------EX1---------------------------//
+        //------------cut img in 9 regions-----------------------//   
+        ExecutorService executors = Executors.newFixedThreadPool(10);
+        scanMap sectors = new scanMap(new pixMap(dato));
+
+        Runnable sectos = sectors;
+        executors.execute(sectos);
+
+        executors.shutdown();	// Cierro el Executor
+        while (!executors.isTerminated()) {
+            // Espero a que terminen de ejecutarse todos los procesos 
+            // para pasar a las siguientes instrucciones 
+        }
+       System.out.println(sectors.getSector1().get(0).getTag());
+//
+//        
+        azure.getConf();
+        azure.getName();
+        azure.tagTen();
+//        
+//        //------------------------------------------------------//
+//       
+        int david = pro.getid(bigdatax).size();
+        HelloWorldJNI lol = new HelloWorldJNI();
+        Graph graph = new Graph();//aem
+        ArrayList<Integer> fake = new ArrayList<>();
+        //fake = pro.getid(bigdatax);
+        for (int i = 0; i < david; i++) {
+            fake.add(i);
+        }
+        lol.nativePrint(fake, graph);
 
 ///////////////////////////////////////////////////////////////////////////////        
     }//GEN-LAST:event_jButton3ActionPerformed
