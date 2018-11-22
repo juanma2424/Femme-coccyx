@@ -16,15 +16,22 @@ import sample.pixelSample;
  */
 public class NewIMG {
     
-    private BufferedImage imageActual;
-
-   
+    private BufferedImage imageActual;   
     private Color colorAux;
     private int mediaPixel, colorSRGB = 0;
+    int NewImageX, NewImageY;
+    
+    
+    public void setImageActual(BufferedImage imageActual) {
+        this.imageActual = imageActual;
+        NewImageX = imageActual.getWidth();
+        NewImageY = imageActual.getHeight();
+    }
+    
+    
     
     
      public BufferedImage efect(ArrayList<pixelSample> bigdatax, int RDistancia, int BDistancia) {
-
         //------------------------------ARRAY IMG  LOOP-----------------------------------------//
         for (int i = 0; i < bigdatax.size(); i++) {
            
@@ -44,8 +51,4 @@ public class NewIMG {
         return imageActual;
     }
 
-    public void setImageActual(BufferedImage imageActual) {
-        this.imageActual = imageActual;
-    }   
-    
 }

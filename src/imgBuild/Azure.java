@@ -16,14 +16,13 @@ import org.json.JSONObject;
 
 public class Azure {
 
-//    https://westcentralus.api.cognitive.microsoft.com/vision/v1.0
+// https://westcentralus.api.cognitive.microsoft.com/vision/v1.0
 //https://westcentralus.api.cognitive.microsoft.com/vision/v2.0
 //Clave 1: 66ebfe0f0b8844b185b394968aa2a26f
 //Clave 2: c1db0fbfa4ea4f979ba101bf7afde240
     ArrayList<Double> conf = new ArrayList<>();
 
-    
-     ArrayList<String> name = new ArrayList<>();
+    ArrayList<String> name = new ArrayList<>();
     private static String imageToAnalyze;
     private static final String subscriptionKey = "66ebfe0f0b8844b185b394968aa2a26f";
     private static final String uriBase
@@ -39,7 +38,7 @@ public class Azure {
     }
 
     public void shareDataJson() {
-             
+
         CloseableHttpClient httpClient = HttpClientBuilder.create().build();
 
         try {
@@ -53,7 +52,6 @@ public class Azure {
             URI uri = builder.build();
             HttpPost request = new HttpPost(uri);
 
-           
             // Request headers.
             request.setHeader("Content-Type", "application/json");
             request.setHeader("Ocp-Apim-Subscription-Key", subscriptionKey);
@@ -71,61 +69,40 @@ public class Azure {
                 // Format and display the JSON response.
                 String jsonString = EntityUtils.toString(entity);
                 JSONObject json = new JSONObject(jsonString);
-                 
-//                System.out.println("REST Response:\n");
-//                System.out.println(json.toString(2));
-  //              System.out.println(json.getJSONArray("tags"));
-                
-                JSONArray json1 = json.getJSONArray("tags");
-                //json1.get(0);
-               //JSONObject json2 =  (JSONObject) json1;
-                for (int i = 0; i < json1.length(); i++) {
-                      JSONObject json2 = (JSONObject) json1.get(i);
-                      conf.add((Double) json2.get("confidence"));
-                      name.add((String) json2.get("name"));
-//                      System.out.println(json2.get("confidence"));
-//                       System.out.println(json2.get("name"));
-                }
-               //System.out.println(json2);
-//                JSONObject json3 = json.getJSONObject("description");
-//                JSONObject json4 = (JSONObject) (json3.getJSONArray("captions")).get(0);
-//
-//                System.out.println(json2.getJSONArray("tags"));
-//                System.out.println(json1.get("dominantColors"));
-//                System.out.println(json4.get("confidence"));
 
-                // System.out.println(" tags " + json.get("tags"));
-                // System.out.println("REST Response:\n");
-                //System.out.println(json.getJSONArray("dominantColorForeground"));
-                
+                JSONArray json1 = json.getJSONArray("tags");
+
+                for (int i = 0; i < json1.length(); i++) {
+                    JSONObject json2 = (JSONObject) json1.get(i);
+                    conf.add((Double) json2.get("confidence"));
+                    name.add((String) json2.get("name"));
+                }
             }
         } catch (Exception e) {
             // Display error message.
             System.out.println(e.getMessage());
         }
 
-    
     }
-    
-    public ArrayList<String> tagTen(){
+
+    public ArrayList<String> tagTen() {
         ArrayList<String> tagt = new ArrayList<>();
         int tagLen;
-        if(getName().size()>=10){
-            tagLen= 10;
-        }else{
-            tagLen= getName().size();
+        if (getName().size() >= 10) {
+            tagLen = 10;
+        } else {
+            tagLen = getName().size();
         }
-        
+
         for (int i = 0; i < tagLen; i++) {
-          
-                 tagt.add(name.get(i));
-            
-           
-        
+
+            tagt.add(name.get(i));
+
         }
         return tagt;
-        
     }
+
+///////////////////////////////////////////GET&SET//////////////////////////////
     public ArrayList<Double> getConf() {
         return conf;
     }

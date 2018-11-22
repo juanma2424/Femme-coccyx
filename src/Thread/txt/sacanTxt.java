@@ -3,38 +3,38 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Thread;
+package Thread.txt;
 
-import Thread.pixMap;
+import Thread.txt.pixTx;
 import java.util.ArrayList;
+import sample.WordSample;
 import sample.pixelSample;
 
 /**
  *
  * @author Juanma
  */
-public class scanMap implements Runnable {
-    //-----VARIEABLE--------//    
-    public pixMap map;
+public class sacanTxt implements Runnable{
+    public pixTx map;
     
-    ArrayList<pixelSample> sector1 = new ArrayList<>();
-    ArrayList<pixelSample> sector2 = new ArrayList<>();
-    ArrayList<pixelSample> sector3 = new ArrayList<>();
-    ArrayList<pixelSample> sector4 = new ArrayList<>();
-    ArrayList<pixelSample> sector5 = new ArrayList<>();
-    ArrayList<pixelSample> sector6 = new ArrayList<>();
-    ArrayList<pixelSample> sector7 = new ArrayList<>();
-    ArrayList<pixelSample> sector8 = new ArrayList<>();
-    ArrayList<pixelSample> sector9 = new ArrayList<>();
+    ArrayList<WordSample> sector1 = new ArrayList<>();
+    ArrayList<WordSample> sector2 = new ArrayList<>();
+    ArrayList<WordSample> sector3 = new ArrayList<>();
+    ArrayList<WordSample> sector4 = new ArrayList<>();
+    ArrayList<WordSample> sector5 = new ArrayList<>();
+    ArrayList<WordSample> sector6 = new ArrayList<>();
+    ArrayList<WordSample> sector7 = new ArrayList<>();
+    ArrayList<WordSample> sector8 = new ArrayList<>();
+    ArrayList<WordSample> sector9 = new ArrayList<>();
     
     //----------------------//
 
-    public pixMap getMap() {
+    public pixTx getMap() {
         return map;
     }
 
     //-----------CONSTRUCTOR----CLIENTE---TIEMPO-----------//
-    public scanMap(pixMap sampleMap) {
+    public sacanTxt(pixTx sampleMap) {
         this.map = sampleMap;
     }
     //----------------------------------------------------//
@@ -45,6 +45,7 @@ public class scanMap implements Runnable {
         int sizemap = this.map.getMap().size()/9;
         this.map.getMap().size();
         
+        System.out.println(" acaxxxxxxxxxxx");
         s1(this.map, sizemap*0, sizemap*1,sector1);
         s1(this.map, sizemap*1, sizemap*2,sector2);
         s1(this.map, sizemap*2, sizemap*3,sector3);
@@ -61,84 +62,86 @@ public class scanMap implements Runnable {
         //System.out.println("scan map------------------------------------------------------------------------------------");
     }
     
-    public void s1(pixMap pmap , int x , int y , ArrayList<pixelSample> s){
+    public void s1(pixTx pmap , int x , int y , ArrayList<WordSample> s){
          for (int i = x; i < y; i++) {
             s.add(map.getMap().get(i));
-            //System.out.println("scan map   xxxxxxxxxxx");
+           // System.out.println("scan map   xxxxxxxxxxx");
         }
     }
 
     //-------------------------------GET&SET-------------------------------//
-    public ArrayList<pixelSample> getSector1() {
+    public ArrayList<WordSample> getSector1() {
         return sector1;
     }
 
-    public void setSector1(ArrayList<pixelSample> sector1) {
+    public void setSector1(ArrayList<WordSample> sector1) {
         this.sector1 = sector1;
     }
 
-    public ArrayList<pixelSample> getSector2() {
+    public ArrayList<WordSample> getSector2() {
         return sector2;
     }
 
-    public void setSector2(ArrayList<pixelSample> sector2) {
+    public void setSector2(ArrayList<WordSample> sector2) {
         this.sector2 = sector2;
     }
 
-    public ArrayList<pixelSample> getSector3() {
+    public ArrayList<WordSample> getSector3() {
         return sector3;
     }
 
-    public void setSector3(ArrayList<pixelSample> sector3) {
+    public void setSector3(ArrayList<WordSample> sector3) {
         this.sector3 = sector3;
     }
 
-    public ArrayList<pixelSample> getSector4() {
+    public ArrayList<WordSample> getSector4() {
         return sector4;
     }
 
-    public void setSector4(ArrayList<pixelSample> sector4) {
+    public void setSector4(ArrayList<WordSample> sector4) {
         this.sector4 = sector4;
     }
 
-    public ArrayList<pixelSample> getSector5() {
+    public ArrayList<WordSample> getSector5() {
         return sector5;
     }
 
-    public void setSector5(ArrayList<pixelSample> sector5) {
+    public void setSector5(ArrayList<WordSample> sector5) {
         this.sector5 = sector5;
     }
 
-    public ArrayList<pixelSample> getSector6() {
+    public ArrayList<WordSample> getSector6() {
         return sector6;
     }
 
-    public void setSector6(ArrayList<pixelSample> sector6) {
+    public void setSector6(ArrayList<WordSample> sector6) {
         this.sector6 = sector6;
     }
 
-    public ArrayList<pixelSample> getSector7() {
+    public ArrayList<WordSample> getSector7() {
         return sector7;
     }
 
-    public void setSector7(ArrayList<pixelSample> sector7) {
+    public void setSector7(ArrayList<WordSample> sector7) {
         this.sector7 = sector7;
     }
 
-    public ArrayList<pixelSample> getSector8() {
+    public ArrayList<WordSample> getSector8() {
         return sector8;
     }
 
-    public void setSector8(ArrayList<pixelSample> sector8) {
+    public void setSector8(ArrayList<WordSample> sector8) {
         this.sector8 = sector8;
     }
 
-    public ArrayList<pixelSample> getSector9() {
+    public ArrayList<WordSample> getSector9() {
         return sector9;
     }
 
-    public void setSector9(ArrayList<pixelSample> sector9) {
+    public void setSector9(ArrayList<WordSample> sector9) {
         this.sector9 = sector9;
     }
    //---------------------------------------------------------------------------//
+
+    
 }

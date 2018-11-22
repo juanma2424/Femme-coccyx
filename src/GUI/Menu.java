@@ -6,17 +6,12 @@
 package GUI;
 
 import JNI.HelloWorldJNI;
-import RGBSample.oneID;
 import RoundRobin.MakeRobin;
-import RoundRobin.RoundRobin;
-import Thread.ImagePixel;
-import Thread.pixMap;
-import Thread.pixTx;
-import Thread.sacanRegion;
-import Thread.sacanTxt;
-import Thread.scanMap;
+import Thread.pix.ImagePixel;
+import Thread.pix.pixMap;
+import Thread.pix.sacanRegion;
+import Thread.txt.scanMap;
 import imgBuild.Azure;
-import imgBuild.MoreApere;
 import imgBuild.ProcessImage;
 import imgBuild.errorShow;
 import imgBuild.searchImg;
@@ -36,7 +31,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import proTEXT.proText;
 import sample.WordSample;
-
 import sample.pixelSample;
 import structures.BPTree;
 import structures.Graph;
@@ -45,16 +39,12 @@ public class Menu extends javax.swing.JFrame {
 
 //////////////////////////////INSTANCE//////////////////////////////////////////
     proText textag = new proText();
-    MoreApere bigColor = new MoreApere();
     Azure azure = new Azure();
     searchImg imgset = new searchImg();
     ProcessImage pro = new ProcessImage();
     errorShow myWindow = errorShow.getSingletonInstance();
-    // DataTXT mydata = DataTXT.getSingletonInstance();
     textData getdatatex = new textData();
     ProcessImage ObjProcesamiento = new ProcessImage();
-    oneID ONE = new oneID();
-    // RoundRobin RRobin =new RoundRobin();
     MakeRobin r = new MakeRobin();
     HashMap<Integer, List<WordSample>> bigwordx;
 ////////////////////////////////////////////////////////////////////////////////
@@ -196,15 +186,14 @@ public class Menu extends javax.swing.JFrame {
         getdatatex.show(true);
         setArchivo(archivo);
         getdatatex.show(true);
-
 ////////////////////////////////////////////////////////////////////////////////        
     }//GEN-LAST:event_jButton1ActionPerformed
 
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-
+        //////////////////////BOTON DE CARGAR IMAGEN //////////////////////////
+        //////////////////////llamada a azure//////////////////////////////////
         try {
-
             //------------GETURL--------------//
             URLDATA = jTextArea1.getText();//url
             URLIMG = imgset.ImagenURL(URLDATA);// Image del url
@@ -215,7 +204,7 @@ public class Menu extends javax.swing.JFrame {
                 jLabel3.setIcon(new ImageIcon(URLIMG));//SHARE IMG
                 //--------//
 
-                //----------------THREAD-------------------------------------//
+                //----------------AZURE-------------------------------------//
                 azure.setImageToAnalyze(URLDATA);//SHARE AZURE
                 //-----------------------------------------------------------//
                 jTextArea1.setText("");//RESET JTEXTAREA
@@ -226,35 +215,38 @@ public class Menu extends javax.swing.JFrame {
         } catch (IOException ex) {
             Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
         }
+        ////////////////////////////////////////////////////////////////////////
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
 //////////////////////////////////SHAREIMG//////////////////////////////////////       
-        pro.setImageActual((BufferedImage) URLIMG);
-        jLabel3.setIcon(new ImageIcon(pro.escalaGrises(3, 3)));
+        pro.setImageActual((BufferedImage) URLIMG);//SET A LA NUEVA IMG
+        jLabel3.setIcon(new ImageIcon(pro.escalaGrises(3, 3)));// METODO L X A
         ArrayList<pixelSample> dato = pro.getExtract1();
-//        System.out.println("todo " + pro.getListPixSample().size());
-//        System.out.println("15% de todo " + pro.getExtract1().size());
+     
+//      System.out.println("todo " + pro.getListPixSample().size());
+//      System.out.println("15% de todo " + pro.getExtract1().size());
 
+         //
         //-------------------------EX1---------------------------//
-        //------------cut img in 9 regions-----------------------//   
+        //------------cut img in 9 regions-----------------------// 
+        //------------------regiones de igual tamano------------//
         ExecutorService executor = Executors.newFixedThreadPool(10);
         scanMap sector = new scanMap(new pixMap(dato));
 
         Runnable secto = sector;
         executor.execute(secto);
-
-        executor.shutdown();	// Cierro el Executor
-        while (!executor.isTerminated()) {
-            // Espero a que terminen de ejecutarse todos los procesos 
-            // para pasar a las siguientes instrucciones 
-        }
-
+        executor.shutdown();	
+        
+        while (!executor.isTerminated()) {}
         //------------------------------------------------------//
+        
+        
+       
         //-------------------EX2---------------------------------//
         //-----------delet same id sample-----------------------//  
+        //-------------elimina repetidos, sumarisa-------------//
         ArrayList<ImagePixel> Pixels = new ArrayList<ImagePixel>();
-
         Pixels.add(new ImagePixel(sector.getSector1(), bigdatax));
         Pixels.add(new ImagePixel(sector.getSector2(), bigdatax));
         Pixels.add(new ImagePixel(sector.getSector3(), bigdatax));
@@ -264,7 +256,7 @@ public class Menu extends javax.swing.JFrame {
         Pixels.add(new ImagePixel(sector.getSector7(), bigdatax));
         Pixels.add(new ImagePixel(sector.getSector8(), bigdatax));
         Pixels.add(new ImagePixel(sector.getSector9(), bigdatax));
-
+        ///////////////////////////////////////////////////////////////////////
         ///////////////////////////////////////////////////////////////////////
         ExecutorService executor1 = Executors.newFixedThreadPool(10);
         for (ImagePixel sample : Pixels) {
@@ -273,55 +265,66 @@ public class Menu extends javax.swing.JFrame {
             executor1.execute(re);
         }
         executor1.shutdown();
-        while (!executor1.isTerminated()) {
-
-        }
+        while (!executor1.isTerminated()) {}
         //-------------------------------------------------------------------//
+        
+        ////////////////////////////////////////////////////////////////////////
         bigdatax.size();// array con todos los samples sin rapetir y con un 15%
-        pro.getid(bigdatax).size();//
-       
-//        System.out.println("  bla " + pro.getBigsample().size());
+        pro.getid(bigdatax).size();//array de los ids sin repetir
+        ////////////////////////////////////////////////////////////////////////
+        
+        // System.out.println("  bla " + pro.getBigsample().size());
        // System.out.println("  most_apert--------------------- " +  pro.principalColor(bigdatax));   
 
-        r.setConf(azure.getConf());
-        r.setSample(pro.getBigsample());
-        r.setTag(azure.getName());
-        r.getData(1, 1, 2);
-
+        ///////////////////////////////OBJETOS AZURE TAGS CONF TOP 10////////// 
+        r.setConf(azure.getConf());//CONF
+        r.setSample(pro.getBigsample());//SAMPLES
+        r.setTag(azure.getName());//TAGS
+        r.getData(1, 1, 2);////ROUND ROUBIN
+        ///////////////////////////////////////////////////////////////////////
+        
+        
+        
         //-------------------------EX1---------------------------//
         //------------cut img in 9 regions-----------------------//   
+        //-------------regiones azure con tags---------------------//   
         ExecutorService executors = Executors.newFixedThreadPool(10);
         scanMap sectors = new scanMap(new pixMap(dato));
 
         Runnable sectos = sectors;
         executors.execute(sectos);
-
-        executors.shutdown();	// Cierro el Executor
-        while (!executors.isTerminated()) {
-            // Espero a que terminen de ejecutarse todos los procesos 
-            // para pasar a las siguientes instrucciones 
-        }
-        // System.out.println(sectors.getSector1().get(0).getTag());
-//
-//        
-        azure.getConf();
-        azure.getName();
-        azure.tagTen();
+        executors.shutdown();	
         
-//        //------------------------------------------------------//
+        while (!executors.isTerminated()) {}
+        ////////////////////////////////////////////////////////////////////////
+        
+        // System.out.println(sectors.getSector1().get(0).getTag());
+ 
+        azure.getConf();//obt conf
+        azure.getName();// opt tags
+        azure.tagTen();// obtiene el top 10
+        
+       /////////////////////////////////////////////////////////////////////////
+
+
+
+       //---------------------JNI----------------------------------------------//
        // System.out.println("  most_apert--------------------- " +  pro.principalColor(bigdatax));
-        int most_appearance = (int) pro.principalColor(bigdatax);
-        System.out.println("Este dato tiene que calzar con el de arriba" + most_appearance);
-        int david = pro.getid(bigdatax).size();
-        HelloWorldJNI lol = new HelloWorldJNI();
-        Graph graph = new Graph();//aem
-        ArrayList<Integer> fake = new ArrayList<>();
+        int most_appearance = (int) pro.principalColor(bigdatax);// DATO QUE MAS APARECE
+       // System.out.println("Este dato tiene que calzar con el de arriba" + most_appearance);
+        int david = pro.getid(bigdatax).size();//TAMANO DE LOS DATOS QUE SE PASARAN
+        HelloWorldJNI lol = new HelloWorldJNI();// INSTANCIA JNI
+        Graph graph = new Graph(david);//GRAFO
+        ArrayList<Integer> fake = new ArrayList<>();// FACHADA
         for (int i = 0; i < david; i++) {
             fake.add(i);
         }
-        lol.nativePrint(fake, graph, most_appearance);
-         
-        System.out.println("La cabeza del grafo es: " + graph.getHead());
+        
+        HashMap<Integer,Integer> map = new HashMap();
+        lol.nativePrint(fake, graph, map, most_appearance);
+        ////////////////////////////////////////////////////////////////////////
+        
+       // System.out.println("La cabeza del grafo es: " + graph.getHead());
         
 //        tree = getdatatex.getTree();// arbol de inicio
 //        tagggin.add(sectors.getSector1());
@@ -336,6 +339,7 @@ public class Menu extends javax.swing.JFrame {
 //        bigwordx = getdatatex.getBigwords();// map
 //        textag.samblestext(tree, azure.tagTen(), tagggin);//arboly tags
 //        bigWordSample = textag.getBigWordSample();
+
        
 //        //-------------------------EX1---------------------------//
 //        //------------cut img in 9 regions-----------------------//   
@@ -353,10 +357,7 @@ public class Menu extends javax.swing.JFrame {
 
         //------------------------------------------------------//
         //System.out.println(" sectot txt 1" + sectortx.getSector1().get(0));
-        
-        
-        
-        
+                
 ///////////////////////////////////////////////////////////////////////////////        
     }//GEN-LAST:event_jButton3ActionPerformed
 

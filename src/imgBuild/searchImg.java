@@ -6,8 +6,6 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import static sun.security.jgss.GSSToken.debug;
 
@@ -19,13 +17,11 @@ public class searchImg {
 
     //-------------------GET IMG BY URL------------------------// 
     public Image ImagenURL(String URLDATA) throws IOException {
-
         try {
             //------ SET URL AND OPEN CONECTION ----// 
             URL url = new URL(URLDATA);
             urlCon = url.openConnection();
             //---------------------------------------//
-
             try {
                 // SETIMG IN LABEL    
                 if (urlCon.getContentType() != null) {
@@ -41,23 +37,24 @@ public class searchImg {
         } catch (MalformedURLException e) {//IF DONT URL  
         }
         return null;
-    }
+    }  
+}  
     
-    public Image fastShare(String urldate) throws IOException{
-        Runnable  miRunnable = () -> {
-            try {
-                 ImagenURL(urldate);//carga img
-            } catch (IOException ex) {
-                Logger.getLogger(searchImg.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        } //Clase para ejecutar hilo independiente del main
-        ; 
-        Thread hilo = new Thread(miRunnable);//Instancia del hilo 
-        hilo.start(); 
-        return ImagenURL(urldate);
-    }
+//    public Image fastShare(String urldate) throws IOException{
+//        Runnable  miRunnable = () -> {
+//            try {
+//                 ImagenURL(urldate);//carga img
+//            } catch (IOException ex) {
+//                Logger.getLogger(searchImg.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+//        } //Clase para ejecutar hilo independiente del main
+//        ; 
+//        Thread hilo = new Thread(miRunnable);//Instancia del hilo 
+//        hilo.start(); 
+//        return ImagenURL(urldate);
+//    }
 
-}
+//}
 
 //    public Image fastShare(String urldate) throws IOException{
 //        Runnable  miRunnable = () -> {

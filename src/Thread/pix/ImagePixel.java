@@ -1,4 +1,4 @@
-package Thread;
+package Thread.pix;
 
 import java.util.ArrayList;
 import sample.pixelSample;

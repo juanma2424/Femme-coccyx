@@ -22,14 +22,6 @@ public class ProcessImage {
     ArrayList<pixelSample> extract1 = new ArrayList<>();
     ArrayList<pixelSample> bigsample = new ArrayList<>();
 
-    public ArrayList<pixelSample> getBigsample() {
-        return bigsample;
-    }
-
-    public void setBigsample(ArrayList<pixelSample> bigsample) {
-        this.bigsample = bigsample;
-    }
-
     //--------------------------------//
     //---------------INSTANCE ARRAY---------------//
     extractPixel pixel1 = new extractPixel();
@@ -68,7 +60,6 @@ public class ProcessImage {
                 //---------SET NEW COLOR---------//
 //                imageActual.setRGB(i, j, colorSRGB);
                 //-------------------------------//
-
             }
 
         }
@@ -151,11 +142,12 @@ public class ProcessImage {
 
         // int pFinalX, int pFinalY, Hashtable table) {
         sector(0, 0, imageActual.getWidth(), imageActual.getHeight(), sector1);//carga el hast y un list de pixselsample
-        extract1 = pixel1.datos(sector1, 0, media);//entrae el 15%
+        extract1 = pixel1.datos(sector1);//entrae el 15%
 
         //---RETURN IMG---//
         return imageActual;
         //----------------// 
+        
     }
 
 /////////////////////////////////GET&SET////////////////////////////////////////
@@ -180,7 +172,6 @@ public class ProcessImage {
     public ArrayList<pixelSample> getExtract1() {
         return extract1;
     }
-//
 
     public void setExtract1(ArrayList<pixelSample> extract1) {
         this.extract1 = extract1;
@@ -225,8 +216,14 @@ public class ProcessImage {
         }
         return aux;
     }
-    
+
+    public ArrayList<pixelSample> getBigsample() {
+        return bigsample;
+    }
+
+    public void setBigsample(ArrayList<pixelSample> bigsample) {
+        this.bigsample = bigsample;
+    }
 
 ////////////////////////////////////////////////////////////////////////////////    
 }
-    

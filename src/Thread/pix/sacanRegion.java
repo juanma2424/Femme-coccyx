@@ -1,7 +1,5 @@
-package Thread;
-
+package Thread.pix;
 import java.util.ArrayList;
-import java.util.Objects;
 import sample.pixelSample;
 
 public class sacanRegion implements Runnable {
@@ -25,9 +23,6 @@ public class sacanRegion implements Runnable {
 
         ArrayList<pixelSample> a = this.sample.getRegion();
         ArrayList<pixelSample> b = this.sample.getRegion();
-        int posx;
-        int posy;
-
         for (int i = 0; i < a.size(); i++) {
 
             for (int j = 0; j < b.size(); j++) {

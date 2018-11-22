@@ -2,8 +2,6 @@
 package RoundRobin;
 
 import java.util.ArrayList;
-import java.util.Scanner;
-import percentage.extractPixel;
 import sample.pixelSample;
 
 /**
