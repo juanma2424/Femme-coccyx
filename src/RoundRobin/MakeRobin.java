@@ -2,6 +2,7 @@
 package RoundRobin;
 
 import java.util.ArrayList;
+import java.util.Map;
 import sample.pixelSample;
 
 /**
@@ -13,7 +14,9 @@ public class MakeRobin {
     
     ArrayList<Double> conf;
     ArrayList<String> tag; 
-    ArrayList<pixelSample> sample;
+    Map<Integer, pixelSample > sample;
+
+   
     int [] temp;
     int commBT, k, tq;
     int[][] d;
@@ -129,13 +132,15 @@ public class MakeRobin {
         this.tag = tag;
     }
 
-    public ArrayList<pixelSample> getSample() {
+   
+ public Map<Integer, pixelSample> getSample() {
         return sample;
     }
 
-    public void setSample(ArrayList<pixelSample> sample) {
+    public void setSample(Map<Integer, pixelSample> sample) {
         this.sample = sample;
     }
+  
     
    
     

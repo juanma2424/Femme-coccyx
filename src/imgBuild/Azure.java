@@ -76,6 +76,7 @@ public class Azure {
                     JSONObject json2 = (JSONObject) json1.get(i);
                     conf.add((Double) json2.get("confidence"));
                     name.add((String) json2.get("name"));
+                    System.out.print("  ,  tags  , " + name.get(i));
                 }
             }
         } catch (Exception e) {
