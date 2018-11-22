@@ -97,16 +97,17 @@ public class MakeRobin {
         
 	for (int i = 0; i < tag.size(); i++){
                 
-		double quant = (sample.size() * (((conf.get(i) * 100) / sum) / 100));
+		double quant = (listpx.size() * (((conf.get(i) * 100) / sum) / 100));
                 
-                if (cont + quant > sample.size()){
-                    quant = sample.size() - cont; 
+                if (cont + quant > listpx.size()){
+                    quant = listpx.size() - cont; 
                 }
                
 		for (int j = 0; j < quant; j++){
-			sample.get(cont).setTag(tag.get(i));
-                        listpx.get(cont).setTag(tag.get(i));
-                        System.out.println("entra");
+                        listpx.get(cont).setTag(tag.get(i)); 
+ 			sample.put(cont,  listpx.get(cont));
+                        
+                        //System.out.println("entra");
 			cont++;
 		}
 	}

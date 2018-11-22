@@ -91,7 +91,7 @@ public class textData extends javax.swing.JFrame {
         
        
         parser.setDirec(getArchivo().toString());
-        tree = parser.getBTree(Integer.parseInt(jTextField2.getText()),Integer.parseInt(jTextField3.getText()), Integer.parseInt(jTextField1.getText()), Integer.parseInt(jTextField4.getText()));      
+        tree = (parser.getBTree(Integer.parseInt(jTextField2.getText()),Integer.parseInt(jTextField4.getText()), Integer.parseInt(jTextField1.getText()), Integer.parseInt(jTextField3.getText())));      
         
         setTree(tree);
         this.show(false);

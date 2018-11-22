@@ -58,11 +58,11 @@ public class proText {
                                int x = sample.getPosX();
                                int y = sample.getPosY();
                                Color Pixel = sample.getColor();
-                               Color Pixelverde = sample.getColor();
+                               int Pixelverde = Pixel.getGreen();
                                int R = Math.abs((Pixel.getRed() - (mapadavid.get(sample.getFakeID())))%256);
                                int B = Math.abs((Pixel.getBlue() + (mapadavid.get(sample.getFakeID())))%256);
                                        
-                                setRGB(x,y,R,B, (Pixelverde) );
+                                setRGB(x,y,R,B,Pixelverde );
                                //ACTUALIZAR IMG
                             //public void setRGB(int x ,int y , int R , int B , Color pixcolor){
                           }   
@@ -107,24 +107,19 @@ public class proText {
                                //img.setRGB(R,Pixel.G,B,x,y);
                                //ACTUALIZAR IMG
     
-    public void setRGB(int x ,int y , int R , int B , Color pixcolor){
+    public void setRGB(int x ,int y , int R , int B , int pixVerde){
        
                 colorAux = new Color(this.imageActual.getRGB(x, y));
                 
-                //colorSRGB = (R % 256) | (pixcolor) | (256 % B);
+                colorSRGB = (R % 256) | (pixVerde) | (256 % B);
+                
+                imageActual.setRGB(x, y, colorSRGB);
+                
+                imageActual.setRGB(x, y, colorSRGB);
+                
+                
 
-                //---------SET NEW COLOR---------//
-                //imageActual.setRGB(x,y);
-                //-------------------------------//
-                //colorSRGB = (mediaPixel << 8) | (mediaPixel << 8) | mediaPixel;
 
-                //---------SET NEW COLOR---------//
-                // imageActual.setRGB(i, j, colorSRGB);
-        
-        
-        
-        
-        
     }
     
     

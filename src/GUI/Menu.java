@@ -298,13 +298,25 @@ public class Menu extends javax.swing.JFrame {
        // System.out.println("  most_apert--------------------- " +  pro.principalColor(bigdatax));   
 
         ///////////////////////////////OBJETOS AZURE TAGS CONF TOP 10////////// 
-        r.setConf(azure.getConf());//CONF
-        r.setSample(pro.getMapdavid());//SAMPLES
-        r.setListpx(pro.getBigID());
-       // pro.getid((pro.getid(bigdatax)));//tag a la lista
+        
+        //System.out.println(" conf" + azure.getConf() );
         r.setTag(azure.getName());//TAGS
+        r.setConf(azure.getConf());//CONF
+        r.setSample(pro.getMapdavid());//dseteo el map
+        r.setListpx(pro.getBigID()); // seteo la lista
+        
         r.getData(1, 1, 2);////ROUND ROUBIN
-        System.out.println(" tamano con tags  " + (r.getListpx().get(0)).getTag());// lista con tags
+       // System.out.println(" tamano con tags  " + (r.getListpx().get(0)).getTag());// lista con tags
+        
+//        for (int i = 0; i < r.getListpx().size(); i++) {
+//            System.out.println("  tag  " + (r.getSample().get(i)).getTag());
+//        }
+        
+        
+        
+        
+        
+        
 //        System.out.println(" tamanooooooooooooo  " + r.getListpx().size());
         ///////////////////////////////////////////////////////////////////////
         // System.out.println( "sampleeee" +r.getSample().get(0).getColor()); // se aasignan los samples//////////////////////////////////////////////////
@@ -322,7 +334,9 @@ public class Menu extends javax.swing.JFrame {
         
         while (!executors.isTerminated()) {}
         ////////////////////////////////////////////////////////////////////////
-        
+//              for (int i = 0; i < sectors.getSector1().size(); i++) {
+//           System.out.println("  tag  sc 1 " + sectors.getSector1().get(i).getTag());
+//        }
        
  
         azure.getConf();//obt conf
@@ -344,12 +358,13 @@ public class Menu extends javax.swing.JFrame {
 //     
 //       
 //       
-       // System.out.println( "tag   " +r.getSample().get(0).getTag());//  se aasignan los samples
-       int most_appearance = (int) pro.principalColor(bigdatax);// DATO QUE MAS APARECE
+//       // System.out.println( "tag   " +r.getSample().get(0).getTag());//  se aasignan los samples
+        int most_appearance = (int) pro.principalColor(bigdatax);// DATO QUE MAS APARECE
        //System.out.println("Este dato tiene que calzar con el de arriba" + (pro.getid(bigdatax)).size());
-        int david = (r.getListpx().size());//TAMANO DE LOS DATOS QUE SE PASARAN
+        
+        int david = ((r.getListpx()).size());//TAMANO DE LOS DATOS QUE SE PASARAN
         HelloWorldJNI lol = new HelloWorldJNI();// INSTANCIA JNI
-        System.out.println("david me la grrrmmmm " + david);
+        //System.out.println("david me la grrrmmmm " + david);
         Graph graph = new Graph(david);//GRAFO
         ArrayList<Integer> fake = new ArrayList<>();// FACHADA
         for (int i = 0; i < david; i++) {
@@ -361,8 +376,8 @@ public class Menu extends javax.swing.JFrame {
          
         ////////////////////////////////////////////////////////////////////////
         
-  //      System.out.println("La cabeza del grafo es: " + pro.getMapdavid().get(0));
-        
+//  //      System.out.println("La cabeza del grafo es: " + pro.getMapdavid().get(0));
+//        
         tree = getdatatex.getTree();// arbol de inicio
         tagggin.add(sectors.getSector1());
         tagggin.add(sectors.getSector2());
@@ -377,9 +392,14 @@ public class Menu extends javax.swing.JFrame {
        // textag.samblestext(tree, azure.tagTen(), tagggin);//arboly tags
         bigWordSample = textag.getBigWordSample();
         mapdavid = pro.getMapdavid();
-    
-        System.out.println( "tag  antes de entrar " +r.getSample().get(0).getTag());//  se aasignan los samples
-        textag.samblestext( map , r.getSample(), graph , tree, azure.tagTen(), tagggin);
+//        System.out.println("sector 1 " + sectors.getSector1().get(0).getTag());
+//        System.out.println( "tag  antes de entrar " + tagggin.get(0).get(0).getTag() );//  se aasignan los samples
+//        for (int i = 0; i < sectors.getSector1().size(); i++) {
+//            System.out.println("sector 1 " + sectors.getSector1().get(i).getTag());
+//        }
+
+       textag.setImageActual(pro.getImageActual());
+       textag.samblestext( map , r.getSample(), graph , tree, azure.tagTen(), tagggin);
     
 //////        //-------------------------EX1---------------------------//
 //////        //------------cut img in 9 regions-----------------------//   
