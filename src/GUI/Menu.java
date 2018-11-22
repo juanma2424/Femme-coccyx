@@ -24,11 +24,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import proTEXT.proText;
@@ -79,7 +79,7 @@ public class Menu extends javax.swing.JFrame {
     ArrayList< WordSample> txt7 = new ArrayList<>();
     ArrayList< WordSample> txt8 = new ArrayList<>();
     ArrayList< WordSample> txt9 = new ArrayList<>();
-
+   Map<Integer, pixelSample > mapdavid = new HashMap<Integer, pixelSample>();
     ArrayList< WordSample> bigWordSample = new ArrayList<>();
     BPTree<String, BPTree<String, WordSample>> tree;
 ////////////////////////////////////////////////////////////////////////////////
@@ -273,9 +273,10 @@ public class Menu extends javax.swing.JFrame {
         
         ////////////////////////////////////////////////////////////////////////
         bigdatax.size();// array con todos los samples sin rapetir y con un 15%
+         
         pro.getid(bigdatax).size();//array de los ids sin repetir
         ////////////////////////////////////////////////////////////////////////
-        
+       
         // System.out.println("  bla " + pro.getBigsample().size());
        // System.out.println("  most_apert--------------------- " +  pro.principalColor(bigdatax));   
 
@@ -313,40 +314,49 @@ public class Menu extends javax.swing.JFrame {
 //       jLabel3.setIcon(null);
 //       jLabel3.setIcon(new ImageIcon (pro.efect()));// cambia a la nueva img 
       // pro.setImageActual(pro.getImageActual());
-       jLabel3.setIcon(new ImageIcon (pro.newPaint()));// cambia a la nueva img 
-//       //---------------------JNI----------------------------------------------//
-//       // System.out.println("  most_apert--------------------- " +  pro.principalColor(bigdatax));
-//        int most_appearance = (int) pro.principalColor(bigdatax);// DATO QUE MAS APARECE
-//       // System.out.println("Este dato tiene que calzar con el de arriba" + most_appearance);
-//        int david = pro.getid(bigdatax).size();//TAMANO DE LOS DATOS QUE SE PASARAN
-//        HelloWorldJNI lol = new HelloWorldJNI();// INSTANCIA JNI
-//        Graph graph = new Graph(david);//GRAFO
-//        ArrayList<Integer> fake = new ArrayList<>();// FACHADA
-//        for (int i = 0; i < david; i++) {
-//            fake.add(i);
-//        }
-//        
+     //  jLabel3.setIcon(new ImageIcon (pro.newPaint()));// cambia a la nueva img 
+       //---------------------JNI----------------------------------------------//
+       // System.out.println("  most_apert--------------------- " +  pro.principalColor(bigdatax));
+      
+      // System.out.println("La cabeza del grafo es: " + graph.getHead());
+       
+        System.out.println("La cabeza del grafo es: " + pro.getMapdavid().get(0));
+       
+       
+       
+       int most_appearance = (int) pro.principalColor(bigdatax);// DATO QUE MAS APARECE
+       // System.out.println("Este dato tiene que calzar con el de arriba" + most_appearance);
+        int david = pro.getid(bigdatax).size();//TAMANO DE LOS DATOS QUE SE PASARAN
+        HelloWorldJNI lol = new HelloWorldJNI();// INSTANCIA JNI
+        Graph graph = new Graph(david);//GRAFO
+        ArrayList<Integer> fake = new ArrayList<>();// FACHADA
+        for (int i = 0; i < david; i++) {
+            fake.add(i);
+        }
+        
 //        HashMap<Integer,Integer> map = new HashMap();
 //        lol.nativePrint(fake, graph, map, most_appearance);
+         
         ////////////////////////////////////////////////////////////////////////
         
-       // System.out.println("La cabeza del grafo es: " + graph.getHead());
+  //      System.out.println("La cabeza del grafo es: " + pro.getMapdavid().get(0));
         
-//        tree = getdatatex.getTree();// arbol de inicio
-//        tagggin.add(sectors.getSector1());
-//        tagggin.add(sectors.getSector2());
-//        tagggin.add(sectors.getSector3());
-//        tagggin.add(sectors.getSector4());
-//        tagggin.add(sectors.getSector5());
-//        tagggin.add(sectors.getSector6());
-//        tagggin.add(sectors.getSector7());
-//        tagggin.add(sectors.getSector8());
-//        tagggin.add(sectors.getSector9());
-//        bigwordx = getdatatex.getBigwords();// map
-//        textag.samblestext(tree, azure.tagTen(), tagggin);//arboly tags
-//        bigWordSample = textag.getBigWordSample();
-
-       
+        tree = getdatatex.getTree();// arbol de inicio
+        tagggin.add(sectors.getSector1());
+        tagggin.add(sectors.getSector2());
+        tagggin.add(sectors.getSector3());
+        tagggin.add(sectors.getSector4());
+        tagggin.add(sectors.getSector5());
+        tagggin.add(sectors.getSector6());
+        tagggin.add(sectors.getSector7());
+        tagggin.add(sectors.getSector8());
+        tagggin.add(sectors.getSector9());
+        bigwordx = getdatatex.getBigwords();// map
+       // textag.samblestext(tree, azure.tagTen(), tagggin);//arboly tags
+        bigWordSample = textag.getBigWordSample();
+        mapdavid = pro.getMapdavid();
+    //     System.out.println("La cabeza del grafo es: " + pro.getMapdavid().get(0));
+        textag.samblestext( pro.getMapdavid(), graph , tree, azure.tagTen(), tagggin);
 //        //-------------------------EX1---------------------------//
 //        //------------cut img in 9 regions-----------------------//   
 //        ExecutorService executotxt = Executors.newFixedThreadPool(10);

@@ -3,7 +3,9 @@ package imgBuild;
 import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Hashtable;
+import java.util.Map;
 import percentage.extractPixel;
 import sample.pixelSample;
 
@@ -21,7 +23,15 @@ public class ProcessImage {
     ArrayList<pixelSample> listPixSample = new ArrayList<>();
     ArrayList<pixelSample> extract1 = new ArrayList<>();
     ArrayList<pixelSample> bigsample = new ArrayList<>();
+    Map<Integer, pixelSample > mapdavid = new HashMap<Integer, pixelSample >();
 
+    public Map<Integer, pixelSample> getMapdavid() {
+        return mapdavid;
+    }
+
+    public void setMapdavid(Map<Integer, pixelSample> mapdavid) {
+        this.mapdavid = mapdavid;
+    }
     //--------------------------------//
     //---------------INSTANCE ARRAY---------------//
     extractPixel pixel1 = new extractPixel();
@@ -29,6 +39,8 @@ public class ProcessImage {
 
     //-----------------------HASH--SAMPLES---SECTOR--------------//
     Hashtable<String, String> sector1 = new Hashtable<String, String>();
+    Hashtable<String, String> yadavid = new Hashtable<String, String>();
+    
     //----------------------------------------------------------//
 
     //-----------------------------PROCES SECTOR IMG----------------------------------------------//
@@ -270,9 +282,13 @@ public class ProcessImage {
         ArrayList<Integer> bigID = new ArrayList<>();
         try {
             for (int i = 0; i < (dato.size()); i++) {
-                if (dato.get(i) != null) {
-                    bigID.add((dato.get(i).getId()));
-                    this.bigsample.add(dato.get(i));
+                if ( (dato.get(i)) != (null) ) {
+                    int nID =0;
+                    //dato.get(i).setFakeID(nID);
+                    mapdavid.put(nID, dato.get(i) );
+//                    bigID.add((dato.get(i).getFakeID()));
+//                    this.bigsample.add(dato.get(i));
+                    nID++;
                 }
             }
         } catch (Exception e) {

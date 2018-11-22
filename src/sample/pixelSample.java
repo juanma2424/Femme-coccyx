@@ -10,6 +10,15 @@ public class pixelSample {
     int posY;
     int id;
     int cantidad = 1;
+    int fakeID ;
+
+    public int getFakeID() {
+        return fakeID;
+    }
+
+    public void setFakeID(int fakeID) {
+        this.fakeID = fakeID;
+    }
     Color color;
     String tag;
 
