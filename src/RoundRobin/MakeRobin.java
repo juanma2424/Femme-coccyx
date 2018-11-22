@@ -15,7 +15,15 @@ public class MakeRobin {
     ArrayList<Double> conf;
     ArrayList<String> tag; 
     Map<Integer, pixelSample > sample;
+    ArrayList<pixelSample> listpx; 
 
+    public ArrayList<pixelSample> getListpx() {
+        return listpx;
+    }
+
+    public void setListpx(ArrayList<pixelSample> listpx) {
+        this.listpx = listpx;
+    }
    
     int [] temp;
     int commBT, k, tq;
@@ -97,6 +105,8 @@ public class MakeRobin {
                
 		for (int j = 0; j < quant; j++){
 			sample.get(cont).setTag(tag.get(i));
+                        listpx.get(cont).setTag(tag.get(i));
+                        System.out.println("entra");
 			cont++;
 		}
 	}

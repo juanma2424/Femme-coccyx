@@ -18,7 +18,11 @@ public class ProcessImage {
     private int pivoteX;
     private int pivoteY;
     int nID =0;
+    ArrayList<pixelSample> bigID = new ArrayList<>();
 
+    public ArrayList<pixelSample> getBigID() {
+        return bigID;
+    }
     public int getnID() {
         return nID;
     }
@@ -285,15 +289,15 @@ public class ProcessImage {
         this.max = max;
     }
 
-    public ArrayList<Integer> getid(ArrayList<pixelSample> dato) {
-        ArrayList<Integer> bigID = new ArrayList<>();
+    public void getid(ArrayList<pixelSample> dato) {
+       
         try {
             for (int i = 0; i < (dato.size()); i++) {
                 if ( (dato.get(i)) != (null) ) {
                     nID =0;
                     //dato.get(i).setFakeID(nID);
                     mapdavid.put(nID, dato.get(i) );
-                    bigID.add((dato.get(i).getFakeID()));
+                    bigID.add((dato.get(i)));
                     this.bigsample.add(dato.get(i));
                     nID++;
                 }
@@ -302,7 +306,7 @@ public class ProcessImage {
 
         }
         /// System.out.println("///" + bigID.size());
-        return bigID;
+     //   return bigID;
     }
 
     public int principalColor(ArrayList<pixelSample> dato) {

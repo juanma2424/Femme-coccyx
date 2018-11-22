@@ -284,17 +284,28 @@ public class Menu extends javax.swing.JFrame {
          
         ////////////////////////////////////////////////////////////////////////
         bigdatax.size();// array con todos los samples sin rapetir y con un 15%
-        pro.getid(bigdatax).size();//array de los ids sin repetir//////////////////////y se construye el map
+        pro.getid(bigdatax);//array de los ids sin repetir//////////////////////y se construye el map
         ////////////////////////////////////////////////////////////////////////
+        pro.getBigID().size();//esteeeeeee es el arreglo grande con todos los samples 
         
-        // System.out.println("  bla " + pro.getBigsample().size());
+        
+        //System.out.println("------tamano " + pro.getBigID().size());     ///// aca esta los tags con 15 sin repeticion  
+        //System.out.println("------tamano " + pro.getBigID().get(0).getTag());       
+
+
+
+// System.out.println("  bla " + pro.getBigsample().size());
        // System.out.println("  most_apert--------------------- " +  pro.principalColor(bigdatax));   
 
         ///////////////////////////////OBJETOS AZURE TAGS CONF TOP 10////////// 
         r.setConf(azure.getConf());//CONF
         r.setSample(pro.getMapdavid());//SAMPLES
+        r.setListpx(pro.getBigID());
+       // pro.getid((pro.getid(bigdatax)));//tag a la lista
         r.setTag(azure.getName());//TAGS
         r.getData(1, 1, 2);////ROUND ROUBIN
+        System.out.println(" tamano con tags  " + (r.getListpx().get(0)).getTag());// lista con tags
+//        System.out.println(" tamanooooooooooooo  " + r.getListpx().size());
         ///////////////////////////////////////////////////////////////////////
         // System.out.println( "sampleeee" +r.getSample().get(0).getColor()); // se aasignan los samples//////////////////////////////////////////////////
         
@@ -303,7 +314,7 @@ public class Menu extends javax.swing.JFrame {
         //------------cut img in 9 regions-----------------------//   
         //-------------regiones azure con tags---------------------//   
         ExecutorService executors = Executors.newFixedThreadPool(10);
-        scanMap sectors = new scanMap(new pixMap(dato));
+        scanMap sectors = new scanMap(new pixMap((r.getListpx())));// divide los15 con tags y sin rep en 9
 
         Runnable sectos = sectors;
         executors.execute(sectos);
@@ -317,34 +328,34 @@ public class Menu extends javax.swing.JFrame {
         azure.getConf();//obt conf
         azure.getName();// opt tags
         azure.tagTen();// obtiene el top 10
-        
-       /////////////////////////////////////////////////////////////////////////
-
-      
-//       jLabel3.setIcon(null);
-//       jLabel3.setIcon(new ImageIcon (pro.efect()));// cambia a la nueva img 
-      // pro.setImageActual(pro.getImageActual());
-     //  jLabel3.setIcon(new ImageIcon (pro.newPaint()));// cambia a la nueva img 
-       //---------------------JNI----------------------------------------------//
-       // System.out.println("  most_apert--------------------- " +  pro.principalColor(bigdatax));
-      
-      // System.out.println("La cabeza del grafo es: " + graph.getHead());
-       
-     
-       
-       
+//        
+//       /////////////////////////////////////////////////////////////////////////
+//
+//      
+////       jLabel3.setIcon(null);
+////       jLabel3.setIcon(new ImageIcon (pro.efect()));// cambia a la nueva img 
+//      // pro.setImageActual(pro.getImageActual());
+//     //  jLabel3.setIcon(new ImageIcon (pro.newPaint()));// cambia a la nueva img 
+//       //---------------------JNI----------------------------------------------//
+//       // System.out.println("  most_apert--------------------- " +  pro.principalColor(bigdatax));
+//      
+//      // System.out.println("La cabeza del grafo es: " + graph.getHead());
+//       
+//     
+//       
+//       
        // System.out.println( "tag   " +r.getSample().get(0).getTag());//  se aasignan los samples
        int most_appearance = (int) pro.principalColor(bigdatax);// DATO QUE MAS APARECE
        //System.out.println("Este dato tiene que calzar con el de arriba" + (pro.getid(bigdatax)).size());
-        int david = (pro.getid(bigdatax).size());//TAMANO DE LOS DATOS QUE SE PASARAN
+        int david = (r.getListpx().size());//TAMANO DE LOS DATOS QUE SE PASARAN
         HelloWorldJNI lol = new HelloWorldJNI();// INSTANCIA JNI
+        System.out.println("david me la grrrmmmm " + david);
         Graph graph = new Graph(david);//GRAFO
         ArrayList<Integer> fake = new ArrayList<>();// FACHADA
         for (int i = 0; i < david; i++) {
             fake.add(i);
         }
         
-                    
         HashMap<Integer,Integer> map = new HashMap();
         lol.nativePrint(fake, graph, map, most_appearance);
          
@@ -369,6 +380,7 @@ public class Menu extends javax.swing.JFrame {
     
         System.out.println( "tag  antes de entrar " +r.getSample().get(0).getTag());//  se aasignan los samples
         textag.samblestext( map , r.getSample(), graph , tree, azure.tagTen(), tagggin);
+    
 //////        //-------------------------EX1---------------------------//
 //////        //------------cut img in 9 regions-----------------------//   
 //////        ExecutorService executotxt = Executors.newFixedThreadPool(10);

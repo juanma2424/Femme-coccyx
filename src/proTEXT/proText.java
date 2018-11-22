@@ -24,32 +24,31 @@ public class proText {
 
     public void samblestext( HashMap<Integer,Integer> mapadavid, Map<Integer, pixelSample > davidya , Graph graph,BPTree<String, BPTree<String, WordSample>> tree, 
             ArrayList<String> bigdatax , ArrayList< ArrayList<pixelSample>> taggin  ){
-        
         for (String bigdatax1 : bigdatax) {
-           // System.out.println("Despues de: " + bigdatax1);    
             try{
-              
                 WordSample Tag = tree.search(bigdatax1.substring(0, 1)).search(bigdatax1);
                 System.out.println("Despues de: " + bigdatax1);
+                System.out.println("La region de este tag es " + Tag.region);
                 List<pixelSample> region = taggin.get(Tag.region);
-                
+                System.out.println("El tamano total es de: " + mapadavid.keySet().size());
                 for(Integer Id: mapadavid.keySet()){
-                    
-                    System.out.println(" aca " +davidya.get(Id).getTag());
-                    
+                    System.out.println(Id);
                     for(pixelSample sample : region){
-                        if (sample.getTag().equals(bigdatax1) && davidya.get(Id).getColor().equals(sample.getColor())){
-                           
+                        System.out.println(  "   acac error " + sample.getTag());
+                        if (sample.getTag().equals(bigdatax1)){
+                            System.out.println(" aca " +davidya.get(Id).getTag());
                             // sample.pintar(R,G,B);
                         }   
                         
                     }    
                 }
             }
-            catch(Exception e){
-                
-            }
+        catch(Exception e){
+            
+        }    
         }
+    }
+    
         /*try{
         for (int i = 0; i < bigdatax.size(); i++) {// tags
         String ini =  bigdatax.get(i).substring(0, 1);
@@ -71,7 +70,7 @@ public class proText {
     ///    }  
    // } catch (Exception e) {}
        
-    }
+    
      public ArrayList<WordSample> getBigWordSample() {
         return bigWordSample;
     }
