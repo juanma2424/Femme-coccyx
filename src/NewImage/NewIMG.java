@@ -18,7 +18,7 @@ public class NewIMG {
     
     private BufferedImage imageActual;   
     private Color colorAux;
-    private int mediaPixel, colorSRGB = 0;
+    private int colorSRGB = 0;
     int NewImageX, NewImageY;
     
     

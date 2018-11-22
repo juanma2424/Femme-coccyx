@@ -6,6 +6,7 @@
 package GUI;
 
 import JNI.HelloWorldJNI;
+import NewImage.NewIMG;
 import RoundRobin.MakeRobin;
 import Thread.pix.ImagePixel;
 import Thread.pix.pixMap;
@@ -27,6 +28,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import proTEXT.proText;
@@ -47,6 +49,7 @@ public class Menu extends javax.swing.JFrame {
     ProcessImage ObjProcesamiento = new ProcessImage();
     MakeRobin r = new MakeRobin();
     HashMap<Integer, List<WordSample>> bigwordx;
+    NewIMG pintar = new  NewIMG();
 ////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////VARIABLES/////////////////////////////////////////
     String URLDATA;
@@ -306,22 +309,25 @@ public class Menu extends javax.swing.JFrame {
         
        /////////////////////////////////////////////////////////////////////////
 
-
-
-       //---------------------JNI----------------------------------------------//
-       // System.out.println("  most_apert--------------------- " +  pro.principalColor(bigdatax));
-        int most_appearance = (int) pro.principalColor(bigdatax);// DATO QUE MAS APARECE
-       // System.out.println("Este dato tiene que calzar con el de arriba" + most_appearance);
-        int david = pro.getid(bigdatax).size();//TAMANO DE LOS DATOS QUE SE PASARAN
-        HelloWorldJNI lol = new HelloWorldJNI();// INSTANCIA JNI
-        Graph graph = new Graph(david);//GRAFO
-        ArrayList<Integer> fake = new ArrayList<>();// FACHADA
-        for (int i = 0; i < david; i++) {
-            fake.add(i);
-        }
-        
-        HashMap<Integer,Integer> map = new HashMap();
-        lol.nativePrint(fake, graph, map, most_appearance);
+      
+//       jLabel3.setIcon(null);
+//       jLabel3.setIcon(new ImageIcon (pro.efect()));// cambia a la nueva img 
+      // pro.setImageActual(pro.getImageActual());
+       jLabel3.setIcon(new ImageIcon (pro.newPaint()));// cambia a la nueva img 
+//       //---------------------JNI----------------------------------------------//
+//       // System.out.println("  most_apert--------------------- " +  pro.principalColor(bigdatax));
+//        int most_appearance = (int) pro.principalColor(bigdatax);// DATO QUE MAS APARECE
+//       // System.out.println("Este dato tiene que calzar con el de arriba" + most_appearance);
+//        int david = pro.getid(bigdatax).size();//TAMANO DE LOS DATOS QUE SE PASARAN
+//        HelloWorldJNI lol = new HelloWorldJNI();// INSTANCIA JNI
+//        Graph graph = new Graph(david);//GRAFO
+//        ArrayList<Integer> fake = new ArrayList<>();// FACHADA
+//        for (int i = 0; i < david; i++) {
+//            fake.add(i);
+//        }
+//        
+//        HashMap<Integer,Integer> map = new HashMap();
+//        lol.nativePrint(fake, graph, map, most_appearance);
         ////////////////////////////////////////////////////////////////////////
         
        // System.out.println("La cabeza del grafo es: " + graph.getHead());
