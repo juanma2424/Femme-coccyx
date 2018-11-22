@@ -22,19 +22,18 @@ public class proText {
     
     ArrayList< WordSample > bigWordSample = new ArrayList<>();
 
-    public void samblestext( Map<Integer, pixelSample > davidya , Graph graph,BPTree<String, BPTree<String, WordSample>> tree, 
+    public void samblestext( HashMap<Integer,Integer> mapadavid, Map<Integer, pixelSample > davidya , Graph graph,BPTree<String, BPTree<String, WordSample>> tree, 
             ArrayList<String> bigdatax , ArrayList< ArrayList<pixelSample>> taggin  ){
         
         for (String bigdatax1 : bigdatax) {
-            
+           // System.out.println("Despues de: " + bigdatax1);    
             try{
               
                 WordSample Tag = tree.search(bigdatax1.substring(0, 1)).search(bigdatax1);
                 System.out.println("Despues de: " + bigdatax1);
                 List<pixelSample> region = taggin.get(Tag.region);
-                ArrayList<Integer> Ids = graph.DFS(graph.head);
                 
-                for (Integer Id : Ids){
+                for(Integer Id: mapadavid.keySet()){
                     
                     System.out.println(" aca " +davidya.get(Id).getTag());
                     

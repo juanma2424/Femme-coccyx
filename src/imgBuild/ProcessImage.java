@@ -17,6 +17,11 @@ public class ProcessImage {
     private Color colorAux;
     private int pivoteX;
     private int pivoteY;
+    int nID =0;
+
+    public int getnID() {
+        return nID;
+    }
     private int id_h = 0;
     private int max;
 
@@ -242,7 +247,9 @@ public class ProcessImage {
         //----------------// 
         
     }
+    
 
+    
 /////////////////////////////////GET&SET////////////////////////////////////////
     public BufferedImage getImageActual() {
         return imageActual;
@@ -283,11 +290,11 @@ public class ProcessImage {
         try {
             for (int i = 0; i < (dato.size()); i++) {
                 if ( (dato.get(i)) != (null) ) {
-                    int nID =0;
+                    nID =0;
                     //dato.get(i).setFakeID(nID);
                     mapdavid.put(nID, dato.get(i) );
-//                    bigID.add((dato.get(i).getFakeID()));
-//                    this.bigsample.add(dato.get(i));
+                    bigID.add((dato.get(i).getFakeID()));
+                    this.bigsample.add(dato.get(i));
                     nID++;
                 }
             }

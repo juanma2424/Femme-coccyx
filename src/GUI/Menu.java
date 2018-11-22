@@ -29,6 +29,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import proTEXT.proText;
@@ -82,6 +83,7 @@ public class Menu extends javax.swing.JFrame {
    Map<Integer, pixelSample > mapdavid = new HashMap<Integer, pixelSample>();
     ArrayList< WordSample> bigWordSample = new ArrayList<>();
     BPTree<String, BPTree<String, WordSample>> tree;
+    File fichero = new File("foto.jpg");
 ////////////////////////////////////////////////////////////////////////////////
 
 ////////////////////////////GET&SET/////////////////////////////////////////////
@@ -114,6 +116,7 @@ public class Menu extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
+        jButton4 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
@@ -143,6 +146,14 @@ public class Menu extends javax.swing.JFrame {
         jScrollPane2.setViewportView(jTextArea1);
 
         jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 540, 900, 40));
+
+        jButton4.setText("jButton4");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 170, 110, 70));
 
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Pictures/bchrome.png"))); // NOI18N
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -285,7 +296,7 @@ public class Menu extends javax.swing.JFrame {
         r.setTag(azure.getName());//TAGS
         r.getData(1, 1, 2);////ROUND ROUBIN
         ///////////////////////////////////////////////////////////////////////
-        // System.out.println( "sampleeee" +r.getSample().get(0).getTag());  se aasignan los samples//////////////////////////////////////////////////
+        // System.out.println( "sampleeee" +r.getSample().get(0).getColor()); // se aasignan los samples//////////////////////////////////////////////////
         
         
         //-------------------------EX1---------------------------//
@@ -324,8 +335,8 @@ public class Menu extends javax.swing.JFrame {
        
        // System.out.println( "tag   " +r.getSample().get(0).getTag());//  se aasignan los samples
        int most_appearance = (int) pro.principalColor(bigdatax);// DATO QUE MAS APARECE
-       // System.out.println("Este dato tiene que calzar con el de arriba" + most_appearance);
-        int david = pro.getid(bigdatax).size();//TAMANO DE LOS DATOS QUE SE PASARAN
+       //System.out.println("Este dato tiene que calzar con el de arriba" + (pro.getid(bigdatax)).size());
+        int david = (pro.getid(bigdatax).size());//TAMANO DE LOS DATOS QUE SE PASARAN
         HelloWorldJNI lol = new HelloWorldJNI();// INSTANCIA JNI
         Graph graph = new Graph(david);//GRAFO
         ArrayList<Integer> fake = new ArrayList<>();// FACHADA
@@ -333,8 +344,9 @@ public class Menu extends javax.swing.JFrame {
             fake.add(i);
         }
         
-        //HashMap<Integer,Integer> map = new HashMap();
-        //lol.nativePrint(fake, graph, map, most_appearance);
+                    
+        HashMap<Integer,Integer> map = new HashMap();
+        lol.nativePrint(fake, graph, map, most_appearance);
          
         ////////////////////////////////////////////////////////////////////////
         
@@ -356,26 +368,38 @@ public class Menu extends javax.swing.JFrame {
         mapdavid = pro.getMapdavid();
     
         System.out.println( "tag  antes de entrar " +r.getSample().get(0).getTag());//  se aasignan los samples
-        textag.samblestext( r.getSample(), graph , tree, azure.tagTen(), tagggin);
-//        //-------------------------EX1---------------------------//
-//        //------------cut img in 9 regions-----------------------//   
-//        ExecutorService executotxt = Executors.newFixedThreadPool(10);
-//        sacanTxt sectortx = new sacanTxt(new pixTx(bigWordSample));
-//        Runnable sectox = sectortx;
-//        executotxt.execute(sectox);
+        textag.samblestext( map , r.getSample(), graph , tree, azure.tagTen(), tagggin);
+//////        //-------------------------EX1---------------------------//
+//////        //------------cut img in 9 regions-----------------------//   
+//////        ExecutorService executotxt = Executors.newFixedThreadPool(10);
+//////        sacanTxt sectortx = new sacanTxt(new pixTx(bigWordSample));
+//////        Runnable sectox = sectortx;
+//////        executotxt.execute(sectox);
+//////
+//////        executor.shutdown();	// Cierro el Executor
+//////        while (!executotxt.isTerminated()) {
+//////            // Espero a que terminen de ejecutarse todos los procesos 
+//////            // para pasar a las siguientes instrucciones 
+//////        }
+//        
 //
-//        executor.shutdown();	// Cierro el Executor
-//        while (!executotxt.isTerminated()) {
-//            // Espero a que terminen de ejecutarse todos los procesos 
-//            // para pasar a las siguientes instrucciones 
-//        }
-        
-
-        //------------------------------------------------------//
-        //System.out.println(" sectot txt 1" + sectortx.getSector1().get(0));
-                
-///////////////////////////////////////////////////////////////////////////////        
+//        //------------------------------------------------------//
+//        //System.out.println(" sectot txt 1" + sectortx.getSector1().get(0));
+//                
+/////////////////////////////////////////////////////////////////////////////////        
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+         pro.getImageActual();
+        try {
+            ImageIO.write(pro.getImageActual(),"jpg", fichero);
+        } catch (IOException ex) {
+            Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
+           
+        }
+         System.out.println("fichero ");
+    }//GEN-LAST:event_jButton4ActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -413,6 +437,7 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
