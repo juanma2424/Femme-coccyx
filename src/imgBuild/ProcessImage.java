@@ -58,7 +58,7 @@ public class ProcessImage {
                 colorSRGB = (mediaPixel << 8) | (mediaPixel << 8) | mediaPixel;
 
                 //---------SET NEW COLOR---------//
-//                imageActual.setRGB(i, j, colorSRGB);
+                // imageActual.setRGB(i, j, colorSRGB);
                 //-------------------------------//
             }
 
@@ -92,37 +92,118 @@ public class ProcessImage {
     }
     //-----------------------------------------------------------------------//
 
-    public BufferedImage efect(int pInicialX, int pInicialY,
-            int pFinalX, int pFinalY, int RDistancia, int BDistancia) {
-
-        //------------------------------ARRAY IMG  LOOP-----------------------------------------//
-        for (int i = pInicialX; i < pFinalX; i++) {
-            for (int j = pInicialY; j < pFinalY; j++) {
+     public BufferedImage efect(){
+         
+         for (int i = 100; i < 100; i++) {
+            for (int j = 100; j < 100; j++) {
 
                 //SAVE COLOR PIXEL
                 colorAux = new Color(this.imageActual.getRGB(i, j));
 
                 //PROM(RGB)
-                mediaPixel = (int) ((colorAux.getRed() + colorAux.getGreen() + colorAux.getBlue()));
+                mediaPixel = (int) ((colorAux.getRed() + colorAux.getGreen() + colorAux.getBlue()) / 3);
 
                 //----------------GREATE SAMPLE PIXEL-------------------//
                 //---------------------------------ID--X--Y--COLOR------//
                 pixelSample dato = new pixelSample(id_h, i, j, colorAux);
                 //-----------------------------------------------------// 
+                //listPixSample.add(dato);
+                //--------------------SAVE SAMPLE PIXEL HASH------------------//
+               // table.put(id_h, dato);
+                //id_h++;//INC ID
+                //------------------------------------------------------------// 
 
                 //CANGHE COLOR
-                //| R-distancia % 256|, G, | B+distancia % 256 |  
-                colorSRGB = (RDistancia % 256) | (colorAux.getGreen()) | (BDistancia % 256);
+                colorSRGB = (mediaPixel << 8) | (mediaPixel << 8) | mediaPixel;
 
                 //---------SET NEW COLOR---------//
                 imageActual.setRGB(i, j, colorSRGB);
                 //-------------------------------//
-
             }
-        }
-        return imageActual;
-    }
+         }
+        return  imageActual;
+     
+     }
+    
+    
+    
+    
+//    public BufferedImage efect(int pInicialX, int pInicialY,
+//            int pFinalX, int pFinalY, int RDistancia, int BDistancia) {
+//
+//        //------------------------------ARRAY IMG  LOOP-----------------------------------------//
+//        for (int i = pInicialX; i < pFinalX; i++) {
+//            for (int j = pInicialY; j < pFinalY; j++) {
+//
+//                //SAVE COLOR PIXEL
+//                colorAux = new Color(this.imageActual.getRGB(i, j));
+//
+//                //PROM(RGB)
+//                mediaPixel = (int) ((colorAux.getRed() + colorAux.getGreen() + colorAux.getBlue()));
+//
+//               
+//
+//                //CANGHE COLOR
+//                //| R-distancia % 256|, G, | B+distancia % 256 |  
+//                colorSRGB = (RDistancia % 256) | (colorAux.getGreen()) | (BDistancia % 256);
+//
+//                //---------SET NEW COLOR---------//
+//                imageActual.setRGB(i, j, colorSRGB);
+//                //-------------------------------//
+//
+//            }
+//        }
+//        return imageActual;
+  //  }
 
+     
+     
+     //---------------------------DRAWLINEY----------------------------------//
+    public void pos(int pFinalY, int pX) {
+         for (int i = 0; i < pFinalY; i++) {
+        for (int j = 0; i < pFinalY; i++) {
+            colorSRGB = (mediaPixel << 8) | (mediaPixel << 8) | mediaPixel;
+            imageActual.setRGB(pX, i, colorSRGB);
+            imageActual.setRGB(j, i, colorSRGB);
+         }
+         }
+    }
+    //-----------------------------------------------------------------------//
+     
+     
+    public BufferedImage newPaint() {
+
+      
+
+        //---------------DRAWLINEX-----------------//
+        pos(imageActual.getWidth(), pivoteY);
+        //----------------------------------------//
+
+       
+
+       
+       
+
+        //---RETURN IMG---//
+        return imageActual;
+        //----------------// 
+        
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     public BufferedImage escalaGrises(int n, int m) {
 
         pivoteX = imageActual.getWidth() / n;
