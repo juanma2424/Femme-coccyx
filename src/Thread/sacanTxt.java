@@ -44,7 +44,7 @@ public class sacanTxt implements Runnable{
         int sizemap = this.map.getMap().size()/9;
         this.map.getMap().size();
         
-       
+        System.out.println(" acaxxxxxxxxxxx");
         s1(this.map, sizemap*0, sizemap*1,sector1);
         s1(this.map, sizemap*1, sizemap*2,sector2);
         s1(this.map, sizemap*2, sizemap*3,sector3);
@@ -64,7 +64,7 @@ public class sacanTxt implements Runnable{
     public void s1(pixTx pmap , int x , int y , ArrayList<WordSample> s){
          for (int i = x; i < y; i++) {
             s.add(map.getMap().get(i));
-            //System.out.println("scan map   xxxxxxxxxxx");
+           // System.out.println("scan map   xxxxxxxxxxx");
         }
     }
 

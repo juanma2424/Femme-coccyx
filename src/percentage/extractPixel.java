@@ -25,12 +25,12 @@ public class extractPixel {
         //----------------------PORCENT OF SECTOR-----------------------//
         double rpta = table.size() * valorEntero / 100.0;
         //----------------------------------------------------------//
-         System.out.println("15 porr "  +(int) rpta) ;
+        // System.out.println("15 porr "  +(int) rpta) ;
      
         //---------------------CREATE ARRAY SAMPLE--------------------//
         pixelSample[] dataSample = new pixelSample[ ((int) rpta)];
         //----------------------------------------------------------//
-         System.out.println("15 xxxxx "  +dataSample.length) ;
+        // System.out.println("15 xxxxx "  +dataSample.length) ;
       
         for (int i = 0; i < (dataSample.length) ; i++) {
             

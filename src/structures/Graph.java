@@ -13,6 +13,7 @@ class Relation{
 
 public class Graph {
     
+    int head;
     public HashMap<Integer, List<Relation>> representation;
     
     public Graph(){ this.representation = new HashMap<>(); }
@@ -32,5 +33,9 @@ public class Graph {
             System.out.println("JAVA: " + n + " esta relacionado con "  + this.representation.get(n).get(i).destiny + " con un peso de " + this.representation.get(n).get(i).weight);
         }
     }
+    
+    public int getHead(){ return this.head; }
+    
+    public void setHead(int n){ this.head = n; }
 }
 

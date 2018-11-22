@@ -8,6 +8,8 @@ package GUI;
 import static GUI.Menu.getArchivo;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -17,6 +19,14 @@ import structures.BPTree;
 
 public class textData extends javax.swing.JFrame {
 
+    HashMap<Integer, List<WordSample>> bigwords;
+    public HashMap<Integer, List<WordSample>> getBigwords() {
+        return bigwords;
+    }
+
+    public void setBigwords(HashMap<Integer, List<WordSample>> bigwords) {
+        this.bigwords = bigwords;
+    }
     public BPTree<String, BPTree<String, WordSample>> getTree() {
         return tree;
     }
@@ -24,6 +34,7 @@ public class textData extends javax.swing.JFrame {
     public void setTree(BPTree<String, BPTree<String, WordSample>> tree) {
         this.tree = tree;
     }
+   
     TXTParser parser = new TXTParser();
    BPTree<String, BPTree<String, WordSample>> tree ;
  
@@ -77,9 +88,11 @@ public class textData extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-
+        
+       
         parser.setDirec(getArchivo().toString());
         tree = parser.getBTree(Integer.parseInt(jTextField2.getText()),Integer.parseInt(jTextField3.getText()), Integer.parseInt(jTextField1.getText()), Integer.parseInt(jTextField4.getText()));      
+        
         setTree(tree);
         this.show(false);
     }//GEN-LAST:event_jButton1ActionPerformed

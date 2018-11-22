@@ -198,7 +198,6 @@ public class ProcessImage {
         ArrayList<Integer> bigID = new ArrayList<>();
         try {
             for (int i = 0; i < (dato.size()); i++) {
-                // System.out.println("pp " +dato.get(i) );
                 if (dato.get(i) != null) {
                     bigID.add((dato.get(i).getId()));
                     this.bigsample.add(dato.get(i));
@@ -211,7 +210,7 @@ public class ProcessImage {
         return bigID;
     }
 
-    public Color principalColor(ArrayList<pixelSample> dato) {
+    public int principalColor(ArrayList<pixelSample> dato) {
         ArrayList<Integer> bigID = new ArrayList<>();
         int aux = 0;
         try {
@@ -224,8 +223,10 @@ public class ProcessImage {
             }
         } catch (Exception e) {
         }
-        return dato.get(aux).getColor();
+        return aux;
     }
+    
 
 ////////////////////////////////////////////////////////////////////////////////    
 }
+    
