@@ -6,9 +6,10 @@
 package GUI;
 
 import static GUI.Menu.getArchivo;
-import imgBuild.DataTXT;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -17,8 +18,25 @@ import sample.WordSample;
 import structures.BPTree;
 
 public class textData extends javax.swing.JFrame {
+
+    HashMap<Integer, List<WordSample>> bigwords;
+    public HashMap<Integer, List<WordSample>> getBigwords() {
+        return bigwords;
+    }
+
+    public void setBigwords(HashMap<Integer, List<WordSample>> bigwords) {
+        this.bigwords = bigwords;
+    }
+    public BPTree<String, BPTree<String, WordSample>> getTree() {
+        return tree;
+    }
+
+    public void setTree(BPTree<String, BPTree<String, WordSample>> tree) {
+        this.tree = tree;
+    }
+   
     TXTParser parser = new TXTParser();
-    
+   BPTree<String, BPTree<String, WordSample>> tree ;
  
     public textData() {
         initComponents();
@@ -70,32 +88,13 @@ public class textData extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-
+        
+       
         parser.setDirec(getArchivo().toString());
-        BPTree<String, BPTree<String, WordSample>> tree = parser.getBTree(Integer.parseInt(jTextField1.getText()),
-        Integer.parseInt(jTextField2.getText()), Integer.parseInt(jTextField3.getText()), Integer.parseInt(jTextField4.getText()));
+        tree = (parser.getBTree(Integer.parseInt(jTextField2.getText()),Integer.parseInt(jTextField4.getText()), Integer.parseInt(jTextField1.getText()), Integer.parseInt(jTextField3.getText())));      
         
-//        System.out.println(tree.search("p").search("prince").counter);
-//        System.out.println(tree.search("a").search("asombroso").region);
-//        
-//        try {
-//            Scanner scan = new Scanner(new File(getArchivo().toString()));
-//            int n = 0;
-//            while (scan.hasNext()){
-//                String a = scan.next().toLowerCase();
-//                if ("asombroso".equals(a)){
-//                    n++;
-//                }
-//            }
-//            System.out.println("Las veces que aparece asombroso es: " + n);
-//        } catch (FileNotFoundException ex) {
-//            Logger.getLogger(textData.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-        
-        
-        
-        
-        DataTXT.setData(false);
+        setTree(this.tree);
+        this.show(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed

@@ -1,6 +1,4 @@
-
 package imgBuild;
-
 import GUI.ErrorURL;
 
 public class errorShow {

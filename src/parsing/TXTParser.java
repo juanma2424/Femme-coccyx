@@ -3,6 +3,9 @@ package parsing;
 import structures.BPTree;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 import java.util.logging.Level;
@@ -51,6 +54,7 @@ public class TXTParser{
             tree.insert(letter, dtree);
         }
     }
+
     
     private void loadwithTXT(BPTree< String, BPTree<String, WordSample>> tree, int MIN_SIZE, int MAX_SIZE){
         
@@ -62,7 +66,8 @@ public class TXTParser{
             if (word.matches(regex) && word.length() >= MIN_SIZE && word.length() <= MAX_SIZE){
                 if (0 <= randint.nextInt(100) + 1){
                    if (tree.search(word.substring(0,1)).search(word) == null){
-                        tree.search(word.substring(0,1)).insert(word , new WordSample( this.getRegion(n), word));
+                       WordSample sample = new WordSample( this.getRegion(n), word);
+                        tree.search(word.substring(0,1)).insert(word , sample);
                    }
                    else{
                        tree.search(word.substring(0, 1)).search(word).increaseCounter();

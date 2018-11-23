@@ -3,7 +3,7 @@ package sample;
 public class WordSample {
     
     public int region;
-    private String word;
+    public String word;
     public int counter;
     
     public WordSample(int region, String word){

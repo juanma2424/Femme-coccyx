@@ -5,61 +5,56 @@
  */
 package GUI;
 
-import RGBSample.oneID;
-import Thread.ImagePixel;
-import Thread.pixMap;
-import Thread.sacanRegion;
-import Thread.scanMap;
+
+import JNI.HelloWorldJNI;
+import RoundRobin.MakeRobin;
 import imgBuild.Azure;
-import imgBuild.DataTXT;
-import imgBuild.MoreApere;
 import imgBuild.ProcessImage;
 import imgBuild.errorShow;
 import imgBuild.searchImg;
-import java.awt.Color;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
-
+import proTEXT.proText;
+import sample.WordSample;
 import sample.pixelSample;
+import structures.BPTree;
+import structures.Graph;
+
 
 public class Menu extends javax.swing.JFrame {
 
 //////////////////////////////INSTANCE//////////////////////////////////////////
-    MoreApere bigColor = new MoreApere();
+    proText textag = new proText();
     Azure azure = new Azure();
     searchImg imgset = new searchImg();
     ProcessImage pro = new ProcessImage();
     errorShow myWindow = errorShow.getSingletonInstance();
-    DataTXT mydata = DataTXT.getSingletonInstance();
-    ProcessImage ObjProcesamiento = new ProcessImage();
-    oneID ONE = new oneID();
+    textData getdatatex = new textData();
+    //ProcessImage ObjProcesamiento = new ProcessImage();
+     HashMap<Integer, List<WordSample>> bigwordx;
+    MakeRobin r = new MakeRobin();
 ////////////////////////////////////////////////////////////////////////////////
-
 ///////////////////////////////VARIABLES/////////////////////////////////////////
     String URLDATA;
     Image URLIMG;
     static File archivo;
-    Color blue;
-    ArrayList<pixelSample> bigdatax = new ArrayList<>();
-    ArrayList<pixelSample> sector1 = new ArrayList<>();
-    ArrayList<pixelSample> sector2 = new ArrayList<>();
-    ArrayList<pixelSample> sector3 = new ArrayList<>();
-    ArrayList<pixelSample> sector4 = new ArrayList<>();
-    ArrayList<pixelSample> sector5 = new ArrayList<>();
-    ArrayList<pixelSample> sector6 = new ArrayList<>();
-    ArrayList<pixelSample> sector7 = new ArrayList<>();
-    ArrayList<pixelSample> sector8 = new ArrayList<>();
-    ArrayList<pixelSample> sector9 = new ArrayList<>();
-////////////////////////////////////////////////////////////////////////////////
+    BPTree<String, BPTree<String, WordSample>> tree;
+    File fichero = new File("foto.jpg");
+//////////////////////////////NEWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW//////////////////////////////////////////////////
+
+    Map<Integer, pixelSample> mapaBits = new HashMap<Integer, pixelSample>();
+    Map<Integer, ArrayList<pixelSample> > regiones = new HashMap<Integer, ArrayList<pixelSample> >();
 
 ////////////////////////////GET&SET/////////////////////////////////////////////
     public static File getArchivo() {
@@ -162,18 +157,18 @@ public class Menu extends javax.swing.JFrame {
         selectorArchivos.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
         selectorArchivos.showOpenDialog(this);
 /////////////////////////////PARSER/////////////////////////////////////////////        
-        archivo = selectorArchivos.getSelectedFile(); // obtiene el archivo seleccionado
-        System.out.println(archivo);
+        archivo = selectorArchivos.getSelectedFile(); // obtiene el archivo seleccionad
+        getdatatex.show(true);
         setArchivo(archivo);
-        DataTXT.setData(true);
+        getdatatex.show(true);
 ////////////////////////////////////////////////////////////////////////////////        
     }//GEN-LAST:event_jButton1ActionPerformed
 
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-
+        //////////////////////BOTON DE CARGAR IMAGEN //////////////////////////
+        //////////////////////llamada a azure//////////////////////////////////
         try {
-
             //------------GETURL--------------//
             URLDATA = jTextArea1.getText();//url
             URLIMG = imgset.ImagenURL(URLDATA);// Image del url
@@ -184,12 +179,8 @@ public class Menu extends javax.swing.JFrame {
                 jLabel3.setIcon(new ImageIcon(URLIMG));//SHARE IMG
                 //--------//
 
-                //----------------THREAD-------------------------------------//
-                Runnable miRunnabl = () -> {
-                     //azure.setImageToAnalyze(URLDATA);//SHARE AZURE
-                };
-                Thread hilo1 = new Thread(miRunnabl);//MAKE THREAD 
-                hilo1.start();
+                //----------------AZURE-------------------------------------//
+                azure.setImageToAnalyze(URLDATA);//SHARE AZURE
                 //-----------------------------------------------------------//
                 jTextArea1.setText("");//RESET JTEXTAREA
             } else {
@@ -199,69 +190,59 @@ public class Menu extends javax.swing.JFrame {
         } catch (IOException ex) {
             Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
         }
+        ////////////////////////////////////////////////////////////////////////
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
 //////////////////////////////////SHAREIMG//////////////////////////////////////       
-        pro.setImageActual((BufferedImage) URLIMG);
-        jLabel3.setIcon(new ImageIcon(pro.escalaGrises(3, 3)));
-        ArrayList<pixelSample> dato = pro.getExtract1();
-//        System.out.println("todo " + pro.getListPixSample().size());
-        System.out.println(" 15%  " + dato.size());
-        int cantdatos = dato.size();
-        int cantdiv = dato.size() / 9;
-
-        //-------------------------EX1---------------------------//
-        //------------cut img in 9 regions-----------------------//   
-        ExecutorService executor = Executors.newFixedThreadPool(7);
-        scanMap sector = new scanMap(new pixMap(dato));
-
-        Runnable secto = sector;
-        executor.execute(secto);
-
-        executor.shutdown();	// Cierro el Executor
-        while (!executor.isTerminated()) {
-            // Espero a que terminen de ejecutarse todos los procesos 
-            // para pasar a las siguientes instrucciones 
-        }
-        //------------------------------------------------------//
-        System.out.println(" con rep 15%  " + dato.size());
+        pro.setImageActual((BufferedImage) URLIMG);//SET A LA NUEVA IMG
+        jLabel3.setIcon(new ImageIcon(pro.divSectors(3, 3)));// METODO L X A
         
+        Map<Integer, pixelSample> Unicos = new HashMap<Integer, pixelSample>();
+        Unicos =  pro.div(this.mapaBits);
+        System.out.println(" tamano sin rep de 15 % "  + Unicos.size());
+      
         
+        r.setTag(azure.getName());//TAGS
+        r.setConf(azure.getConf());//CONF
+        r.setSample(Unicos);//dseteo el map
+        r.setListpx(Unicos.size()); // seteo la lista
+        r.getData(1, 1, 2);////ROUND ROUBIN
         
+        Unicos = r.getSample();// ya con tags
         
-        //-------------------EX2---------------------------------//
-        //-----------delet same id sample-----------------------//  
-        ArrayList<ImagePixel> Pixels = new ArrayList<ImagePixel>();
        
-        Pixels.add(new ImagePixel(sector.getSector1() ,bigdatax ));
-        Pixels.add(new ImagePixel(sector.getSector2(), bigdatax));
-        Pixels.add(new ImagePixel(sector.getSector3(),bigdatax));
-        Pixels.add(new ImagePixel(sector.getSector4(),bigdatax));
-        Pixels.add(new ImagePixel(sector.getSector5(),bigdatax));
-        Pixels.add(new ImagePixel(sector.getSector6(),bigdatax));
-        Pixels.add(new ImagePixel(sector.getSector7(),bigdatax));
-        Pixels.add(new ImagePixel(sector.getSector8(),bigdatax));
-        Pixels.add(new ImagePixel(sector.getSector9(),bigdatax));
-
-       
-        ExecutorService executor1 = Executors.newFixedThreadPool(7);
-        for (ImagePixel sample: Pixels) { 
-            sacanRegion regio =  new sacanRegion(sample,bigdatax);
-            Runnable re = regio;            
-            executor1.execute(re);
+        regiones = pro.tagallsampes(Unicos);
+        
+        
+        
+        azure.getConf();//obt conf
+        azure.getName();// opt tags
+        azure.tagTen();// obtiene el top 10
+        
+        int moreId = Unicos.get(pro.getMoreAperret()).getId();
+     
+        int most_appearance = Unicos.get(pro.getMoreAperret()).getId();// DATO QUE MAS APARECE
+     
+        
+        int dataSize = (Unicos.size());//TAMANO DE LOS DATOS QUE SE PASARAN
+        HelloWorldJNI JNIObject = new HelloWorldJNI();// INSTANCIA JN
+        Graph graph = new Graph(dataSize);//GRAFO
+        ArrayList<Integer> fakeID = new ArrayList<>();// FACHADA
+        for (int i = 0; i < dataSize; i++) {
+            fakeID.add(i);
         }
-        executor1.shutdown();
-        while (!executor1.isTerminated()) {
-        	
-        }
-        //-------------------------------------------------------------------//
-       
-        pro.getid(bigdatax);
         
+        HashMap<Integer,Integer> map = new HashMap();
+        HashMap <Integer , HashMap< Integer , ArrayList<Integer> > > RoadHash = new HashMap();
+        JNIObject.nativePrint(fakeID, graph, map, RoadHash, most_appearance);
         
-        
-///////////////////////////////////////////////////////////////////////////////        
+       bigwordx = getdatatex.getBigwords();// arbol del libro
+       tree = getdatatex.getTree();
+       textag.setImageActual(pro.getImageActual());// para pintar
+       textag.samblestext( Unicos,map,tree,azure.tagTen(), regiones);
+     
+/////////////////////////////////////////////////////////////////////////////////        
     }//GEN-LAST:event_jButton3ActionPerformed
 
     public static void main(String args[]) {
