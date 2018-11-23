@@ -86,7 +86,6 @@ public class Menu extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
-        jButton4 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
@@ -116,14 +115,6 @@ public class Menu extends javax.swing.JFrame {
         jScrollPane2.setViewportView(jTextArea1);
 
         jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 540, 900, 40));
-
-        jButton4.setText("jButton4");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 170, 110, 70));
 
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Pictures/bchrome.png"))); // NOI18N
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -206,69 +197,53 @@ public class Menu extends javax.swing.JFrame {
 //////////////////////////////////SHAREIMG//////////////////////////////////////       
         pro.setImageActual((BufferedImage) URLIMG);//SET A LA NUEVA IMG
         jLabel3.setIcon(new ImageIcon(pro.divSectors(3, 3)));// METODO L X A
-        Map<Integer, pixelSample> Unicos = new HashMap<Integer, pixelSample>();
-
-         Unicos =  pro.div(this.mapaBits);
-         
-         System.out.println(" tamano sin rep de 15 % "  + Unicos.size());
         
-        regiones = pro.getRegionesAux();
-        System.out.println("region 1 todos los samples" + regiones.get(1));
-         System.out.println("region 1 todos los samples" + regiones.get(2));
-//        
+        Map<Integer, pixelSample> Unicos = new HashMap<Integer, pixelSample>();
+        Unicos =  pro.div(this.mapaBits);
+        System.out.println(" tamano sin rep de 15 % "  + Unicos.size());
+      
+        
         r.setTag(azure.getName());//TAGS
         r.setConf(azure.getConf());//CONF
         r.setSample(Unicos);//dseteo el map
         r.setListpx(Unicos.size()); // seteo la lista
         r.getData(1, 1, 2);////ROUND ROUBIN
+        
         Unicos = r.getSample();// ya con tags
         
-//        for (int i = 0; i < Unicos.size(); i++) {
-//            System.out.println(" tag  "  + Unicos.get(i).getTag());
-//        }
-        
-        
-        
        
+        regiones = pro.tagallsampes(Unicos);
+        
+        
         
         azure.getConf();//obt conf
         azure.getName();// opt tags
         azure.tagTen();// obtiene el top 10
-       
         
         int moreId = Unicos.get(pro.getMoreAperret()).getId();
      
         int most_appearance = Unicos.get(pro.getMoreAperret()).getId();// DATO QUE MAS APARECE
      
         
-        int david = (Unicos.size());//TAMANO DE LOS DATOS QUE SE PASARAN
-        HelloWorldJNI lol = new HelloWorldJNI();// INSTANCIA JN
-        Graph graph = new Graph(david);//GRAFO
-        ArrayList<Integer> fake = new ArrayList<>();// FACHADA
-        for (int i = 0; i < david; i++) {
-            fake.add(i);
+        int dataSize = (Unicos.size());//TAMANO DE LOS DATOS QUE SE PASARAN
+        HelloWorldJNI JNIObject = new HelloWorldJNI();// INSTANCIA JN
+        Graph graph = new Graph(dataSize);//GRAFO
+        ArrayList<Integer> fakeID = new ArrayList<>();// FACHADA
+        for (int i = 0; i < dataSize; i++) {
+            fakeID.add(i);
         }
         
         HashMap<Integer,Integer> map = new HashMap();
-        //lol.nativePrint(fake, graph, map, most_appearance);
+        HashMap <Integer , HashMap< Integer , ArrayList<Integer> > > RoadHash = new HashMap();
+        JNIObject.nativePrint(fakeID, graph, map, RoadHash, most_appearance);
+        
        bigwordx = getdatatex.getBigwords();// arbol del libro
+       tree = getdatatex.getTree();
        textag.setImageActual(pro.getImageActual());// para pintar
-       textag.samblestext( azure.getName(),  regiones);
-               
+       textag.samblestext( Unicos,map,tree,azure.tagTen(), regiones);
+     
 /////////////////////////////////////////////////////////////////////////////////        
     }//GEN-LAST:event_jButton3ActionPerformed
-
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
-        pro.getImageActual();
-        try {
-            ImageIO.write(pro.getImageActual(), "jpg", fichero);
-        } catch (IOException ex) {
-            Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
-
-        }
-        System.out.println("fichero ");
-    }//GEN-LAST:event_jButton4ActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -306,7 +281,6 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;

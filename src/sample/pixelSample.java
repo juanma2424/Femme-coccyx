@@ -22,7 +22,7 @@ public class pixelSample {
     public void setFakeID(int fakeID) {
         this.fakeID = fakeID;
     }
-    int color;
+    Color color;
     String tag;
 
     
@@ -30,7 +30,7 @@ public class pixelSample {
     //----------------//
    
     //--------------MAKE A SAMBLE PIX -----------------------//
-    public pixelSample (int id,int pX, int pY, int pcolor, int psec) {
+    public pixelSample (int id,int pX, int pY, Color pcolor, int psec) {
         this.id = id;
         this.posX = pX;
         this.posY = pY;
@@ -74,11 +74,11 @@ public class pixelSample {
         this.cantidad = cantidad;
     }
 
-    public int getColor() {
+    public Color getColor() {
         return color;
     }
 
-    public void setColor(int color) {
+    public void setColor(Color color) {
         this.color = color;
     }
     

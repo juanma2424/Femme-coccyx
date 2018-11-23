@@ -9,6 +9,6 @@ public class HelloWorldJNI {
     static {
         System.load("C:\\Users\\USER\\Documents\\NetBeansProjects\\JNITester\\dist\\Debug\\MinGW-Windows\\libJNITester.dll");}
     
-    public native void nativePrint(ArrayList<Integer> Ids, Graph graph, HashMap map, int MOST);
+    public native void nativePrint(ArrayList<Integer> Ids, Graph graph, HashMap map, HashMap road, int MOST);
    
 }
