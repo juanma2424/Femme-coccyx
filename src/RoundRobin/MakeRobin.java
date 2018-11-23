@@ -15,13 +15,13 @@ public class MakeRobin {
     ArrayList<Double> conf;
     ArrayList<String> tag; 
     Map<Integer, pixelSample > sample;
-    ArrayList<pixelSample> listpx; 
+    int  listpx; 
 
-    public ArrayList<pixelSample> getListpx() {
+    public int getListpx() {
         return listpx;
     }
 
-    public void setListpx(ArrayList<pixelSample> listpx) {
+    public void setListpx(int listpx) {
         this.listpx = listpx;
     }
    
@@ -88,7 +88,7 @@ public class MakeRobin {
  
     public void distribute(){
         
-        double sum = 0;
+       double sum = 0;
 	int cont = 0;
 
 	for (int i = 0; i < conf.size(); i++){
@@ -97,21 +97,17 @@ public class MakeRobin {
         
 	for (int i = 0; i < tag.size(); i++){
                 
-		double quant = (listpx.size() * (((conf.get(i) * 100) / sum) / 100));
+		double quant = (sample.size() * (((conf.get(i) * 100) / sum) / 100));
                 
-                if (cont + quant > listpx.size()){
-                    quant = listpx.size() - cont; 
+                if (cont + quant > sample.size()){
+                    quant = sample.size() - cont; 
                 }
                
 		for (int j = 0; j < quant; j++){
-                        listpx.get(cont).setTag(tag.get(i)); 
- 			sample.put(cont,  listpx.get(cont));
-                        
-                        //System.out.println("entra");
+			sample.get(cont).setTag(tag.get(i));
 			cont++;
 		}
 	}
-      
         
     }
     

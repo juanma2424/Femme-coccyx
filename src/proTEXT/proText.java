@@ -5,12 +5,16 @@
  */
 package proTEXT;
 
+import GUI.Menu;
+//import static GUI.Menu.jLabel3;
 import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import sample.WordSample;
 import sample.pixelSample;
 import structures.BPTree;
@@ -29,22 +33,25 @@ public class proText {
     
     private int mediaPixel, colorSRGB = 0;
 
-    public void samblestext( HashMap<Integer,Integer> mapadavid, Map<Integer, pixelSample > davidya , Graph graph,BPTree<String, BPTree<String, WordSample>> tree, 
-            ArrayList<String> bigdatax , ArrayList< ArrayList<pixelSample>> taggin  ){
+    public void samblestext( ArrayList<String> tags ,Map<Integer, ArrayList<pixelSample> > regions ){
         
         int cont = 0;
-        for (String bigdatax1 : bigdatax) {
+        for (String tag : tags) {
             try{
-                WordSample Tag = tree.search(bigdatax1.substring(0, 1)).search(bigdatax1); 
+                //WordSample Tag = tree.search(bigdatax1.substring(0, 1)).search(bigdatax1); 
                 //System.out.println("El tag es " + bigdatax1);
                // System.out.println("Despues de: " + bigdatax1);
                // System.out.println("La region de este tag es " + Tag.region);
-                List<pixelSample> region = taggin.get(Tag.region);
+                List<pixelSample> region = regions.get(1);
+               // System.out.println("El tag es: " + bigdatax1 + " y su region es " + Tag.region);
+                for (pixelSample sample : region){
+                    setRGB(sample.getPosX(),sample.getPosY(),0,0,0);
+                }
                 //System.out.println(region.size());
                 //System.out.println(mapadavid.keySet().size());
                 //System.out.println(region.size());
                // System.out.println("El tamano total es de: " + mapadavid.keySet().size());
-                for(Integer Id: mapadavid.keySet()){
+                /*for(Integer Id: mapadavid.keySet()){
                   //    System.out.println(mapadavid.keySet());
                   //  System.out.println(Id);
                     for(pixelSample sample : region){
@@ -68,7 +75,7 @@ public class proText {
                           }   
                         
                     }    
-                }
+                }*/
             }
             catch(Exception e){
             }    
@@ -111,14 +118,11 @@ public class proText {
        
                 colorAux = new Color(this.imageActual.getRGB(x, y));
                 
-                colorSRGB = (R % 256) | (pixVerde) | (256 % B);
+                colorSRGB = (R) | (pixVerde) | (B);
                 
                 imageActual.setRGB(x, y, colorSRGB);
                 
-                imageActual.setRGB(x, y, colorSRGB);
-                
-                
-
+                //imageActual.setRGB(x, y, colorSRGB);
 
     }
     

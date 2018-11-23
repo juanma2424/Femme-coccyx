@@ -6,6 +6,8 @@
 package Thread.txt;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import sample.WordSample;
 import sample.pixelSample;
 
@@ -14,33 +16,19 @@ import sample.pixelSample;
  * @author Juanma
  */
 public class pixTx {
+
     //-------VARIABLE-------//
-    private ArrayList<WordSample> map = new ArrayList<>();
+    Map<Integer, pixelSample> mapaBitsDiv = new HashMap<Integer, pixelSample>();
+
     //----------------------//
     //EMPY CONSTRUCTOR//
-	public pixTx (){
-	}
-        //----------------//
+    public pixTx() {
+    }
+    //----------------//
 
-        //-------NAME  ARRAY  CONSTRUCTO----------------//
-	public pixTx(ArrayList<WordSample> pmap) {
-		this.map = pmap;
-	}
-        //----------------------------------------------//
-
-   
-
-        //-----------------------GET&SET-----------------------//
-	
-        //-----------------------------------------------------//
-
-    public ArrayList<WordSample> getMap() {
-        return map;
+    //-------NAME  ARRAY  CONSTRUCTO----------------//
+    public pixTx(Map<Integer, pixelSample> pmapaBitsDiv) {
+        this.mapaBitsDiv = pmapaBitsDiv;
     }
 
-    public void setMap(ArrayList<WordSample> map) {
-        this.map = map;
-    }
-
-    
 }

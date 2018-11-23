@@ -11,6 +11,9 @@ public class pixelSample {
     int id;
     int cantidad = 1;
     int fakeID ;
+    int sector;
+
+    
 
     public int getFakeID() {
         return fakeID;
@@ -19,7 +22,7 @@ public class pixelSample {
     public void setFakeID(int fakeID) {
         this.fakeID = fakeID;
     }
-    Color color;
+    int color;
     String tag;
 
     
@@ -27,12 +30,13 @@ public class pixelSample {
     //----------------//
    
     //--------------MAKE A SAMBLE PIX -----------------------//
-    public pixelSample (int id,int pX, int pY, Color pcolor) {
+    public pixelSample (int id,int pX, int pY, int pcolor, int psec) {
         this.id = id;
         this.posX = pX;
         this.posY = pY;
         this.color = pcolor;
         this.cantidad = 1;
+        this.sector = psec;
     }
      //-----------------------------------------------------//
    
@@ -70,11 +74,11 @@ public class pixelSample {
         this.cantidad = cantidad;
     }
 
-    public Color getColor() {
+    public int getColor() {
         return color;
     }
 
-    public void setColor(Color color) {
+    public void setColor(int color) {
         this.color = color;
     }
     
@@ -93,6 +97,14 @@ public class pixelSample {
 
     public void setTag(String tag) {
         this.tag = tag;
+    }
+    
+    public int getSector() {
+        return sector;
+    }
+
+    public void setSector(int sector) {
+        this.sector = sector;
     }
     //-------------------------------------------------//
     

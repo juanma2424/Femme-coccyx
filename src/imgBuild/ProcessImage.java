@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.Map;
-import percentage.extractPixel;
 import sample.pixelSample;
 
 public class ProcessImage {
@@ -14,86 +13,26 @@ public class ProcessImage {
     //---------VARIABLES-------------//
     private BufferedImage imageActual;
     private int mediaPixel, colorSRGB = 0;
-    private Color colorAux;
     private int pivoteX;
     private int pivoteY;
-    int nID =0;
-    ArrayList<pixelSample> bigID = new ArrayList<>();
+    int moreAperret = 0;
 
-    public ArrayList<pixelSample> getBigID() {
-        return bigID;
-    }
-    public int getnID() {
-        return nID;
-    }
-    private int id_h = 0;
-    private int max;
-
-    ArrayList<pixelSample> listPixSample = new ArrayList<>();
-    ArrayList<pixelSample> extract1 = new ArrayList<>();
-    ArrayList<pixelSample> bigsample = new ArrayList<>();
-    Map<Integer, pixelSample > mapdavid = new HashMap<Integer, pixelSample >();
-
-    public Map<Integer, pixelSample> getMapdavid() {
-        return mapdavid;
-    }
-
-    public void setMapdavid(Map<Integer, pixelSample> mapdavid) {
-        this.mapdavid = mapdavid;
-    }
-    //--------------------------------//
-    //---------------INSTANCE ARRAY---------------//
-    extractPixel pixel1 = new extractPixel();
-    //-------------------------------------------//
-
-    //-----------------------HASH--SAMPLES---SECTOR--------------//
-    Hashtable<String, String> sector1 = new Hashtable<String, String>();
-    Hashtable<String, String> yadavid = new Hashtable<String, String>();
-    
-    //----------------------------------------------------------//
-
-    //-----------------------------PROCES SECTOR IMG----------------------------------------------//
-    public void sector(int pInicialX, int pInicialY, int pFinalX, int pFinalY, Hashtable table) {
-
-        //------------------------------ARRAY IMG  LOOP-----------------------------------------//
-        for (int i = pInicialX; i < pFinalX; i++) {
-            for (int j = pInicialY; j < pFinalY; j++) {
-
-                //SAVE COLOR PIXEL
-                colorAux = new Color(this.imageActual.getRGB(i, j));
-
-                //PROM(RGB)
-                mediaPixel = (int) ((colorAux.getRed() + colorAux.getGreen() + colorAux.getBlue()) / 3);
-
-                //----------------GREATE SAMPLE PIXEL-------------------//
-                //---------------------------------ID--X--Y--COLOR------//
-                pixelSample dato = new pixelSample(id_h, i, j, colorAux);
-                //-----------------------------------------------------// 
-                listPixSample.add(dato);
-                //--------------------SAVE SAMPLE PIXEL HASH------------------//
-                table.put(id_h, dato);
-                id_h++;//INC ID
-                //------------------------------------------------------------// 
-
-                //CANGHE COLOR
-                colorSRGB = (mediaPixel << 8) | (mediaPixel << 8) | mediaPixel;
-
-                //---------SET NEW COLOR---------//
-                // imageActual.setRGB(i, j, colorSRGB);
-                //-------------------------------//
-            }
-
-        }
-        //--------------------------------------------------------------------------------//
-    }
-
-    public ArrayList<pixelSample> getListPixSample() {
-        return listPixSample;
-    }
-
-    public void setListPixSample(ArrayList<pixelSample> listPixSample) {
-        this.listPixSample = listPixSample;
-    }
+    Map<Integer, pixelSample> mapaBitsAux = new HashMap<Integer, pixelSample>();
+    Map<String, Boolean> postXY = new HashMap<String, Boolean>();
+    Map<Integer, ArrayList<pixelSample>> regionesAux = new HashMap<Integer, ArrayList<pixelSample>>();
+    ArrayList<pixelSample> region1 = new ArrayList<pixelSample>();
+    ArrayList<pixelSample> region2 = new ArrayList<pixelSample>();
+    ArrayList<pixelSample> region3 = new ArrayList<pixelSample>();
+    ArrayList<pixelSample> region4 = new ArrayList<pixelSample>();
+    ArrayList<pixelSample> region5 = new ArrayList<pixelSample>();
+    ArrayList<pixelSample> region6 = new ArrayList<pixelSample>();
+    ArrayList<pixelSample> region7 = new ArrayList<pixelSample>();
+    ArrayList<pixelSample> region8 = new ArrayList<pixelSample>();
+    ArrayList<pixelSample> region9 = new ArrayList<pixelSample>();
+    Map<String, Integer> myMap = new HashMap<String, Integer>();
+    int putamierda = 0;
+    int guia = 0;
+    // int sizeImege = imageActual.getWidth() * imageActual.getWidth();
 
     //---------------------------DRAWLINEX----------------------------------//
     public void limitX(int pFinalX, int pY) {
@@ -111,126 +50,13 @@ public class ProcessImage {
             imageActual.setRGB(pX, i, colorSRGB);
         }
     }
+
+    //xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx// 
     //-----------------------------------------------------------------------//
+    public BufferedImage divSectors(int n, int m) {
 
-     public BufferedImage efect(){
-         
-         for (int i = 100; i < 100; i++) {
-            for (int j = 100; j < 100; j++) {
-
-                //SAVE COLOR PIXEL
-                colorAux = new Color(this.imageActual.getRGB(i, j));
-
-                //PROM(RGB)
-                mediaPixel = (int) ((colorAux.getRed() + colorAux.getGreen() + colorAux.getBlue()) / 3);
-
-                //----------------GREATE SAMPLE PIXEL-------------------//
-                //---------------------------------ID--X--Y--COLOR------//
-                pixelSample dato = new pixelSample(id_h, i, j, colorAux);
-                //-----------------------------------------------------// 
-                //listPixSample.add(dato);
-                //--------------------SAVE SAMPLE PIXEL HASH------------------//
-               // table.put(id_h, dato);
-                //id_h++;//INC ID
-                //------------------------------------------------------------// 
-
-                //CANGHE COLOR
-                colorSRGB = (mediaPixel << 8) | (mediaPixel << 8) | mediaPixel;
-
-                //---------SET NEW COLOR---------//
-                imageActual.setRGB(i, j, colorSRGB);
-                //-------------------------------//
-            }
-         }
-        return  imageActual;
-     
-     }
-    
-    
-    
-    
-//    public BufferedImage efect(int pInicialX, int pInicialY,
-//            int pFinalX, int pFinalY, int RDistancia, int BDistancia) {
-//
-//        //------------------------------ARRAY IMG  LOOP-----------------------------------------//
-//        for (int i = pInicialX; i < pFinalX; i++) {
-//            for (int j = pInicialY; j < pFinalY; j++) {
-//
-//                //SAVE COLOR PIXEL
-//                colorAux = new Color(this.imageActual.getRGB(i, j));
-//
-//                //PROM(RGB)
-//                mediaPixel = (int) ((colorAux.getRed() + colorAux.getGreen() + colorAux.getBlue()));
-//
-//               
-//
-//                //CANGHE COLOR
-//                //| R-distancia % 256|, G, | B+distancia % 256 |  
-//                colorSRGB = (RDistancia % 256) | (colorAux.getGreen()) | (BDistancia % 256);
-//
-//                //---------SET NEW COLOR---------//
-//                imageActual.setRGB(i, j, colorSRGB);
-//                //-------------------------------//
-//
-//            }
-//        }
-//        return imageActual;
-  //  }
-
-     
-     
-     //---------------------------DRAWLINEY----------------------------------//
-    public void pos(int pFinalY, int pX) {
-         for (int i = 0; i < pFinalY; i++) {
-        for (int j = 0; i < pFinalY; i++) {
-            colorSRGB = (mediaPixel << 8) | (mediaPixel << 8) | mediaPixel;
-            imageActual.setRGB(pX, i, colorSRGB);
-            imageActual.setRGB(j, i, colorSRGB);
-         }
-         }
-    }
-    //-----------------------------------------------------------------------//
-     
-     
-    public BufferedImage newPaint() {
-
-      
-
-        //---------------DRAWLINEX-----------------//
-        pos(imageActual.getWidth(), pivoteY);
-        //----------------------------------------//
-
-       
-
-       
-       
-
-        //---RETURN IMG---//
-        return imageActual;
-        //----------------// 
-        
-    }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    public BufferedImage escalaGrises(int n, int m) {
-
-        pivoteX = imageActual.getWidth() / n;
-        pivoteY = imageActual.getHeight() / m;
-
-        int media = imageActual.getWidth() * imageActual.getWidth();
+        pivoteX = (imageActual.getWidth() / n);
+        pivoteY = (imageActual.getHeight() / m);
 
         //---------------DRAWLINEX-----------------//
         limitX(imageActual.getWidth(), pivoteY);
@@ -241,97 +67,169 @@ public class ProcessImage {
         limitY(imageActual.getHeight(), pivoteX);
         limitY(imageActual.getHeight(), pivoteX * 2);
         //----------------------------------------//
+//        for (int i = 0; i < (n+1); i++) {
+//         percent(pivoteX * 0, pivoteX * (1), pivoteY * i, pivoteY * (i+1),i);
+//         percent(pivoteX * 1, pivoteX * (2), pivoteY * i, pivoteY * (i+1),i);
+//         percent(pivoteX * 2, pivoteX * (3)-1, pivoteY * i, pivoteY * (i+1),i);
+//
+//        }
 
-        // int pFinalX, int pFinalY, Hashtable table) {
-        sector(0, 0, imageActual.getWidth(), imageActual.getHeight(), sector1);//carga el hast y un list de pixselsample
-        extract1 = pixel1.datos(sector1);//entrae el 15%
-
+//        int sector;
+//        
+//        for (int i = 0; i < (n * m); i++) {
+//            percent(pivoteX * i, pivoteX * (i + 1), pivoteX * i, pivoteY * (i + 1));
+//            System.out.println("eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
+//        }
         //---RETURN IMG---//
         return imageActual;
         //----------------// 
-        
-    }
-    
 
-    
-/////////////////////////////////GET&SET////////////////////////////////////////
+    }
+//xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx//    
+
+    public Map<Integer, pixelSample> div(Map<Integer, pixelSample> pmapaBitsAux) {
+        percent(pivoteX * 0, pivoteX * (1), pivoteY * 0, pivoteY * (1), 1, pmapaBitsAux,region1);
+        regionesAux.put(1, region1);
+
+        percent(pivoteX * 1, pivoteX * (2), pivoteY * 0, pivoteY * (1), 2, pmapaBitsAux,region2);
+        regionesAux.put(2,region2);
+
+        percent(pivoteX * 2, pivoteX * (3) - 1, pivoteY * 0, pivoteY * (1), 3, pmapaBitsAux,region3);
+        regionesAux.put(3, region3);
+
+        percent(pivoteX * 0, pivoteX * (1), pivoteY * (1), pivoteY * (2), 4, pmapaBitsAux,region4);
+        regionesAux.put(4, region4);
+
+        percent(pivoteX * 1, pivoteX * (2), pivoteY * (1), pivoteY * (2), 5, pmapaBitsAux,region5);
+        regionesAux.put(5, region5);
+
+        percent(pivoteX * 2, pivoteX * (3) - 1, pivoteY * (1), pivoteY * (2), 6, pmapaBitsAux,region6);
+        regionesAux.put(6, region6);
+
+        percent(pivoteX * (0), pivoteX * (1), pivoteY * (2), pivoteY * (3) - 1, 7, pmapaBitsAux,region7);
+        regionesAux.put(7, region7);
+
+        percent(pivoteX * (1), pivoteX * (2), pivoteY * (2), pivoteY * (3) - 1, 8, pmapaBitsAux,region8);
+        regionesAux.put(8, region8);
+
+        percent(pivoteX * (2), pivoteX * (3) - 1, pivoteY * (2), pivoteY * (3) - 1, 9, pmapaBitsAux,region9);
+        regionesAux.put(9, region9);
+
+        return pmapaBitsAux;
+
+    }
+
+    public void percent(int InicioX, int finX, int inicioY, int finY, int sec, Map<Integer, pixelSample> pmapaBitsAux,  ArrayList<pixelSample> reg) {
+       
+        //----------------------RANMDON 10-15-----------------------//
+        int valorEntero = (int) Math.floor(Math.random() * ((15 - 10) + 1) + 10);
+        //----------------------------------------------------------//
+
+        //----------------------PORCENT OF SECTOR-----------------------//
+        double rpta = (((pivoteX) * (pivoteY)) * (valorEntero / 100.0));
+        //----------------------------------------------------------//
+
+        //---------------------CREATE ARRAY SAMPLE--------------------//
+        int dataSample = ((int) rpta);
+        System.out.println("  ");
+        //----------------------------------------------------------//
+
+        for (int i = 0; i < (dataSample); i++) {// estsblece el 15 de laimagen
+           
+            int posX = (int) Math.floor(Math.random() * ((finX - InicioX) + 1) + InicioX);
+            int posY = (int) Math.floor(Math.random() * ((finY - inicioY) + 1) + inicioY);
+            int rgb = (imageActual.getRGB(posX, posY));
+            String Xp = Integer.toString(posX);
+            String Yp = Integer.toString(posY);
+            
+            if((postXY.get(Xp+","+Yp))!=null){
+               
+
+            if((postXY.get(Xp+","+Yp))){
+                int cant = (pmapaBitsAux.get((myMap.get(Xp+","+Yp))).getCantidad())+1;
+                pmapaBitsAux.get((myMap.get(Xp+","+Yp))).setCantidad(cant);
+                pmapaBitsAux.get((myMap.get(Xp+","+Yp))).setPosition(posX, posY);
+                
+                
+                
+                
+                
+                 if( getMoreAperret() <= (pmapaBitsAux.get((myMap.get(Xp+","+Yp))).getCantidad())){
+                    setMoreAperret((pmapaBitsAux.get((myMap.get(Xp+","+Yp))).getCantidad()));
+                 }   
+            }else{
+                pmapaBitsAux.put(putamierda, new pixelSample(putamierda, posX, posY, rgb, sec));
+                reg.add(new pixelSample(putamierda, posX, posY, rgb, sec));
+                String keyXY = Xp+","+Yp;
+                postXY.put(keyXY,true);
+                putamierda++;
+                
+                
+            }
+            }else{
+                pmapaBitsAux.put(putamierda, new pixelSample(putamierda, posX, posY, rgb, sec));
+                reg.add(new pixelSample(putamierda, posX, posY, rgb, sec));
+                String keyXY = Xp+","+Yp;
+                postXY.put(keyXY,true);
+                myMap.put(keyXY,putamierda);
+                putamierda++;
+                
+            }
+            
+            
+            
+            
+            
+//            if ((pmapaBitsAux.get(putamierda)!=null) && ( (pmapaBitsAux.get(putamierda).getPosX()) == posX) && 
+//                    (pmapaBitsAux.get(putamierda).getPosY()== posY)) {
+//                int cant = pmapaBitsAux.get(putamierda).getCantidad() + 1;
+//                pmapaBitsAux.get(putamierda).setCantidad(cant);
+//                pmapaBitsAux.get(putamierda).setPosition(posX, posY);
+//                 if(moreAperret<pmapaBitsAux.get(putamierda).getCantidad()){
+//                     moreAperret= putamierda;
+//                 }
+//                
+//            }
+//            pmapaBitsAux.put( putamierda, new  pixelSample( putamierda,posX,posY ,rgb,sec));
+//            regionX.add(new  pixelSample( putamierda,posX,posY ,rgb,sec));
+//            putamierda++;
+//        }
+        }
+    }
+    //xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx//         
+
+    /////////////////////////////////GET&SET////////////////////////////////////////
     public BufferedImage getImageActual() {
         return imageActual;
     }
 
     public void setImageActual(BufferedImage imageActual) {
         this.imageActual = imageActual;
-        pivoteX = imageActual.getWidth();
-        pivoteY = imageActual.getHeight();
+    }
+////////////////////////////////////////////////////////////////////////////////
+//CXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX//
+
+    public Map<Integer, pixelSample> getMapaBitsAux() {
+        return mapaBitsAux;
     }
 
-    public Hashtable<String, String> getSector1() {
-        return sector1;
+    public void setMapaBitsAux(Map<Integer, pixelSample> mapaBitsAux) {
+        this.mapaBitsAux = mapaBitsAux;
     }
 
-    public void setSector1(Hashtable<String, String> sector1) {
-        this.sector1 = sector1;
+    public Map<Integer, ArrayList<pixelSample>> getRegionesAux() {
+        return regionesAux;
     }
 
-    public ArrayList<pixelSample> getExtract1() {
-        return extract1;
+    public void setRegionesAux(Map<Integer, ArrayList<pixelSample>> regionesAux) {
+        this.regionesAux = regionesAux;
     }
 
-    public void setExtract1(ArrayList<pixelSample> extract1) {
-        this.extract1 = extract1;
+    public int getMoreAperret() {
+        return moreAperret;
     }
 
-    public int getMax() {
-        return max;
+    public void setMoreAperret(int moreAperret) {
+        this.moreAperret = moreAperret;
     }
-
-    public void setMax(int max) {
-        this.max = max;
-    }
-
-    public void getid(ArrayList<pixelSample> dato) {
-       
-        try {
-            for (int i = 0; i < (dato.size()); i++) {
-                if ( (dato.get(i)) != (null) ) {
-                    nID =0;
-                    //dato.get(i).setFakeID(nID);
-                    mapdavid.put(nID, dato.get(i) );
-                    bigID.add((dato.get(i)));
-                    this.bigsample.add(dato.get(i));
-                    nID++;
-                }
-            }
-        } catch (Exception e) {
-
-        }
-        /// System.out.println("///" + bigID.size());
-     //   return bigID;
-    }
-
-    public int principalColor(ArrayList<pixelSample> dato) {
-        ArrayList<Integer> bigID = new ArrayList<>();
-        int aux = 0;
-        try {
-            for (int i = 0; i < dato.size(); i++) {
-                bigID.add(dato.get(i).getId());
-                if (max < dato.get(i).getCantidad()) {
-                    max = dato.get(i).getCantidad();
-                    aux = i;
-                }
-            }
-        } catch (Exception e) {
-        }
-        return aux;
-    }
-
-    public ArrayList<pixelSample> getBigsample() {
-        return bigsample;
-    }
-
-    public void setBigsample(ArrayList<pixelSample> bigsample) {
-        this.bigsample = bigsample;
-    }
-
-////////////////////////////////////////////////////////////////////////////////    
 }
